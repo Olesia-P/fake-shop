@@ -9,12 +9,28 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "13.4.12",
+    "@reduxjs/toolkit": "^1.9.5",
+    "next": "^12.3.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-redux": "^8.1.1",
+    "redux": "^4.2.1"
   },
   "devDependencies": {
+    "classnames": "^2.3.2",
     "eslint": "8.45.0",
-    "eslint-config-next": "13.4.12"
+    "eslint-config-next": "13.4.12",
+    "husky": "^4.3.8",
+    "lint-staged": "^13.2.3",
+    "react-icons": "^4.10.1",
+    "sass": "^1.64.1"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": "eslint src --ext .js,.jsx --max-warnings=0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
