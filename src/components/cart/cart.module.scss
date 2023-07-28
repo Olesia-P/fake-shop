@@ -1,0 +1,28 @@
+@import "../../styles/main.scss";
+
+.container {
+    position: relative;
+    margin: 0 1rem;
+
+    .containerCart {
+
+
+        svg {
+            height: 2.5rem;
+            width: 2.5rem;
+
+        }
+    }
+
+    .itemCounter {
+        position: absolute;
+        font-size: 12pt;
+        color: white;
+        background-color: $red;
+        border-radius: 1rem;
+        padding: 0.1rem 0.5rem;
+        right: -0.2rem;
+        top: 1.5rem;
+        font-weight: 400;
+    }
+}

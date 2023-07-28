@@ -1,0 +1,170 @@
+@import "../../styles/main.scss";
+
+.container {
+    // @include dfc;
+    display: flex;
+    align-items: center;
+    // justify-content: space-evenly;
+    height: 4rem;
+    font-size: $size-header;
+    box-shadow: $main-shadow;
+    font-weight: 300;
+
+    .hamburger {
+        display: none;
+    }
+
+    .userIcon {
+        @include dfc;
+        margin-left: 1rem;
+        border-radius: 2rem;
+        height: 2.5rem;
+        padding: 0.3rem;
+
+        svg {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        // &:hover {
+        //     background-color: $grey;
+        // }
+    }
+
+    a {
+        text-decoration: none;
+
+        .logo {
+            font-family: $cursive-font;
+            font-size: 20pt;
+            margin-left: 1rem;
+            border-radius: 0.7rem;
+            padding: 0.5rem 0.7rem;
+            background-color: black;
+            color: white;
+            white-space: nowrap;
+            justify-self: flex-start;
+        }
+    }
+
+    .headerLink {
+        margin-left: 1rem;
+        border-radius: $standart-b-radius;
+        padding: 0.3rem;
+        text-decoration: none;
+        color: black;
+
+
+
+
+        // &:hover {
+        //     background-color: $grey;
+        //     border-radius: $standart-b-radius;
+        // }
+    }
+
+    // .catalogAccordeon {
+    //     background-color: red;
+    //     // height: 10rem;
+
+
+
+    // &.open {}
+}
+
+.searchFrom {
+    @include dfc;
+    height: 2rem;
+    width: 100%;
+    max-width: 55%;
+    margin-left: 1rem;
+
+    .searchIcon {
+        border-bottom: 3px solid black;
+        height: 100%;
+        padding: 0 0.5rem;
+        border-bottom-right-radius: $standart-b-radius;
+        box-sizing: border-box;
+
+        svg {
+            height: 1.3rem;
+        }
+    }
+
+    input {
+        background-color: $white;
+        border: none;
+        border-bottom: 3px solid black;
+        font-size: $size-p;
+        border-bottom-left-radius: $standart-b-radius;
+        padding: 0 0.5rem;
+        outline: none;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        outline: none;
+        font-family: $main-font;
+    }
+}
+
+
+@include tablet {
+    .container {
+        .hamburger {
+            display: block;
+            margin-left: 1rem;
+            box-sizing: border-box;
+
+
+        }
+
+        .userIcon {
+            display: none;
+        }
+
+        .logo {
+            display: none;
+
+
+        }
+
+        .headerLink {
+            display: none;
+        }
+
+        .searchFrom {
+            @include dfc;
+            height: 2rem;
+            width: 100%;
+            max-width: 100%;
+            margin-left: 1rem;
+
+            .searchIcon {
+                border-bottom: 3px solid black;
+                height: 100%;
+                padding: 0 0.5rem;
+                border-bottom-right-radius: $standart-b-radius;
+                box-sizing: border-box;
+
+                svg {
+                    height: 1.3rem;
+                }
+            }
+
+            input {
+                background-color: $white;
+                border: none;
+                border-bottom: 3px solid black;
+                font-size: $size-p;
+                border-bottom-left-radius: $standart-b-radius;
+                padding: 0 0.5rem;
+                outline: none;
+                height: 100%;
+                width: 100%;
+                box-sizing: border-box;
+                outline: none;
+                font-family: $main-font;
+            }
+        }
+    }
+}
