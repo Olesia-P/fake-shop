@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'REM Light';
+    src: url('../../public/fonts/REM Light.eot');
+    src: url('../../public/fonts/REM Light.eot?#iefix') format('embedded-opentype'),
+        url('../../public/fonts/REM Light.woff2') format('woff2'),
+        url('../../public/fonts/REM Light.woff') format('woff'),
+        url('../../public/fonts/REM Light.svg#REM Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-2212;
+}
+
+@font-face {
+    font-family: 'great_vibesregular';
+    src: url('../../public/fonts/greatvibes-regular-webfont.woff2') format('woff2'),
+        url('../../public/fonts/greatvibes-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+//fonts
+$main-font: 'REM Light',
+    sans-serif;
+$cursive-font: 'great_vibesregular',
+    cursive;
+
+//font sizes
+$size-header: 18pt;
+$size-p: 14pt;
