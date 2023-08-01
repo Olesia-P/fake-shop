@@ -1,0 +1,27 @@
+@import "../../styles/main.scss";
+
+.container {
+    .productContainer {
+        border: 1px solid black;
+
+        width: 20rem;
+
+
+        box-sizing: border-box;
+        // height: 5rem;
+
+        img {
+            height: 20rem;
+            // width: 1rem;
+            box-sizing: border-box;
+
+            // width: 10rem;
+
+        }
+
+
+        // .title {}
+
+        // .class {}
+    }
+}

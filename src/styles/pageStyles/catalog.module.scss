@@ -1,0 +1,55 @@
+@import "../main.scss";
+
+.container {
+    display: flex;
+    // height: 100%;
+    font-size: $size-p;
+
+    .sideMenu {
+        position: fixed;
+        top: 4rem;
+        height: 40rem;
+        width: 15rem;
+        box-shadow: $main-shadow;
+        padding: 1rem;
+
+        .listItemSideMenu {
+            margin: 0.5rem;
+            display: flex;
+            gap: 0.5em;
+
+
+            input[type="checkbox"] {
+                appearance: none;
+                background-color: $white;
+                margin: 0;
+                font: inherit;
+                color: black;
+                width: 1em;
+                height: 1em;
+                border: 0.1em solid black;
+                border-radius: 0.15em;
+                transform: translateY(0.30em);
+                @include dfc;
+
+                &::before {
+                    content: "";
+                    width: 0.65em;
+                    height: 0.65em;
+                    transform: scale(0);
+                    transition: 120ms transform ease-in-out;
+                    box-shadow: inset 1em 1em $red;
+                }
+
+                &:checked::before {
+                    transform: scale(1);
+                }
+            }
+        }
+    }
+
+    .productsArea {
+        margin-top: 4rem;
+        margin-left: 20rem;
+    }
+}

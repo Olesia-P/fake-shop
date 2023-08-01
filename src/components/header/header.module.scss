@@ -9,6 +9,9 @@
     font-size: $size-header;
     box-shadow: $main-shadow;
     font-weight: 100;
+    position: fixed;
+    background-color: $white;
+    width: 100%;
 
     .hamburger {
         display: none;
@@ -80,7 +83,7 @@
     margin-left: 1rem;
 
     .searchIcon {
-        border-bottom: 3px solid black;
+        border-bottom: 2px solid black;
         height: 100%;
         padding: 0 0.5rem;
         border-bottom-right-radius: $standart-b-radius;
@@ -94,7 +97,7 @@
     input {
         background-color: $white;
         border: none;
-        border-bottom: 3px solid black;
+        border-bottom: 2px solid black;
         font-size: $size-p;
         border-bottom-left-radius: $standart-b-radius;
         padding: 0 0.5rem;
