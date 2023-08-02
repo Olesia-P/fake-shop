@@ -13,19 +13,34 @@ import { useEffect } from "react";
 
 export default function Products() {
   // const { data: singleProductData = {} } = useGetOneProductQuery();
-  const { data: allProductsData = {}, isSuccess } = useGetAllProductsQuery();
-  //  const [getAllProductsQuery, { data: allProductsData = {}, isSuccess }] =
-  //  useLazyGetAllProductsQuery();
+
+  // const [getAllProductsQuery, { data: allProductsData = [], isSuccess }] =
+  // useLazyGetAllProductsQuery();
 
   const { catalogProducts } = useSelector(({ catalog }) => catalog);
   const dispatch = useDispatch();
+  dispatch(changeCatalogProducts(["jhjkujki"]));
+
   // if (isSuccess) {
   // dispatch(changeCatalogProducts(allProductsData));
   // }
 
-  if (isSuccess) {
-    console.log(allProductsData);
-  }
+  // console.log(catalogProducts);
+
+  // const { data: allProductsData, isSuccess } = useGetAllProductsQuery();
+
+  // useEffect(() => {
+  //   if (allProductsData) {
+  //     dispatch(changeCatalogProducts(allProductsData));
+  //   }
+  // }, [allProductsData]);
+
+  // console.log(allProductsData, "allProductsData");
+  console.log(catalogProducts, "catalogProducts");
+
+  // useEffect(() => {
+  //   const { data: allProductsData = [], isSuccess } = useGetAllProductsQuery();
+  // }, []);
 
   return (
     <div className={css.container}>
