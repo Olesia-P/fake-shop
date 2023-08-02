@@ -26,6 +26,8 @@ export const fakeShopApi = createApi({
 });
 
 export const {
+  useLazyGetAllProductsQuery,
+
   useGetAllProductsQuery,
   useGetFromCategoryElectronicsQuery,
   useGetFromCategoryJeweleryQuery,

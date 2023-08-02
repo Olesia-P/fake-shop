@@ -1,13 +1,23 @@
 import css from "../styles/pageStyles/catalog.module.scss";
 import Products from "../components/products/products";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { changeIsJewelery } from "../store/modules/catalogSlice";
 
-export default function catalog() {
+export default function Catalog() {
+  const { isJewelery } = useSelector(({ catalog }) => catalog);
+  const dispatch = useDispatch();
+
   return (
     <div className={css.container}>
       <div className={css.sideMenu}>
         <label className={css.listItemSideMenu}>
-          <input type="checkbox" />
-          Jeweley
+          <input
+            type="checkbox"
+            checked={isJewelery}
+            onChange={() => dispatch(changeIsJewelery(!isJewelery))}
+          />
+          Jewelery
         </label>
         <label className={css.listItemSideMenu}>
           <input type="checkbox" />

@@ -6,11 +6,13 @@ import MobileMenu from "../components/mobileMenu/mobileMenu";
 
 function MyApp({ Component, pageProps }) {
   return (
+    // <>
     <Provider store={store}>
       <Header />
       <MobileMenu />
       <Component {...pageProps} />
     </Provider>
+    // </>
   );
 }
 

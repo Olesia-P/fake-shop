@@ -1,17 +1,21 @@
 @import "../../styles/main.scss";
 
 .container {
+    display: flex;
+    flex-wrap: wrap;
+
     .productContainer {
         border: 1px solid black;
-
-        width: 20rem;
+        margin: 2rem;
+        width: 13rem;
 
 
         box-sizing: border-box;
         // height: 5rem;
 
         img {
-            height: 20rem;
+            max-height: 15rem;
+            max-width: 13rem;
             // width: 1rem;
             box-sizing: border-box;
 
