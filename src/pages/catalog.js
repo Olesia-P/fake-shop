@@ -1,39 +1,75 @@
 import css from "../styles/pageStyles/catalog.module.scss";
 import Products from "../components/products/products";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { changeIsJewelery } from "../store/modules/catalogSlice";
 
 export default function Catalog() {
-  const { isJewelery } = useSelector(({ catalog }) => catalog);
-  const dispatch = useDispatch();
+  const [category, setCategory] = useState("");
+  const handleRadioButton = (categoryName) => {
+    setCategory(categoryName);
+  };
 
   return (
     <div className={css.container}>
       <div className={css.sideMenu}>
         <label className={css.listItemSideMenu}>
           <input
-            type="checkbox"
-            checked={isJewelery}
-            onChange={() => dispatch(changeIsJewelery(!isJewelery))}
+            type="radio"
+            name="productsType"
+            onChange={() => {
+              handleRadioButton("");
+            }}
+            checked={category === ""}
+          />
+          All Products
+        </label>
+
+        <label className={css.listItemSideMenu}>
+          <input
+            type="radio"
+            name="productsType"
+            onChange={() => {
+              handleRadioButton("category/jewelery");
+            }}
+            checked={category === "category/jewelery"}
           />
           Jewelery
         </label>
         <label className={css.listItemSideMenu}>
-          <input type="checkbox" />
+          <input
+            type="radio"
+            name="productsType"
+            onChange={() => {
+              handleRadioButton("category/electronics");
+            }}
+            checked={category === "category/electronics"}
+          />
           Electronics
         </label>
         <label className={css.listItemSideMenu}>
-          <input type="checkbox" />
+          <input
+            type="radio"
+            name="productsType"
+            onChange={() => {
+              handleRadioButton("category/men's%20clothing");
+            }}
+            checked={category === "category/men's%20clothing"}
+          />
           Men&apos;s clothing
         </label>
         <label className={css.listItemSideMenu}>
-          <input type="checkbox" />
+          <input
+            type="radio"
+            name="productsType"
+            onChange={() => {
+              handleRadioButton("category/women's%20clothing");
+            }}
+            checked={category === "category/women's%20clothing"}
+          />
           Women&apos;s clothing
         </label>
       </div>
       <div className={css.productsArea}>
-        <Products />
+        <Products category={category} />
       </div>
     </div>
   );
