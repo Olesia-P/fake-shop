@@ -1,4 +1,4 @@
-import css from "./header.module.scss";
+import css from "./navbar.module.scss";
 import cx from "classnames";
 import { BiSolidUserCircle, BiSearchAlt2 } from "react-icons/bi";
 import Link from "next/link";

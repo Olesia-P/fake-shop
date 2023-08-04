@@ -1,7 +1,98 @@
-.container {
-    padding: 10rem;
-    background-color: red;
-    width: 100%;
-    height: 100%;
+@import "../../styles/main.scss";
 
+.container {
+    padding: 4rem;
+    background-color: $grey;
+    font-size: $size-p;
+
+    .card {
+        margin-top: 2rem;
+        background-color: $white;
+        width: 100%;
+        height: 100%;
+        position: static;
+        box-shadow: $main-shadow;
+        border-radius: $standart-b-radius;
+
+        .backBtnWrap {
+            width: 8rem;
+            height: 3rem;
+            @include dfc;
+            padding: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+
+            .backBtn {
+                font-size: $size-header;
+                position: relative;
+                border-radius: $standart-b-radius;
+
+                svg {
+                    margin-right: 0.3rem;
+                }
+
+
+
+                @include underlineAnimation;
+
+            }
+        }
+
+        .product {
+            display: flex;
+            padding: 0 3rem 3rem 3rem;
+
+            .image {
+                margin-right: 2rem;
+                border: 2px dashed black;
+                padding: 1rem;
+                background-color: white;
+                height: 14.1rem;
+                width: 12.1rem;
+                @include dfc;
+
+                img {
+                    max-height: 14rem;
+                    max-width: 12rem;
+                }
+            }
+
+            .info {
+                display: flex;
+                flex-direction: column;
+
+                .title {
+                    font-size: $size-header;
+                    font-weight: 600;
+                }
+
+                .description {
+                    margin-top: 1rem;
+                }
+
+                .price {
+                    margin-top: 1rem;
+                    align-self: flex-end;
+                    font-size: $size-header;
+                    font-weight: 600;
+                }
+
+                .addToCartBtn {
+                    @include dfc;
+                    height: 3rem;
+                    width: 10rem;
+                    margin-top: 0.5rem;
+                    background-color: $red;
+                    color: white;
+                    border-radius: $standart-b-radius;
+                    font-weight: 600;
+                    cursor: pointer;
+                    align-self: flex-end;
+
+                    @include hoverAnimation;
+                }
+            }
+        }
+    }
 }

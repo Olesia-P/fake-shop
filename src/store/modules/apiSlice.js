@@ -5,16 +5,16 @@ export const fakeShopApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "https://fakestoreapi.com/" }),
   endpoints: (builder) => ({
     getOneProduct: builder.query({
-      query: () => "products/1",
+      query: (productId) => `products/${productId}`,
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const { data: oneProductData } = await queryFulfilled;
       },
     }),
     getProducts: builder.query({
-      query: (category) => `products/${category}`,
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        const { data: productsData } = await queryFulfilled;
-      },
+      query: (category) =>
+        category === "" ? `products` : `products/category/${category}`,
+      // async onQueryStarted(_, { dispatch, queryFulfilled }) {
+      // const { data: productsData } = await queryFulfilled;
     }),
   }),
 });

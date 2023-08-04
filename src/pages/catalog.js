@@ -1,6 +1,10 @@
 import css from "../styles/pageStyles/catalog.module.scss";
 import Products from "../components/products/products";
 import { useState } from "react";
+import { categories } from "../utils/objects";
+import { capitalizeFirstLetter } from "../utils/functions";
+import { useDispatch, useSelector } from "react-redux";
+import { changeCatalogCategory } from "../store/modules/catalogSlice";
 
 export default function Catalog() {
   const [category, setCategory] = useState("");
@@ -8,72 +12,37 @@ export default function Catalog() {
     setCategory(categoryName);
   };
 
+  // const { catalogCategory } = useSelector(({ catalog }) => catalog);
+  // const dispatch = useDispatch();
+
   return (
     <div className={css.container}>
       <div className={css.sideMenu}>
-        <label className={css.listItemSideMenu}>
-          <input
-            type="radio"
-            name="productsType"
-            onChange={() => {
-              handleRadioButton("");
-            }}
-            checked={category === ""}
-          />
-          All Products
-        </label>
-
-        <label className={css.listItemSideMenu}>
-          <input
-            type="radio"
-            name="productsType"
-            onChange={() => {
-              handleRadioButton("category/jewelery");
-            }}
-            checked={category === "category/jewelery"}
-          />
-          Jewelery
-        </label>
-        <label className={css.listItemSideMenu}>
-          <input
-            type="radio"
-            name="productsType"
-            onChange={() => {
-              handleRadioButton("category/electronics");
-            }}
-            checked={category === "category/electronics"}
-          />
-          Electronics
-        </label>
-        <label className={css.listItemSideMenu}>
-          <input
-            type="radio"
-            name="productsType"
-            onChange={() => {
-              handleRadioButton("category/men's%20clothing");
-            }}
-            checked={category === "category/men's%20clothing"}
-          />
-          Men&apos;s clothing
-        </label>
-        <label className={css.listItemSideMenu}>
-          <input
-            type="radio"
-            name="productsType"
-            onChange={() => {
-              handleRadioButton("category/women's%20clothing");
-            }}
-            checked={category === "category/women's%20clothing"}
-          />
-          Women&apos;s clothing
-        </label>
+        {categories.map((element) => (
+          <label key={element} className={css.listItemSideMenu}>
+            <input
+              type="radio"
+              name="productsType"
+              onChange={() => {
+                // dispatch(changeCatalogCategory(element));
+                handleRadioButton(element);
+              }}
+              // checked={catalogCategory === element}
+              checked={category === element}
+            />
+            {capitalizeFirstLetter(decodeURI(element))}
+          </label>
+        ))}
       </div>
       <div className={css.productsArea}>
+        {/* <Products category={catalogCategory} /> */}
         <Products category={category} />
       </div>
     </div>
   );
 }
+
+//&apos;
 
 //  Sed ut perspiciatis, unde omnis iste natus error sit voluptatem
 //         accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab

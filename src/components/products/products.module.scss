@@ -16,6 +16,9 @@
         align-items: center;
         background-color: white;
         border-radius: $standart-b-radius;
+        cursor: pointer;
+        text-decoration: none;
+        color: black;
 
 
         .img {
@@ -57,11 +60,9 @@
             border-radius: $standart-b-radius;
             font-weight: 600;
             cursor: pointer;
-            transition: filter 0.2s ease-in;
+            @include hoverAnimation;
 
-            &:hover {
-                filter: brightness(125%);
-            }
+
         }
     }
 }
