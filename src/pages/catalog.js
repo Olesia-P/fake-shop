@@ -25,12 +25,12 @@ export default function Catalog() {
               name="productsType"
               onChange={() => {
                 // dispatch(changeCatalogCategory(element));
-                handleRadioButton(element);
+                handleRadioButton(element.link);
               }}
               // checked={catalogCategory === element}
-              checked={category === element}
+              checked={category === element.link}
             />
-            {capitalizeFirstLetter(decodeURI(element))}
+            {capitalizeFirstLetter(element.name)}
           </label>
         ))}
       </div>
