@@ -9,7 +9,7 @@ const catalogSlice = createSlice({
   initialState,
   reducers: {
     changeCatalogCategory: (state, action) => {
-      state.catalogProducts = action.payload;
+      state.catalogCategory = action.payload;
     },
   },
 });

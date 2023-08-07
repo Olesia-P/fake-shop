@@ -13,11 +13,15 @@ export default function ProductsId() {
   return (
     <div className={css.container}>
       <div className={css.card}>
-        <a href={`/catalog`} className={css.backBtnWrap}>
+        <div
+          // href={`/catalog`}
+          onClick={() => router.push(`/catalog`)}
+          className={css.backBtnWrap}
+        >
           <div className={css.backBtn}>
             <PiArrowBendUpLeft /> Go back
           </div>
-        </a>
+        </div>
 
         {isSuccess ? (
           <div className={css.product}>

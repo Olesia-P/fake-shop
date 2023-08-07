@@ -1,13 +1,20 @@
 import css from "./navbar.module.scss";
 import cx from "classnames";
-import { BiSolidUserCircle, BiSearchAlt2 } from "react-icons/bi";
+import { BiSolidUserCircle, BiSearchAlt2, BiChevronDown } from "react-icons/bi";
 import Link from "next/link";
 import Cart from "../cart/cart";
 import Hamburger from "../hamburger/hamburger";
 import { useState } from "react";
+import { categories } from "../../utils/objects";
+import { capitalizeFirstLetter } from "../../utils/functions";
+import { useDispatch, useSelector } from "react-redux";
+import { changeCatalogCategory } from "../../store/modules/catalogSlice";
+import { useRouter } from "next/router";
 
 export default function Header() {
   const [isCatalogAccordeonOpen, setIsCatalogAccordeonOpen] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   return (
     <div className={css.container}>
@@ -24,11 +31,34 @@ export default function Header() {
           <div>Home</div>
         </a>
       </Link>
-      <Link href="/catalog">
-        <a className={css.headerLink}>
-          <div>Catalog</div>
-        </a>
-      </Link>
+      <a
+        className={cx(css.headerLink)}
+        onClick={() => setIsCatalogAccordeonOpen(!isCatalogAccordeonOpen)}
+      >
+        <div>Catalog</div>
+        <div className={cx(css.chevron, isCatalogAccordeonOpen && css.open)}>
+          <BiChevronDown />
+        </div>
+        <div
+          className={cx(
+            css.catalogAccordion,
+            isCatalogAccordeonOpen && css.open
+          )}
+        >
+          {categories.map((element) => (
+            <div
+              key={element.name}
+              className={css.listItem}
+              onClick={() => {
+                dispatch(changeCatalogCategory(element.link));
+                router.push(`catalog`);
+              }}
+            >
+              {capitalizeFirstLetter(element.name)}
+            </div>
+          ))}
+        </div>
+      </a>
 
       <Link href="/contacts">
         <a className={css.headerLink}>
@@ -54,7 +84,7 @@ export default function Header() {
 // onMouseOut={() => setIsCatalogAccordeonOpen(false)}
 
 {
-  /* <div className={css.catalogAccordeon}>
+  /* <div className={css.catalogAccordion}>
   <div className={css.listItem}>Electronics</div>
   <div className={css.listItem}>Jewelery</div>
   <div className={css.listItem}>Men&apos;s clothing</div>

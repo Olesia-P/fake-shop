@@ -14,17 +14,17 @@
 @mixin underlineAnimation {
     &::before {
         position: absolute;
-        border-bottom: 1px solid black;
+        border-bottom: 2px dashed black;
         content: "";
         width: 0%;
-        bottom: 0;
-        transition: width 0.3s ease-in;
+        bottom: 0.3rem;
+        transition: width 0.2s ease-in;
         border-radius: $standart-b-radius;
     }
 
     &:hover::before {
         width: 100%;
-        transition: width 0.3s ease-in;
+        transition: width 0.2s ease-in;
     }
 }
 

@@ -9,15 +9,17 @@ import { useRouter } from "next/router";
 
 export default function Products({ category }) {
   const { data: productsData, isSuccess } = useGetProductsQuery(category);
+  const router = useRouter();
 
   return (
     <div className={css.container}>
       {isSuccess ? (
         productsData.map((element) => (
-          <a
-            href={`/products/${element.id}`}
+          <div
+            // href={`/products/${element.id}`}
             key={element.id}
             className={css.productContainer}
+            onClick={() => router.push(`/products/${element.id}`)}
           >
             <div className={css.img}>
               <img src={element.image} />
@@ -25,7 +27,7 @@ export default function Products({ category }) {
             <div className={css.title}>{element.title}</div>
             <div className={css.price}>{element.price}$</div>
             <div className={css.addToCartBtn}>Add to cart</div>
-          </a>
+          </div>
         ))
       ) : (
         <div>LOADING</div>

@@ -7,36 +7,38 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeCatalogCategory } from "../store/modules/catalogSlice";
 
 export default function Catalog() {
-  const [category, setCategory] = useState("");
-  const handleRadioButton = (categoryName) => {
-    setCategory(categoryName);
-  };
+  // const [category, setCategory] = useState("");
+  // const handleRadioButton = (categoryName) => {
+  // setCategory(categoryName);
+  // };
 
-  // const { catalogCategory } = useSelector(({ catalog }) => catalog);
-  // const dispatch = useDispatch();
+  const { catalogCategory } = useSelector(({ catalog }) => catalog);
+  const dispatch = useDispatch();
+
+  console.log(catalogCategory);
 
   return (
     <div className={css.container}>
       <div className={css.sideMenu}>
         {categories.map((element) => (
-          <label key={element} className={css.listItemSideMenu}>
+          <label key={element.name} className={css.listItemSideMenu}>
             <input
               type="radio"
               name="productsType"
               onChange={() => {
-                // dispatch(changeCatalogCategory(element));
-                handleRadioButton(element.link);
+                dispatch(changeCatalogCategory(element.link));
+                // handleRadioButton(element.link);
               }}
-              // checked={catalogCategory === element}
-              checked={category === element.link}
+              checked={catalogCategory === element.link}
+              // checked={category === element.link}
             />
             {capitalizeFirstLetter(element.name)}
           </label>
         ))}
       </div>
       <div className={css.productsArea}>
-        {/* <Products category={catalogCategory} /> */}
-        <Products category={category} />
+        <Products category={catalogCategory} />
+        {/* <Products category={category} /> */}
       </div>
     </div>
   );

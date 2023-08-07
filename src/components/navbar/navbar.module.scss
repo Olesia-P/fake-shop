@@ -52,24 +52,56 @@
     }
 
     .headerLink {
-        margin-left: 1rem;
+        margin-left: 2rem;
         border-radius: $standart-b-radius;
         padding: 0.3rem;
         text-decoration: none;
         color: black;
+        position: relative;
+        cursor: pointer;
+        @include underlineAnimation;
 
+        .catalogAccordion {
+            position: absolute;
+            top: 115%;
+            left: 0;
+            width: 12rem;
+            font-size: $size-p;
+            max-height: 0rem;
+            background-image: url(/cloth.jpg);
+            background-size: cover;
+            box-shadow: $main-shadow;
+            transition: all 0.3s ease-in;
+            overflow: hidden;
 
+            &.open {
+                max-height: 13rem;
+                transition: all 0.3s ease-in;
+            }
 
+            .listItem {
+                padding: 0.2rem 1rem;
+                border-bottom: 1px dashed black;
+                border-top: 1px dashed black;
 
-        // &:hover {
-        //     background-color: $grey;
-        //     border-radius: $standart-b-radius;
-        // }
+                &:hover {
+                    color: $red;
+                }
+            }
+        }
+
+        .chevron {
+            position: absolute;
+            top: 0.6rem;
+            right: -1.5rem;
+
+            &.open {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
     }
-
-    // .catalogAccordeon {
-    //     background-color: red;
-    //     // height: 10rem;
 
 
 
@@ -81,7 +113,7 @@
     height: 2rem;
     width: 100%;
     max-width: 55%;
-    margin-left: 1rem;
+    margin-left: 2rem;
 
     .searchIcon {
         border-bottom: 2px solid black;
