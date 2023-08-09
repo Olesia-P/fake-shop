@@ -17,10 +17,10 @@ export default function Catalog() {
   const addFilter = () => {
     if (filter === "A-Z" && catalogCategory === "") {
       dispatch(changeCatalogCategory(""));
-      dispatch(changeCatalogCategory("products?sort=desc"));
+      dispatch(changeCatalogCategory("?sort=desc"));
     } else if (filter === "Z-A" && catalogCategory === "") {
       dispatch(changeCatalogCategory(""));
-      dispatch(changeCatalogCategory("products?sort=asc"));
+      dispatch(changeCatalogCategory("?sort=asc"));
     } else if (filter === "A-Z" && catalogCategory !== "") {
       dispatch(changeCatalogCategory(""));
       dispatch(changeCatalogCategory(catalogCategory + "?sort=desc"));

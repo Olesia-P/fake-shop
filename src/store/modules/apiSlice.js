@@ -12,7 +12,11 @@ export const fakeShopApi = createApi({
     }),
     getProducts: builder.query({
       query: (category) =>
-        category === "" ? `products` : `products/category/${category}`,
+        category === ""
+          ? `products`
+          : "?sort=desc" || "?sort=asc"
+          ? `products/${category}`
+          : `products/category/${category}`,
       // async onQueryStarted(_, { dispatch, queryFulfilled }) {
       // const { data: productsData } = await queryFulfilled;
     }),
