@@ -14,7 +14,7 @@
 @mixin underlineAnimation {
     &::before {
         position: absolute;
-        border-bottom: 2px dashed black;
+        border-bottom: 1px solid black;
         content: "";
         width: 0%;
         bottom: 0.3rem;

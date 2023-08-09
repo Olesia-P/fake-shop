@@ -3,6 +3,7 @@
 .container {
     display: flex;
     font-size: $size-p;
+    box-sizing: border-box;
 
     .sideMenu {
         position: fixed;
@@ -12,47 +13,119 @@
         box-shadow: $main-shadow;
         padding: 1rem;
 
-        .listItemSideMenu {
-            margin: 0.5rem;
-            display: flex;
-            gap: 0.5em;
+        .list {
+            padding: 0 0 1rem 0;
 
-            *,
-            *:before,
-            *:after {
-                box-sizing: border-box;
-            }
+            .listItemSideMenu {
+                margin: 0.5rem;
+                display: flex;
+                gap: 0.5em;
+                cursor: pointer;
 
-            input[type="radio"] {
-                appearance: none;
-                background-color: $white;
-                margin: 0;
-                font: inherit;
-                color: black;
-                width: 1em;
-                height: 1em;
-                border: 0.10em solid currentColor;
-                border-radius: 50%;
-                transform: translateY(0.3em);
-                @include dfc;
-
-
-                &::before {
-                    content: "";
-                    width: 0.5em;
-                    height: 0.5em;
-                    border-radius: 50%;
-                    transform: scale(0);
-                    transition: 120ms transform ease-in-out;
-                    box-shadow: inset 1em 1em $red;
+                *,
+                *:before,
+                *:after {
+                    box-sizing: border-box;
                 }
 
-                &:checked::before {
-                    transform: scale(1);
+                input[type="radio"] {
+                    appearance: none;
+                    background-color: $white;
+                    margin: 0;
+                    font: inherit;
+                    color: black;
+                    width: 1em;
+                    height: 1em;
+                    border: 0.10em solid currentColor;
+                    border-radius: 50%;
+                    transform: translateY(0.3em);
+                    @include dfc;
+
+                    &::before {
+                        content: "";
+                        width: 0.5em;
+                        height: 0.5em;
+                        border-radius: 50%;
+                        transform: scale(0);
+                        transition: 120ms transform ease-in-out;
+                        box-shadow: inset 1em 1em $red;
+                    }
+
+                    &:checked::before {
+                        transform: scale(1);
+                    }
                 }
             }
         }
 
+        .filter {
+            margin: 0.5rem;
+            display: flex;
+            padding: 1rem 0;
+            border-top: 1px solid black;
+
+            &.open {
+
+                .chevron {
+                    transform: rotate(180deg);
+                }
+
+                .filterListWrap {
+                    .filterAccordion {
+                        transition: height 0.2s ease-in;
+                        height: 3.9rem;
+
+                    }
+                }
+            }
+
+            .filterHeader {
+                margin: 0 0.5rem;
+                font-weight: 600;
+            }
+
+            .filterListWrap {
+
+                .filterChosen {
+                    margin: 0 0.5rem;
+                    font-weight: 600;
+                    color: $red;
+                }
+
+                .filterAccordion {
+                    background-color: $grey;
+                    overflow: hidden;
+                    height: 0;
+                    transition: height 0.2s ease-in;
+
+                    .filterOption {
+                        border-top: 1px solid white;
+                        border-bottom: 1px solid white;
+                        padding: 0 0.5rem;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $green;
+                        }
+                    }
+                }
+            }
+
+            .chevron {
+                position: absolute;
+                left: 50%;
+                top: 38.5%;
+                cursor: pointer;
+                height: 1.5rem;
+                width: 1.5rem;
+
+                svg {
+                    height: 1.5rem;
+                    width: 1.5rem;
+                    padding: 0;
+                }
+            }
+        }
     }
 
     .productsArea {
@@ -61,20 +134,24 @@
     }
 }
 
-
 @include tablet {
     .container {
         @include dfcc;
 
         .sideMenu {
             position: static;
-            height: 12rem;
+            height: auto;
             width: 100%;
             margin-top: 4rem;
-            padding: 1rem 0;
+            padding: 1rem;
+            box-sizing: border-box;
 
-            .listItemSideMenu {
-                margin-left: 2rem;
+            .filter {
+
+                .chevron {
+                    top: 20.5rem;
+                    left: 9rem;
+                }
             }
         }
 

@@ -1,50 +1,98 @@
 import css from "../styles/pageStyles/catalog.module.scss";
+import cx from "classnames";
 import Products from "../components/products/products";
 import { useState } from "react";
 import { categories } from "../utils/objects";
 import { capitalizeFirstLetter } from "../utils/functions";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCatalogCategory } from "../store/modules/catalogSlice";
+import { BiChevronDown } from "react-icons/bi";
 
 export default function Catalog() {
-  // const [category, setCategory] = useState("");
-  // const handleRadioButton = (categoryName) => {
-  // setCategory(categoryName);
-  // };
-
   const { catalogCategory } = useSelector(({ catalog }) => catalog);
   const dispatch = useDispatch();
+  const [filter, setFilter] = useState("A-Z");
+  const [filterAccordion, setFilterAccordion] = useState();
+
+  const addFilter = () => {
+    if (filter === "A-Z" && catalogCategory === "") {
+      dispatch(changeCatalogCategory(""));
+      dispatch(changeCatalogCategory("products?sort=desc"));
+    } else if (filter === "Z-A" && catalogCategory === "") {
+      dispatch(changeCatalogCategory(""));
+      dispatch(changeCatalogCategory("products?sort=asc"));
+    } else if (filter === "A-Z" && catalogCategory !== "") {
+      dispatch(changeCatalogCategory(""));
+      dispatch(changeCatalogCategory(catalogCategory + "?sort=desc"));
+    } else if (filter === "Z-A" && catalogCategory !== "") {
+      dispatch(changeCatalogCategory(""));
+      dispatch(changeCatalogCategory(catalogCategory + "?sort=asc"));
+    }
+  };
 
   console.log(catalogCategory);
 
   return (
     <div className={css.container}>
       <div className={css.sideMenu}>
-        {categories.map((element) => (
-          <label key={element.name} className={css.listItemSideMenu}>
-            <input
-              type="radio"
-              name="productsType"
-              onChange={() => {
-                dispatch(changeCatalogCategory(element.link));
-                // handleRadioButton(element.link);
-              }}
-              checked={catalogCategory === element.link}
-              // checked={category === element.link}
-            />
-            {capitalizeFirstLetter(element.name)}
-          </label>
-        ))}
+        <div className={css.list}>
+          {categories.map((element) => (
+            <label key={element.name} className={css.listItemSideMenu}>
+              <input
+                type="radio"
+                name="productsType"
+                onChange={() => {
+                  dispatch(changeCatalogCategory(element.link));
+                }}
+                checked={catalogCategory === element.link}
+              />
+              {capitalizeFirstLetter(element.name)}
+            </label>
+          ))}
+        </div>
+        <div className={cx(css.filter, filterAccordion && css.open)}>
+          <div className={css.filterHeader}>Filter:</div>
+          <div className={css.filterListWrap}>
+            <div className={css.filterChosen}>{filter}</div>
+            <div className={css.filterAccordion}>
+              <div
+                className={css.filterOption}
+                onClick={() => {
+                  setFilterAccordion(false), setFilter("A-Z"), addFilter();
+                }}
+              >
+                A-Z
+              </div>
+              <div
+                className={css.filterOption}
+                onClick={() => {
+                  setFilterAccordion(false), setFilter("Z-A"), addFilter();
+                }}
+              >
+                Z-A
+              </div>
+            </div>
+          </div>
+          <div
+            className={css.chevron}
+            onClick={() => setFilterAccordion(!filterAccordion)}
+          >
+            <BiChevronDown />
+          </div>
+        </div>
       </div>
       <div className={css.productsArea}>
         <Products category={catalogCategory} />
-        {/* <Products category={category} /> */}
       </div>
     </div>
   );
 }
 
 //&apos;
+// const [category, setCategory] = useState("");
+// const handleRadioButton = (categoryName) => {
+// setCategory(categoryName);
+// };
 
 //  Sed ut perspiciatis, unde omnis iste natus error sit voluptatem
 //         accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab
