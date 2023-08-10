@@ -3,12 +3,15 @@
 /* eslint-disable @next/next/no-img-element */
 import css from "./products.module.scss";
 import { useGetProductsQuery } from "../../store/modules/apiSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+
 import { useRouter } from "next/router";
 
-export default function Products({ category }) {
-  const { data: productsData, isSuccess } = useGetProductsQuery(category);
+export default function Products({ category, filter }) {
+  const params = {
+    category: category,
+    filter: filter,
+  };
+  const { data: productsData, isSuccess } = useGetProductsQuery(params);
   const router = useRouter();
 
   return (
@@ -16,7 +19,6 @@ export default function Products({ category }) {
       {isSuccess ? (
         productsData.map((element) => (
           <div
-            // href={`/products/${element.id}`}
             key={element.id}
             className={css.productContainer}
             onClick={() => router.push(`/products/${element.id}`)}
@@ -35,12 +37,3 @@ export default function Products({ category }) {
     </div>
   );
 }
-
-// const { data: singleProductData = {} } = useGetOneProductQuery();
-// const { data: allProductsData, isSuccess } = useGetAllProductsQuery();
-// useEffect(() => {
-//   if (allProductsData) {
-//     dispatch(changeCatalogProducts(allProductsData));
-//   }
-// console.log("allProductsData", allProductsData);
-// }, [allProductsData]);
