@@ -15,7 +15,7 @@ export default function Catalog() {
   const [filterLink, setFilterLink] = useState("asc");
   const [filterAccordion, setFilterAccordion] = useState();
 
-  const allFilters = { alphabet: filterLink, limit: "2" };
+  const allFilters = { alphabet: filterLink, limit: "" };
 
   return (
     <div className={css.container}>

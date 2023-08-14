@@ -1,0 +1,102 @@
+@import "../../../styles/main.scss";
+
+.product {
+    padding: 1rem;
+    margin: 0.5rem;
+    width: 19rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    border-top: 2px solid $grey;
+
+    .rightSection {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+
+        .img {
+            height: 7rem;
+            width: 7rem;
+            @include dfc;
+            box-sizing: border-box;
+            border: 1px solid black;
+            border-radius: $standart-b-radius;
+
+            img {
+                max-height: 7rem;
+                max-width: 7rem;
+                box-sizing: border-box;
+                padding: 1rem;
+            }
+        }
+
+        .deleteIcon {
+            height: 4rem;
+            width: 7rem;
+            @include dfc;
+
+            svg {
+                width: 2rem;
+                height: 2rem;
+                color: $asphalt;
+            }
+        }
+    }
+
+    .productInfo {
+        .title {
+            width: 10rem;
+            margin-right: 1rem;
+            line-height: 1;
+            font-size: $size-p;
+        }
+
+        .price {
+            align-self: flex-end;
+            font-weight: 600;
+            font-size: $size-header;
+        }
+
+        .counterContainer {
+            display: flex;
+            margin: 0.5rem 0;
+
+            .counterBtn {
+                width: 2rem;
+                height: 2rem;
+                @include dfc;
+                cursor: pointer;
+
+                .minusBtn,
+                .plusBtn {
+                    height: 1.5rem;
+                    width: 1.5rem;
+                }
+
+                .minusBtn {
+                    color: $red;
+
+                    &.stopMinusBtn {
+                        color: $grey;
+                    }
+                }
+
+                .plusBtn {
+                    color: $red;
+                }
+            }
+
+            .counter {
+                font-weight: 600;
+                font-size: $size-p;
+                text-align: center;
+                border-radius: 8px;
+                padding: 0 1rem;
+            }
+        }
+    }
+}

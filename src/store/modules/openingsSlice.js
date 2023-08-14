@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isMobileMenuOpen: false,
+  isCartOpen: false,
 };
 
 const openingsSlice = createSlice({
@@ -11,8 +12,12 @@ const openingsSlice = createSlice({
     changeIsMobileMenuOpen: (state, action) => {
       state.isMobileMenuOpen = action.payload;
     },
+    changeIsCartOpen: (state, action) => {
+      state.isCartOpen = action.payload;
+    },
   },
 });
 
 export default openingsSlice.reducer;
-export const { changeIsMobileMenuOpen } = openingsSlice.actions;
+export const { changeIsMobileMenuOpen, changeIsCartOpen } =
+  openingsSlice.actions;

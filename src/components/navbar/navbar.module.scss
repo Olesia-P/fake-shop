@@ -1,10 +1,26 @@
 @import "../../styles/main.scss";
 
+
+.overlay {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: opacity 0.3s ease-in;
+    z-index: 1;
+    transform: translateX(-100%);
+
+    &.open {
+        transform: translateX(0);
+        opacity: 100%;
+        transition: opacity 0.5s ease-in;
+    }
+
+}
+
 .container {
-    // @include dfc;
     display: flex;
     align-items: center;
-    // justify-content: space-evenly;
     height: 4rem;
     font-size: $size-header;
     box-shadow: $main-shadow;
@@ -20,7 +36,7 @@
 
     .userIcon {
         @include dfc;
-        margin-left: 1rem;
+        margin-right: 1rem;
         border-radius: 2rem;
         height: 2.5rem;
         padding: 0.3rem;
@@ -29,10 +45,6 @@
             width: 2.5rem;
             height: 2.5rem;
         }
-
-        // &:hover {
-        //     background-color: $grey;
-        // }
     }
 
     a {
@@ -59,7 +71,9 @@
         color: black;
         position: relative;
         cursor: pointer;
-        @include underlineAnimation;
+        @include hoverAnimation;
+
+
 
         .catalogAccordion {
             position: absolute;
@@ -69,14 +83,14 @@
             font-size: $size-p;
             max-height: 0rem;
             background-image: url(/cloth.jpg);
-            background-size: cover;
             box-shadow: $main-shadow;
-            transition: all 0.3s ease-in;
+            transition: all 0.2s ease-in;
             overflow: hidden;
 
             &.open {
                 max-height: 13rem;
-                transition: all 0.3s ease-in;
+                transition: all 0.2s ease-in;
+                border: 1px dashed black;
             }
 
             .listItem {
@@ -104,44 +118,43 @@
     }
 
 
+    .searchFrom {
+        @include dfc;
+        height: 2rem;
+        width: 100%;
+        max-width: 55%;
+        margin-left: 2rem;
 
-    // &.open {}
-}
+        .searchIcon {
+            border-bottom: 2px solid black;
+            height: 100%;
+            padding: 0 0.5rem;
+            border-bottom-right-radius: $standart-b-radius;
+            box-sizing: border-box;
 
-.searchFrom {
-    @include dfc;
-    height: 2rem;
-    width: 100%;
-    max-width: 55%;
-    margin-left: 2rem;
+            svg {
+                height: 1.3rem;
+            }
+        }
 
-    .searchIcon {
-        border-bottom: 2px solid black;
-        height: 100%;
-        padding: 0 0.5rem;
-        border-bottom-right-radius: $standart-b-radius;
-        box-sizing: border-box;
-
-        svg {
-            height: 1.3rem;
+        input {
+            background-color: $white;
+            border: none;
+            border-bottom: 2px solid black;
+            font-size: $size-p;
+            border-bottom-left-radius: $standart-b-radius;
+            padding: 0 0.5rem;
+            outline: none;
+            height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            outline: none;
+            font-family: $main-font;
         }
     }
-
-    input {
-        background-color: $white;
-        border: none;
-        border-bottom: 2px solid black;
-        font-size: $size-p;
-        border-bottom-left-radius: $standart-b-radius;
-        padding: 0 0.5rem;
-        outline: none;
-        height: 100%;
-        width: 100%;
-        box-sizing: border-box;
-        outline: none;
-        font-family: $main-font;
-    }
 }
+
+
 
 
 @include tablet {

@@ -3,6 +3,8 @@
 /* eslint-disable @next/next/no-img-element */
 import css from "./products.module.scss";
 import { useGetProductsQuery } from "../../store/modules/apiSlice";
+import { addToCart } from "../../store/modules/cartSlice";
+import { useDispatch } from "react-redux";
 
 import { useRouter } from "next/router";
 
@@ -13,6 +15,7 @@ export default function Products({ category, filter }) {
   };
   const { data: productsData, isSuccess } = useGetProductsQuery(params);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   return (
     <div className={css.container}>
@@ -21,14 +24,19 @@ export default function Products({ category, filter }) {
           <div
             key={element.id}
             className={css.productContainer}
-            onClick={() => router.push(`/products/${element.id}`)}
+            // onClick={() => router.push(`/products/${element.id}`)}
           >
             <div className={css.img}>
               <img src={element.image} />
             </div>
             <div className={css.title}>{element.title}</div>
             <div className={css.price}>{element.price}$</div>
-            <div className={css.addToCartBtn}>Add to cart</div>
+            <div
+              className={css.addToCartBtn}
+              onClick={() => dispatch(addToCart(element))}
+            >
+              Add to cart
+            </div>
           </div>
         ))
       ) : (

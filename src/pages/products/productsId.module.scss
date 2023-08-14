@@ -15,7 +15,7 @@
         border-radius: $standart-b-radius;
 
         .backBtnWrap {
-            width: 8rem;
+            width: 10rem;
             height: 3rem;
             @include dfc;
             padding: 1rem;
@@ -23,18 +23,20 @@
             text-decoration: none;
             color: black;
 
+
             .backBtn {
                 font-size: $size-header;
                 position: relative;
                 border-radius: $standart-b-radius;
+                padding: 0.5rem;
 
                 svg {
                     margin-right: 0.3rem;
                 }
 
+                @include hoverAnimation;
 
 
-                @include underlineAnimation;
 
             }
         }

@@ -1,11 +1,31 @@
 @import "../../styles/main.scss";
 
+.overlay {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgb(0, 0, 0, 0.5);
+    transition: opacity 0.3s ease-in;
+    z-index: 1;
+    transform: translateX(-100%);
+
+    &.open {
+        transform: translateX(0);
+        opacity: 100%;
+        transition: opacity 0.5s ease-in;
+    }
+}
+
+
 .container {
     position: relative;
     margin: 0 1rem;
 
-    .containerCart {
 
+    .cartIcon {
+        @include dfc;
+        height: 4rem;
 
         svg {
             height: 2.5rem;
@@ -22,7 +42,49 @@
         border-radius: 1rem;
         padding: 0rem 0.5rem;
         right: -0.2rem;
-        top: 1.5rem;
+        top: 2.2rem;
 
     }
+
+
+
+    .cart {
+
+        position: absolute;
+        left: -16rem;
+        top: 4rem;
+        height: 0;
+        width: 22rem;
+        background-color: white;
+        overflow: hidden;
+        border-radius: $standart-b-radius;
+        box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+        transition: all 0.3s ease-in;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+
+
+
+        &.open {
+            height: 26rem;
+            transition: all 0.3s ease-in;
+            overflow: auto;
+        }
+
+
+        .header {
+            text-align: center;
+            padding: 0 1rem;
+            margin: 1rem;
+            border: 3px solid $grey;
+            border-radius: $standart-b-radius;
+
+            font-weight: 600;
+        }
+
+
+    }
+
 }
