@@ -40,6 +40,7 @@
         border-radius: 2rem;
         height: 2.5rem;
         padding: 0.3rem;
+        @include hoverAnimation;
 
         svg {
             width: 2.5rem;
@@ -73,8 +74,6 @@
         cursor: pointer;
         @include hoverAnimation;
 
-
-
         .catalogAccordion {
             position: absolute;
             top: 115%;
@@ -86,6 +85,7 @@
             box-shadow: $main-shadow;
             transition: all 0.2s ease-in;
             overflow: hidden;
+            border-radius: $standart-b-radius;
 
             &.open {
                 max-height: 13rem;

@@ -1,12 +1,9 @@
 @import "../styles/main.scss";
+@import "./_normalize.css";
 
 
 
 body {
-    margin: 0;
     font-family: $main-font;
     background: $white;
-
-
-
 }

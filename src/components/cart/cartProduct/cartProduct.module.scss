@@ -100,3 +100,15 @@
         }
     }
 }
+
+@include tablet {
+    .product {
+        width: 80%;
+
+        .productInfo {
+            .title {
+                width: 100%;
+            }
+        }
+    }
+}

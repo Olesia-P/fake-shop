@@ -10,9 +10,11 @@ import {
 } from "../../../store/modules/cartSlice";
 import cx from "classnames";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 export default function CartProduct({ cartProducts }) {
   const dispatch = useDispatch();
+  const router = useRouter();
   return (
     <>
       {cartProducts.map((element) => (
@@ -22,7 +24,12 @@ export default function CartProduct({ cartProducts }) {
           // onClick={() => router.push(`/products/${element.product.id}`)}
         >
           <div className={css.productInfo}>
-            <div className={css.title}>{element.product.title}</div>
+            <div
+              className={css.title}
+              onClick={() => router.push(`/products/${element.product.id}`)}
+            >
+              {element.product.title}
+            </div>
 
             <div className={css.counterContainer}>
               <div className={css.counterBtn}>
@@ -51,7 +58,10 @@ export default function CartProduct({ cartProducts }) {
             </div>
           </div>
           <div className={css.rightSection}>
-            <div className={css.img}>
+            <div
+              className={css.img}
+              onClick={() => router.push(`/products/${element.product.id}`)}
+            >
               <img src={element.product.image} />
             </div>
             <div

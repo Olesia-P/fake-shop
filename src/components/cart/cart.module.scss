@@ -17,15 +17,16 @@
     }
 }
 
-
 .container {
     position: relative;
     margin: 0 1rem;
+    @include hoverAnimation;
+    border-radius: $standart-b-radius;
 
 
     .cartIcon {
         @include dfc;
-        height: 4rem;
+        height: 2.5rem;
 
         svg {
             height: 2.5rem;
@@ -42,17 +43,14 @@
         border-radius: 1rem;
         padding: 0rem 0.5rem;
         right: -0.2rem;
-        top: 2.2rem;
-
+        top: 1.3rem;
+        cursor: pointer;
     }
 
-
-
     .cart {
-
         position: absolute;
         left: -16rem;
-        top: 4rem;
+        top: 3.3rem;
         height: 0;
         width: 22rem;
         background-color: white;
@@ -68,7 +66,7 @@
 
 
         &.open {
-            height: 26rem;
+            height: 30rem;
             transition: all 0.3s ease-in;
             overflow: auto;
         }
@@ -83,8 +81,26 @@
 
             font-weight: 600;
         }
+    }
+}
 
-
+@include tablet {
+    .overlay {
+        display: none;
     }
 
+    .container {
+        .cart {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            top: 4.2rem;
+            right: 0;
+            margin: auto;
+
+            &.open {
+                height: 100%;
+            }
+        }
+    }
 }

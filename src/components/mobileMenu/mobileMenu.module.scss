@@ -33,12 +33,13 @@
     font-size: 24pt;
     box-sizing: border-box;
     margin-top: 4rem;
-
     overflow-y: scroll;
 
     &.open {
         transform: translateX(0);
         transition: transform 0.3s ease-in;
+
+
     }
 
     .userIcon {
@@ -52,10 +53,6 @@
             width: 3rem;
             height: 3rem;
         }
-
-        // &:hover {
-        //     background-color: $grey;
-        // }
     }
 
     .headerLink {

@@ -14,6 +14,15 @@ export default function Cart({}) {
   const dispatch = useDispatch();
   return (
     <>
+      {isCartOpen && (
+        <style jsx global>
+          {`
+            body {
+              overflow: hidden;
+            }
+          `}
+        </style>
+      )}
       <div className={css.container}>
         <div
           className={css.cartIcon}
@@ -21,7 +30,12 @@ export default function Cart({}) {
         >
           <IoIosBasket />
         </div>
-        <div className={css.itemCounter}>{cartProducts.length}</div>
+        <div
+          className={css.itemCounter}
+          onClick={() => dispatch(changeIsCartOpen(!isCartOpen))}
+        >
+          {cartProducts.length}
+        </div>
 
         <div className={cx(css.cart, isCartOpen && css.open)}>
           <div className={css.header}>In your cart</div>

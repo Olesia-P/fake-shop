@@ -21,16 +21,25 @@ export default function Products({ category, filter }) {
     <div className={css.container}>
       {isSuccess ? (
         productsData.map((element) => (
-          <div
-            key={element.id}
-            className={css.productContainer}
-            // onClick={() => router.push(`/products/${element.id}`)}
-          >
-            <div className={css.img}>
+          <div key={element.id} className={css.productContainer}>
+            <div
+              className={css.img}
+              onClick={() => router.push(`/products/${element.id}`)}
+            >
               <img src={element.image} />
             </div>
-            <div className={css.title}>{element.title}</div>
-            <div className={css.price}>{element.price}$</div>
+            <div
+              className={css.title}
+              onClick={() => router.push(`/products/${element.id}`)}
+            >
+              {element.title}
+            </div>
+            <div
+              className={css.price}
+              onClick={() => router.push(`/products/${element.id}`)}
+            >
+              {element.price}$
+            </div>
             <div
               className={css.addToCartBtn}
               onClick={() => dispatch(addToCart(element))}

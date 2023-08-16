@@ -1,5 +1,5 @@
 export const categories = [
-  { link: "", name: "all prducts" },
+  { link: "", name: "all products" },
   { link: "jewelery", name: "jewelery" },
   { link: "electronics", name: "electronics" },
   { link: "men's%20clothing", name: "men's clothing" },
