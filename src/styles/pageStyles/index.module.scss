@@ -2,7 +2,7 @@
 
 
 .buttonWrap {
-    padding-top: 10rem;
+    padding-top: 5rem;
 
     .button {
         width: 9rem;
@@ -15,4 +15,11 @@
         box-shadow: $main-shadow;
         cursor: pointer;
     }
+}
+
+.data {
+    // background-color: red;
+    text-align: center;
+    font-size: $size-header;
+    margin-top: 3rem;
 }

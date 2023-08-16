@@ -17,4 +17,4 @@ export const localFakeShopApi = createApi({
   }),
 });
 
-export const { usePostCartMutation } = localFakeShopApi;
+export const { usePostCartMutation, useGetCartQuery } = localFakeShopApi;
