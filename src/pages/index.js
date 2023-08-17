@@ -1,22 +1,21 @@
 import css from "../styles/pageStyles/index.module.scss";
 import {
   usePostCartMutation,
-  useGetCartQuery,
+  useLazyGetCartQuery,
 } from "../store/modules/localApiSlice";
 import { useState } from "react";
+import { testCart2 } from "../utils/objects";
 
 export default function Home() {
   const [postCart] = usePostCartMutation();
-  const [data, setData] = useState([]);
-  const {
-    data: localApiCartData = {},
-    error,
-    isError,
-    isLoading,
-    isSucces,
-  } = useGetCartQuery();
+  // const [data, setData] = useState();
 
-  const testingPost = { id: 999 };
+  const [
+    getCart,
+    { data: localApiCartData, error, isError, isLoading, isSuccess, refetch },
+  ] = useLazyGetCartQuery();
+
+  // console.log("localApiCartData", localApiCartData);
 
   return (
     <>
@@ -24,7 +23,7 @@ export default function Home() {
         <div
           className={css.button}
           onClick={() => {
-            setData(localApiCartData);
+            getCart();
           }}
         >
           Get Button
@@ -34,14 +33,23 @@ export default function Home() {
         <div
           className={css.button}
           onClick={() => {
-            setData(testingPost);
-            postCart(data);
+            postCart({
+              id: 1,
+              product: "shirt",
+            });
           }}
         >
           Post Button
         </div>
       </div>
-      <div className={css.data}> CartID: {data.id}</div>
+      <div className={css.data}>
+        Cart:
+        {localApiCartData?.map((element) => (
+          <div key={element.id}>
+            {element.id} {element.product}
+          </div>
+        ))}
+      </div>
     </>
   );
 }

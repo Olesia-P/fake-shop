@@ -14,7 +14,7 @@ export const store = configureStore({
     cart: cartReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(fakeShopApi.middleware),
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(localFakeShopApi.middleware),
+    getDefaultMiddleware()
+      .concat(fakeShopApi.middleware)
+      .concat(localFakeShopApi.middleware),
 });

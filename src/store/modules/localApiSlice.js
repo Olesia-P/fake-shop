@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { localCart } from "../../utils/objects";
 
 export const localFakeShopApi = createApi({
   reducerPath: "localFakeShopApi",
@@ -6,15 +7,15 @@ export const localFakeShopApi = createApi({
   endpoints: (builder) => ({
     postCart: builder.mutation({
       query: (cart) => ({
-        url: `cart`,
+        url: "/cart",
         method: "POST",
         body: cart,
       }),
     }),
     getCart: builder.query({
-      query: () => `cart`,
+      query: () => "/cart",
     }),
   }),
 });
 
-export const { usePostCartMutation, useGetCartQuery } = localFakeShopApi;
+export const { usePostCartMutation, useLazyGetCartQuery } = localFakeShopApi;
