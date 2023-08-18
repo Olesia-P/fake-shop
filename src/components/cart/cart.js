@@ -3,13 +3,20 @@ import cx from "classnames";
 import { IoIosBasket } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { changeIsCartOpen } from "../../store/modules/openingsSlice";
-import { useGetProductsQuery } from "../../store/modules/apiSlice";
 import CartProduct from "./cartProduct/cartProduct";
 import CountOrder from "./countOrder/CountOrder";
+import { useGetCartQuery } from "../../store/modules/localApiSlice";
 
 export default function Cart({}) {
   const { isCartOpen } = useSelector(({ openings }) => openings);
-  const { cartProducts } = useSelector(({ cart }) => cart);
+  // const { cartProducts } = useSelector(({ cart }) => cart);
+  const {
+    data: localApiCartData,
+    error,
+    isError,
+    isLoading,
+    isSuccess,
+  } = useGetCartQuery();
 
   const dispatch = useDispatch();
   return (
@@ -26,7 +33,9 @@ export default function Cart({}) {
       <div className={css.container}>
         <div
           className={css.cartIcon}
-          onClick={() => dispatch(changeIsCartOpen(!isCartOpen))}
+          onClick={() => {
+            dispatch(changeIsCartOpen(!isCartOpen));
+          }}
         >
           <IoIosBasket />
         </div>
@@ -34,12 +43,13 @@ export default function Cart({}) {
           className={css.itemCounter}
           onClick={() => dispatch(changeIsCartOpen(!isCartOpen))}
         >
-          {cartProducts.length}
+          {/* {cartProducts.length} */}
+          {localApiCartData?.length}
         </div>
 
         <div className={cx(css.cart, isCartOpen && css.open)}>
           <div className={css.header}>In your cart</div>
-          <CartProduct cartProducts={cartProducts} />
+          <CartProduct cartProducts={localApiCartData} />
           <CountOrder />
         </div>
       </div>

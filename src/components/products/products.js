@@ -3,8 +3,12 @@
 /* eslint-disable @next/next/no-img-element */
 import css from "./products.module.scss";
 import { useGetProductsQuery } from "../../store/modules/apiSlice";
-import { addToCart } from "../../store/modules/cartSlice";
+// import { addToCart } from "../../store/modules/cartSlice";
 import { useDispatch } from "react-redux";
+import {
+  usePostCartMutation,
+  useGetCartQuery,
+} from "../../store/modules/localApiSlice";
 
 import { useRouter } from "next/router";
 
@@ -16,6 +20,8 @@ export default function Products({ category, filter }) {
   const { data: productsData, isSuccess } = useGetProductsQuery(params);
   const router = useRouter();
   const dispatch = useDispatch();
+  const [postCart] = usePostCartMutation();
+  const { refetch } = useGetCartQuery();
 
   return (
     <div className={css.container}>
@@ -42,7 +48,11 @@ export default function Products({ category, filter }) {
             </div>
             <div
               className={css.addToCartBtn}
-              onClick={() => dispatch(addToCart(element))}
+              // onClick={() => dispatch(addToCart(element))}
+              onClick={() => {
+                postCart({ object: element, type: "addToCart" });
+                refetch();
+              }}
             >
               Add to cart
             </div>

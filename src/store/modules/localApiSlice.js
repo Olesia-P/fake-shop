@@ -15,7 +15,26 @@ export const localFakeShopApi = createApi({
     getCart: builder.query({
       query: () => "/cart",
     }),
+
+    deleteProduct: builder.mutation({
+      query: (productId) => ({
+        url: `/cart/products/${productId}`,
+        method: "DELETE",
+      }),
+    }),
+    postProduct: builder.mutation({
+      query: (productId) => ({
+        url: `/cart/products/${productId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { usePostCartMutation, useLazyGetCartQuery } = localFakeShopApi;
+export const {
+  usePostCartMutation,
+  useLazyGetCartQuery,
+  useGetCartQuery,
+  useDeleteProductMutation,
+  usePostProductMutation,
+} = localFakeShopApi;

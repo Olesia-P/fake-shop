@@ -1,13 +1,23 @@
 import css from "./CountOrder.module.scss";
 import { useSelector } from "react-redux";
 import { countOrderCost } from "../../../utils/functions";
+import { useGetCartQuery } from "../../../store/modules/localApiSlice";
 
 export default function CountOrder() {
-  const { cartProducts } = useSelector(({ cart }) => cart);
-  const sum = countOrderCost(cartProducts);
+  // const { cartProducts } = useSelector(({ cart }) => cart);
+  // const sum = countOrderCost(cartProducts);
+  const {
+    data: localApiCartData,
+    error,
+    isError,
+    isLoading,
+    isSuccess,
+  } = useGetCartQuery();
+
+  const sum = countOrderCost(localApiCartData);
   return (
     <>
-      {cartProducts.length > 0 && (
+      {localApiCartData?.length > 0 && (
         <div className={css.containerCount}>
           <div className={css.card}>
             <div className={css.receiptSum}>
@@ -20,7 +30,7 @@ export default function CountOrder() {
           </div>
         </div>
       )}
-      {cartProducts.length === 0 && <p>Cart is empty!</p>}
+      {localApiCartData?.length === 0 && <p>Cart is empty!</p>}
     </>
   );
 }

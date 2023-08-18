@@ -4,7 +4,7 @@ export function capitalizeFirstLetter(string) {
 
 export const countOrderCost = (cart) => {
   const initialValue = 0;
-  const sum = cart.reduce(
+  const sum = cart?.reduce(
     (accumulator, currentValue) =>
       accumulator + currentValue.product.price * currentValue.quantity,
     initialValue

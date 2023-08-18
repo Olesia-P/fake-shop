@@ -11,18 +11,23 @@ import {
 import cx from "classnames";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import {
+  usePostCartMutation,
+  useGetCartQuery,
+  useDeleteProductMutation,
+} from "../../../store/modules/localApiSlice";
 
 export default function CartProduct({ cartProducts }) {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [postCart] = usePostCartMutation();
+  const [deleteProduct] = useDeleteProductMutation();
+  const { refetch } = useGetCartQuery();
+
   return (
     <>
-      {cartProducts.map((element) => (
-        <div
-          key={element.product.id}
-          className={css.product}
-          // onClick={() => router.push(`/products/${element.product.id}`)}
-        >
+      {cartProducts?.map((element) => (
+        <div key={element.product.id} className={css.product}>
           <div className={css.productInfo}>
             <div
               className={css.title}
@@ -39,7 +44,9 @@ export default function CartProduct({ cartProducts }) {
                     element.quantity <= 1 && css.stopMinusBtn
                   )}
                   onClick={() => {
-                    dispatch(minusToQuantity(element.product.id));
+                    // dispatch(minusToQuantity(element.product.id));
+                    postCart({ object: element, type: "minusQuantity" });
+                    refetch();
                   }}
                 />
               </div>
@@ -48,7 +55,9 @@ export default function CartProduct({ cartProducts }) {
                 <AiOutlinePlus
                   className={css.plusBtn}
                   onClick={() => {
-                    dispatch(plusToQuantity(element.product.id));
+                    // dispatch(plusToQuantity(element.product.id));
+                    postCart({ object: element, type: "plusQuantity" });
+                    refetch();
                   }}
                 />
               </div>
@@ -66,7 +75,11 @@ export default function CartProduct({ cartProducts }) {
             </div>
             <div
               className={css.deleteIcon}
-              onClick={() => dispatch(deleteFromCart(element.product.id))}
+              onClick={() => {
+                // dispatch(deleteFromCart(element.product.id))
+                deleteProduct(element.product.id);
+                refetch();
+              }}
             >
               <MdDelete />
             </div>
