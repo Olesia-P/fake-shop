@@ -22,7 +22,6 @@ export default function CartProduct({ cartProducts }) {
   const router = useRouter();
   const [postCart] = usePostCartMutation();
   const [deleteProduct] = useDeleteProductMutation();
-  const { refetch } = useGetCartQuery();
 
   return (
     <>
@@ -44,9 +43,7 @@ export default function CartProduct({ cartProducts }) {
                     element.quantity <= 1 && css.stopMinusBtn
                   )}
                   onClick={() => {
-                    // dispatch(minusToQuantity(element.product.id));
                     postCart({ object: element, type: "minusQuantity" });
-                    refetch();
                   }}
                 />
               </div>
@@ -55,9 +52,7 @@ export default function CartProduct({ cartProducts }) {
                 <AiOutlinePlus
                   className={css.plusBtn}
                   onClick={() => {
-                    // dispatch(plusToQuantity(element.product.id));
                     postCart({ object: element, type: "plusQuantity" });
-                    refetch();
                   }}
                 />
               </div>
@@ -76,9 +71,7 @@ export default function CartProduct({ cartProducts }) {
             <div
               className={css.deleteIcon}
               onClick={() => {
-                // dispatch(deleteFromCart(element.product.id))
                 deleteProduct(element.product.id);
-                refetch();
               }}
             >
               <MdDelete />

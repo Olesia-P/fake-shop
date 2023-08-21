@@ -9,7 +9,7 @@ import { useGetCartQuery } from "../../store/modules/localApiSlice";
 
 export default function Cart({}) {
   const { isCartOpen } = useSelector(({ openings }) => openings);
-  // const { cartProducts } = useSelector(({ cart }) => cart);
+
   const {
     data: localApiCartData,
     error,
@@ -43,7 +43,6 @@ export default function Cart({}) {
           className={css.itemCounter}
           onClick={() => dispatch(changeIsCartOpen(!isCartOpen))}
         >
-          {/* {cartProducts.length} */}
           {localApiCartData?.length}
         </div>
 

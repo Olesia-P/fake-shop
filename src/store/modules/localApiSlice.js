@@ -4,25 +4,23 @@ import { localCart } from "../../utils/objects";
 export const localFakeShopApi = createApi({
   reducerPath: "localFakeShopApi",
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+  tagTypes: ["Cart"],
   endpoints: (builder) => ({
+    getCart: builder.query({
+      query: () => "/cart",
+      providesTags: ["Cart"],
+    }),
+
     postCart: builder.mutation({
       query: (cart) => ({
         url: "/cart",
         method: "POST",
         body: cart,
       }),
-    }),
-    getCart: builder.query({
-      query: () => "/cart",
+      invalidatesTags: ["Cart"],
     }),
 
     deleteProduct: builder.mutation({
-      query: (productId) => ({
-        url: `/cart/products/${productId}`,
-        method: "DELETE",
-      }),
-    }),
-    postProduct: builder.mutation({
       query: (productId) => ({
         url: `/cart/products/${productId}`,
         method: "DELETE",
