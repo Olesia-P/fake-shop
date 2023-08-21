@@ -25,6 +25,7 @@ export const localFakeShopApi = createApi({
         url: `/cart/products/${productId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Cart"],
     }),
   }),
 });

@@ -63,14 +63,14 @@ export default function Products({ category, filter }) {
                     (it) => it.product.id === element.id
                   );
 
-                  element.id === identicalObject?.product.id
-                    ? setElementQuantity(
-                        localApiCartData.find(
-                          (it) => it.product.id === element.id
-                        ).quantity + 1
-                      )
-                    : setElementQuantity(1);
-                  postCart({ id: element.id, quantity: elementQuantity });
+                  const finalQuantity =
+                    element.id === identicalObject?.product.id
+                      ? identicalObject.quantity + 1
+                      : 1;
+
+                  const params = { id: element.id, quantity: finalQuantity };
+
+                  postCart(params);
                 }
               }}
             >
