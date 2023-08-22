@@ -21,15 +21,6 @@ export default function Cart({}) {
   const dispatch = useDispatch();
   return (
     <>
-      {isCartOpen && (
-        <style jsx global>
-          {`
-            body {
-              overflow: hidden;
-            }
-          `}
-        </style>
-      )}
       <div className={css.container}>
         <div
           className={css.cartIcon}
@@ -54,11 +45,4 @@ export default function Cart({}) {
       </div>
     </>
   );
-}
-
-{
-  /* <div
-        className={cx(css.overlay, isCartOpen && css.open)}
-        onClick={() => dispatch(changeIsCartOpen(false))}
-      ></div> */
 }

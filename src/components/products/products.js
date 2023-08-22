@@ -7,9 +7,7 @@ import {
   usePostCartMutation,
   useGetCartQuery,
 } from "../../store/modules/localApiSlice";
-
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 export default function Products({ category, filter }) {
   const params = {
@@ -19,9 +17,8 @@ export default function Products({ category, filter }) {
   const { data: productsData, isSuccess: productsDataSuccess } =
     useGetProductsQuery(params);
   const router = useRouter();
-
   const [postCart] = usePostCartMutation();
-  const [elementQuantity, setElementQuantity] = useState();
+
   const {
     data: localApiCartData,
     error,
@@ -30,7 +27,19 @@ export default function Products({ category, filter }) {
     isSuccess: localApiCartDataSuccess,
   } = useGetCartQuery();
 
-  console.log(localApiCartData);
+  const addToCart = (product) => {
+    if (localApiCartDataSuccess) {
+      const identicalObject = localApiCartData.find(
+        (it) => it.product.id === product.id
+      );
+      const finalQuantity =
+        product.id === identicalObject?.product.id
+          ? identicalObject.quantity + 1
+          : 1;
+      const params = { id: product.id, quantity: finalQuantity };
+      postCart(params);
+    }
+  };
 
   return (
     <div className={css.container}>
@@ -58,20 +67,7 @@ export default function Products({ category, filter }) {
             <div
               className={css.addToCartBtn}
               onClick={() => {
-                if (localApiCartDataSuccess) {
-                  const identicalObject = localApiCartData.find(
-                    (it) => it.product.id === element.id
-                  );
-
-                  const finalQuantity =
-                    element.id === identicalObject?.product.id
-                      ? identicalObject.quantity + 1
-                      : 1;
-
-                  const params = { id: element.id, quantity: finalQuantity };
-
-                  postCart(params);
-                }
+                addToCart(element);
               }}
             >
               Add to cart

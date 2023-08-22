@@ -26,28 +26,3 @@ export default async function handler(req, res) {
     res.status(200).json(localCart);
   }
 }
-
-// res.status(200).json(req.body);
-// const identicalObject = localCart.find(
-//   (it) => it.product.id === req.body.object.id
-// );
-
-// req.body.object.id === identicalObject?.product.id
-//   ? (localCart.find(
-//       (it) => it.product.id === req.body.object.id
-//     ).quantity = identicalObject.quantity + 1)
-//   : localCart.push({
-//       product: req.body.object,
-//       quantity: 1,
-//     });
-// } else if (req.body.type === "plusQuantity") {
-//   const receivedId = req.body.object.product.id;
-//   localCart.find((it) => it.product.id === receivedId).quantity =
-//     localCart.find((it) => it.product.id === receivedId).quantity + 1;
-// } else if (req.body.type === "minusQuantity") {
-//   const receivedId = req.body.object.product.id;
-//   localCart.find((it) => it.product.id === receivedId).quantity > 1
-//     ? (localCart.find((it) => it.product.id === receivedId).quantity =
-//         localCart.find((it) => it.product.id === receivedId).quantity - 1)
-//     : 1;
-// }

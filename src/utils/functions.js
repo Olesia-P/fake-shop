@@ -9,5 +9,7 @@ export const countOrderCost = (cart) => {
       accumulator + currentValue.product.price * currentValue.quantity,
     initialValue
   );
-  return sum;
+  const roundedSum = sum?.toFixed(2);
+
+  return roundedSum;
 };

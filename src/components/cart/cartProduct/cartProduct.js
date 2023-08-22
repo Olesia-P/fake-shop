@@ -3,13 +3,7 @@
 import css from "./cartProduct.module.scss";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
-import {
-  deleteFromCart,
-  plusToQuantity,
-  minusToQuantity,
-} from "../../../store/modules/cartSlice";
 import cx from "classnames";
-import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import {
   usePostCartMutation,
@@ -18,10 +12,40 @@ import {
 } from "../../../store/modules/localApiSlice";
 
 export default function CartProduct({ cartProducts }) {
-  const dispatch = useDispatch();
   const router = useRouter();
   const [postCart] = usePostCartMutation();
   const [deleteProduct] = useDeleteProductMutation();
+
+  const {
+    data: localApiCartData,
+    error,
+    isError,
+    isLoading,
+    isSuccess: localApiCartDataSuccess,
+  } = useGetCartQuery();
+
+  const addToCart = (cartProduct) => {
+    if (localApiCartDataSuccess) {
+      const identicalObject = localApiCartData.find(
+        (it) => it.product.id === cartProduct.product.id
+      );
+      const finalQuantity = identicalObject.quantity + 1;
+      const params = { id: cartProduct.product.id, quantity: finalQuantity };
+      postCart(params);
+    }
+  };
+
+  const minusProduct = (cartProduct) => {
+    if (localApiCartDataSuccess) {
+      const identicalObject = localApiCartData.find(
+        (it) => it.product.id === cartProduct.product.id
+      );
+      const finalQuantity =
+        identicalObject.quantity > 1 ? identicalObject.quantity - 1 : 1;
+      const params = { id: cartProduct.product.id, quantity: finalQuantity };
+      postCart(params);
+    }
+  };
 
   return (
     <>
@@ -43,7 +67,7 @@ export default function CartProduct({ cartProducts }) {
                     element.quantity <= 1 && css.stopMinusBtn
                   )}
                   onClick={() => {
-                    postCart({ object: element, type: "minusQuantity" });
+                    minusProduct(element);
                   }}
                 />
               </div>
@@ -52,7 +76,7 @@ export default function CartProduct({ cartProducts }) {
                 <AiOutlinePlus
                   className={css.plusBtn}
                   onClick={() => {
-                    postCart({ object: element, type: "plusQuantity" });
+                    addToCart(element);
                   }}
                 />
               </div>

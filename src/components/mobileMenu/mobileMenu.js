@@ -4,16 +4,16 @@ import { changeIsMobileMenuOpen } from "../../store/modules/openingsSlice";
 import cx from "classnames";
 import Link from "next/link";
 import { BiSolidUserCircle } from "react-icons/bi";
-// import useMediaQuery from "../../hooks/useMediaQuery";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 export default function MobileMenu() {
   const { isMobileMenuOpen } = useSelector(({ openings }) => openings);
   const dispatch = useDispatch();
 
-  // const isTablet = useMediaQuery(850);
-  // if (isTablet) {
-  //   dispatch(changeIsMobileMenuOpen(false));
-  // }
+  const isTablet = useMediaQuery(850);
+  if (isTablet) {
+    dispatch(changeIsMobileMenuOpen(false));
+  }
 
   return (
     <>

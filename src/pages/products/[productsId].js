@@ -4,14 +4,39 @@ import { useRouter } from "next/router";
 import css from "./productsId.module.scss";
 import { PiArrowBendUpLeft } from "react-icons/pi";
 import { useGetOneProductQuery } from "../../store/modules/apiSlice";
-import { addToCart } from "../../store/modules/cartSlice";
-import { useDispatch } from "react-redux";
+import {
+  usePostCartMutation,
+  useGetCartQuery,
+} from "../../store/modules/localApiSlice";
 
 export default function ProductsId() {
   const router = useRouter();
   const productId = router.query.productsId;
   const { data: productData, isSuccess } = useGetOneProductQuery(productId);
-  const dispatch = useDispatch();
+
+  const [postCart] = usePostCartMutation();
+
+  const {
+    data: localApiCartData,
+    error,
+    isError,
+    isLoading,
+    isSuccess: localApiCartDataSuccess,
+  } = useGetCartQuery();
+
+  const addToCart = (product) => {
+    if (localApiCartDataSuccess) {
+      const identicalObject = localApiCartData.find(
+        (it) => it.product.id === product.id
+      );
+      const finalQuantity =
+        product.id === identicalObject?.product.id
+          ? identicalObject.quantity + 1
+          : 1;
+      const params = { id: product.id, quantity: finalQuantity };
+      postCart(params);
+    }
+  };
 
   return (
     <div className={css.container}>
@@ -36,7 +61,7 @@ export default function ProductsId() {
               <div className={css.price}>{productData.price}$</div>
               <div
                 className={css.addToCartBtn}
-                onClick={() => dispatch(addToCart(productData))}
+                onClick={() => addToCart(productData)}
               >
                 Add to cart
               </div>
