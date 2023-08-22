@@ -116,44 +116,7 @@
             }
         }
     }
-
-
-    .searchFrom {
-        @include dfc;
-        height: 2rem;
-        width: 100%;
-        max-width: 55%;
-        margin-left: 2rem;
-
-        .searchIcon {
-            border-bottom: 2px solid black;
-            height: 100%;
-            padding: 0 0.5rem;
-            border-bottom-right-radius: $standart-b-radius;
-            box-sizing: border-box;
-
-            svg {
-                height: 1.3rem;
-            }
-        }
-
-        input {
-            background-color: $white;
-            border: none;
-            border-bottom: 2px solid black;
-            font-size: $size-p;
-            border-bottom-left-radius: $standart-b-radius;
-            padding: 0 0.5rem;
-            outline: none;
-            height: 100%;
-            width: 100%;
-            box-sizing: border-box;
-            outline: none;
-            font-family: $main-font;
-        }
-    }
 }
-
 
 
 
@@ -163,8 +126,6 @@
             display: block;
             margin-left: 1rem;
             box-sizing: border-box;
-
-
         }
 
         .userIcon {
@@ -179,41 +140,6 @@
 
         .headerLink {
             display: none;
-        }
-
-        .searchFrom {
-            @include dfc;
-            height: 2rem;
-            width: 100%;
-            max-width: 100%;
-            margin-left: 1rem;
-
-            .searchIcon {
-                border-bottom: 3px solid black;
-                height: 100%;
-                padding: 0 0.5rem;
-                border-bottom-right-radius: $standart-b-radius;
-                box-sizing: border-box;
-
-                svg {
-                    height: 1.3rem;
-                }
-            }
-
-            input {
-                background-color: $white;
-                border: none;
-                border-bottom: 3px solid black;
-                font-size: $size-p;
-                border-bottom-left-radius: $standart-b-radius;
-                padding: 0 0.5rem;
-                outline: none;
-                height: 100%;
-                width: 100%;
-                box-sizing: border-box;
-                outline: none;
-                font-family: $main-font;
-            }
         }
     }
 }

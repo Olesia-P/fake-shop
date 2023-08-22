@@ -1,6 +1,6 @@
 import css from "./navbar.module.scss";
 import cx from "classnames";
-import { BiSolidUserCircle, BiSearchAlt2, BiChevronDown } from "react-icons/bi";
+import { BiSolidUserCircle, BiChevronDown } from "react-icons/bi";
 import Link from "next/link";
 import Cart from "../cart/cart";
 import Hamburger from "../hamburger/hamburger";
@@ -10,6 +10,7 @@ import { capitalizeFirstLetter } from "../../utils/functions";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCatalogCategory } from "../../store/modules/catalogSlice";
 import { useRouter } from "next/router";
+import SearchForm from "./searchForm/searchForm";
 
 export default function Header() {
   const [isCatalogAccordeonOpen, setIsCatalogAccordeonOpen] = useState(false);
@@ -72,12 +73,8 @@ export default function Header() {
           </a>
         </Link>
 
-        <div className={css.searchFrom}>
-          <input type="search" placeholder="Search" />
-          <div className={css.searchIcon}>
-            <BiSearchAlt2 />
-          </div>
-        </div>
+        <SearchForm />
+
         <Cart />
         <div className={css.userIcon}>
           <BiSolidUserCircle />
