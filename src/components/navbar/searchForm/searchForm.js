@@ -70,6 +70,7 @@ export default function SearchForm() {
                   onClick={() => {
                     router.push(`/products/${element.id}`);
                     setIsSearchListOpen(false);
+                    setInputData("");
                   }}
                 >
                   {element.title}
