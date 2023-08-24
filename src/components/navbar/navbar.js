@@ -4,7 +4,7 @@ import { BiSolidUserCircle, BiChevronDown } from "react-icons/bi";
 import Link from "next/link";
 import Cart from "../cart/cart";
 import Hamburger from "../hamburger/hamburger";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { categories } from "../../utils/objects";
 import { capitalizeFirstLetter } from "../../utils/functions";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,13 +17,28 @@ export default function Header() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const catalogAccordionRef = useRef();
+
+  const handleOutsideClick = (event) => {
+    if (catalogAccordionRef.current.contains(event.target)) {
+      return;
+    }
+    setIsCatalogAccordeonOpen(false);
+  };
+
+  useEffect(() => {
+    if (isCatalogAccordeonOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isCatalogAccordeonOpen]);
+
   return (
     <>
-      <div
-        className={cx(css.overlay, isCatalogAccordeonOpen && css.open)}
-        onClick={() => setIsCatalogAccordeonOpen(false)}
-      ></div>
-
       <div className={css.container}>
         <div className={css.hamburger}>
           <Hamburger />
@@ -51,6 +66,7 @@ export default function Header() {
               css.catalogAccordion,
               isCatalogAccordeonOpen && css.open
             )}
+            ref={catalogAccordionRef}
           >
             {categories.map((element) => (
               <div

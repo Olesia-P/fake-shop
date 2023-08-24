@@ -26,10 +26,7 @@ export default function MobileMenu() {
           `}
         </style>
       )}
-      <div
-        className={cx(css.overlay, isMobileMenuOpen && css.open)}
-        onClick={() => dispatch(changeIsMobileMenuOpen(false))}
-      ></div>
+
       <div className={cx(css.container, isMobileMenuOpen && css.open)}>
         <div className={css.userIcon}>
           <BiSolidUserCircle />

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import css from "./searchForm.module.scss";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { useGetProductsQuery } from "../../../store/modules/apiSlice";
@@ -11,9 +11,14 @@ export default function SearchForm() {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearchListOpen, setIsSearchListOpen] = useState(false);
   const router = useRouter();
+  const searchListRef = useRef();
 
-  console.log("searchResults", searchResults);
-  console.log("inputData", inputData);
+  const handleOutsideClick = (event) => {
+    if (searchListRef.current.contains(event.target)) {
+      return;
+    }
+    setIsSearchListOpen(false);
+  };
 
   const { data: productsData, isSuccess } = useGetProductsQuery({
     category: "",
@@ -29,7 +34,6 @@ export default function SearchForm() {
               item.title.toLowerCase().includes(inputData.toLowerCase())
             );
       setSearchResults(filteredResults);
-      console.log("filteredResults", filteredResults);
     }
   };
 
@@ -37,13 +41,20 @@ export default function SearchForm() {
     handleSearch();
   }, [inputData]);
 
+  useEffect(() => {
+    if (isSearchListOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isSearchListOpen]);
+
   return (
     <>
-      <div
-        className={cx(css.overlay, isSearchListOpen && css.open)}
-        onClick={() => setIsSearchListOpen(false)}
-      ></div>
-      <div className={css.searchFrom}>
+      <div className={css.searchFrom} ref={searchListRef}>
         <div className={css.searchWrap}>
           <input
             type="search"
@@ -53,12 +64,6 @@ export default function SearchForm() {
               setInputData(event.target.value);
               setIsSearchListOpen(true);
             }}
-            //   onKeyUp={(event) => {
-            //     if (event.key === "Enter") {
-            //       handleSearch();
-            //     }
-            //   }}
-            // onClick={() => }
           />
 
           <div className={css.searchedList}>
@@ -85,3 +90,10 @@ export default function SearchForm() {
     </>
   );
 }
+
+//   onKeyUp={(event) => {
+//     if (event.key === "Enter") {
+//       handleSearch();
+//     }
+//   }}
+// onClick={() => }

@@ -3,6 +3,7 @@ import { TiThMenu } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { changeIsMobileMenuOpen } from "../../store/modules/openingsSlice";
+import { useEffect } from "react";
 
 export default function Hamburger() {
   const dispatch = useDispatch();
