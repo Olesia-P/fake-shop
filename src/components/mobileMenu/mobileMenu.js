@@ -10,14 +10,14 @@ export default function MobileMenu() {
   const { isMobileMenuOpen } = useSelector(({ openings }) => openings);
   const dispatch = useDispatch();
 
-  const isTablet = useMediaQuery(850);
-  if (isTablet) {
-    dispatch(changeIsMobileMenuOpen(false));
-  }
+  // const isTablet = useMediaQuery(850);
+  // if (isTablet) {
+  //   dispatch(changeIsMobileMenuOpen(false));
+  // }
 
   return (
     <>
-      {isMobileMenuOpen && (
+      {/* {isMobileMenuOpen && (
         <style jsx global>
           {`
             body {
@@ -25,7 +25,7 @@ export default function MobileMenu() {
             }
           `}
         </style>
-      )}
+      )} */}
 
       <div className={cx(css.container, isMobileMenuOpen && css.open)}>
         <div className={css.userIcon}>

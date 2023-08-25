@@ -8,6 +8,7 @@ import {
   useGetCartQuery,
 } from "../../store/modules/localApiSlice";
 import { useRouter } from "next/router";
+import { BiLoaderAlt } from "react-icons/bi";
 
 export default function Products({ category, filter }) {
   const params = {
@@ -64,13 +65,15 @@ export default function Products({ category, filter }) {
             >
               {element.price}$
             </div>
+
             <div
               className={css.addToCartBtn}
               onClick={() => {
                 addToCart(element);
               }}
             >
-              Add to cart
+              {isLoading && <BiLoaderAlt className={css.loading} />}
+              {!isLoading && "Add to cart"}
             </div>
           </div>
         ))

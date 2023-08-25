@@ -62,9 +62,25 @@
             cursor: pointer;
             @include hoverAnimation;
 
+            .loading {
+                animation: spin-clockwise 1s infinite ease-in;
+
+            }
 
         }
     }
+}
+
+@keyframes spin-clockwise {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    ;
 }
 
 @include tablet {
