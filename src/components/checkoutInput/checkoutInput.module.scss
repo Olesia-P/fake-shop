@@ -1,0 +1,25 @@
+@import "../../styles/main.scss";
+
+
+
+.lable {
+    display: inline-block;
+    margin: 0.5rem 1rem;
+    width: 10rem;
+}
+
+.input {
+    height: 1.5rem;
+    width: 20rem;
+
+    &.input:invalid[unfocused="true"]~div {
+        display: block;
+    }
+
+}
+
+.errorMessage {
+    color: red;
+    text-align: center;
+    display: none;
+}
