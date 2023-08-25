@@ -9,6 +9,7 @@ import {
 } from "../../store/modules/localApiSlice";
 import { useRouter } from "next/router";
 import { BiLoaderAlt } from "react-icons/bi";
+import { useState } from "react";
 
 export default function Products({ category, filter }) {
   const params = {
@@ -19,6 +20,7 @@ export default function Products({ category, filter }) {
     useGetProductsQuery(params);
   const router = useRouter();
   const [postCart] = usePostCartMutation();
+  const [specificProductLoading, setSpecificProductLoading] = useState(null);
 
   const {
     data: localApiCartData,
@@ -28,7 +30,8 @@ export default function Products({ category, filter }) {
     isSuccess: localApiCartDataSuccess,
   } = useGetCartQuery();
 
-  const addToCart = (product) => {
+  const addToCart = async (product) => {
+    setSpecificProductLoading(product.id);
     if (localApiCartDataSuccess) {
       const identicalObject = localApiCartData.find(
         (it) => it.product.id === product.id
@@ -38,7 +41,11 @@ export default function Products({ category, filter }) {
           ? identicalObject.quantity + 1
           : 1;
       const params = { id: product.id, quantity: finalQuantity };
-      postCart(params);
+
+      try {
+        await postCart(params); // Wait for the cart mutation to finish
+        setSpecificProductLoading(null); // Reset loading product after the mutation is complete
+      } catch {}
     }
   };
 
@@ -72,8 +79,10 @@ export default function Products({ category, filter }) {
                 addToCart(element);
               }}
             >
-              {isLoading && <BiLoaderAlt className={css.loading} />}
-              {!isLoading && "Add to cart"}
+              {specificProductLoading === element.id && (
+                <BiLoaderAlt className={css.loading} />
+              )}
+              Add to cart
             </div>
           </div>
         ))
