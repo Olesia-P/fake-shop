@@ -16,6 +16,9 @@ export default function CheckoutInput(props) {
         {...inputProps}
         onBlur={() => setUnfocused(true)}
         unfocused={unfocused.toString()}
+        onInvalid={(event) =>
+          event.target.setCustomValidity("This field is required")
+        }
       />
       <div className={css.errorMessage}>{errorMessage}</div>
     </>

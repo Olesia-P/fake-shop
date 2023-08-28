@@ -12,6 +12,7 @@
     .cartIcon {
         @include dfc;
         height: 2.5rem;
+        cursor: pointer;
 
         svg {
             height: 2.5rem;

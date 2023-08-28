@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
+
 import css from "./products.module.scss";
 import { useGetProductsQuery } from "../../store/modules/apiSlice";
 import {

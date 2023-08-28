@@ -1,11 +1,13 @@
 import css from "./CountOrder.module.scss";
-import { useSelector } from "react-redux";
 import { countOrderCost } from "../../../utils/functions";
 import { useGetCartQuery } from "../../../store/modules/localApiSlice";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { changeIsCartOpen } from "../../../store/modules/openingsSlice";
 
 export default function CountOrder() {
-  // const { cartProducts } = useSelector(({ cart }) => cart);
-  // const sum = countOrderCost(cartProducts);
+  const dispatch = useDispatch();
+
   const {
     data: localApiCartData,
     error,
@@ -13,6 +15,8 @@ export default function CountOrder() {
     isLoading,
     isSuccess,
   } = useGetCartQuery();
+
+  const router = useRouter();
 
   const sum = countOrderCost(localApiCartData);
   return (
@@ -24,7 +28,12 @@ export default function CountOrder() {
               <div className={css.title}>Final cost</div>
               <div className={css.sum}>{sum}₴</div>
             </div>
-            <div className={css.submitBtnContainer}>
+            <div
+              className={css.submitBtnContainer}
+              onClick={() => {
+                router.push("/checkout"), dispatch(changeIsCartOpen(false));
+              }}
+            >
               <div className={css.submitBtn}>Order</div>
             </div>
           </div>

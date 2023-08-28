@@ -33,11 +33,13 @@ export default function Checkout() {
     },
     {
       lable: "Email",
-      type: "email",
+      type: "text",
       state: formData.email,
       name: "email",
       required: true,
       errorMessage: "Use a valid email",
+      pattern:
+        "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$",
     },
     {
       lable: "Delivery address",
@@ -67,8 +69,6 @@ export default function Checkout() {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-    // console.log("name", name);
-    // console.log("value", value);
   };
 
   return (

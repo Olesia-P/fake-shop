@@ -30,7 +30,7 @@
             font-size: $size-p;
             border-radius: $standart-b-radius;
             @include dfc;
-
+            cursor: pointer;
         }
     }
 }

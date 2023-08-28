@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from "react";
 import css from "./searchForm.module.scss";
 import { BiSearchAlt2 } from "react-icons/bi";
