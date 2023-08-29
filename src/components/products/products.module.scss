@@ -80,7 +80,7 @@
         height: 20rem;
         margin-left: 70%;
         color: $asphalt;
-        animation: spin-clockwise 0.3s infinite ease-in;
+        animation: spin-clockwise 1s infinite ease-in;
         // display: block;
         // margin: 0 50%;
 
@@ -102,12 +102,12 @@
     }
 
     50% {
-        color: $green;
+        color: $red;
     }
 
     100% {
         transform: rotate(360deg);
-        color: $red;
+        color: $grey;
     }
 
     ;

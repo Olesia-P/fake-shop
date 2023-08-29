@@ -15,10 +15,10 @@
         border-radius: $standart-b-radius;
 
         .backBtnWrap {
-            width: 10rem;
-            height: 3rem;
+            width: 15rem;
+            height: 6rem;
             @include dfc;
-            padding: 1rem;
+            padding: 2rem;
             cursor: pointer;
             text-decoration: none;
             color: black;
@@ -28,7 +28,7 @@
                 font-size: $size-header;
                 position: relative;
                 border-radius: $standart-b-radius;
-                padding: 0.5rem;
+                padding: 1rem;
 
                 svg {
                     margin-right: 0.3rem;

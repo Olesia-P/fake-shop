@@ -50,14 +50,30 @@
     }
 
     .headerLink {
-        margin-left: 2rem;
+        margin-left: 1rem;
         border-radius: $standart-b-radius;
-        padding: 0.3rem;
+        padding: 0.5rem;
         text-decoration: none;
         color: black;
         position: relative;
         cursor: pointer;
         @include hoverAnimation;
+        line-height: 1;
+        white-space: nowrap;
+        @include dfc;
+        max-height: 2.5rem;
+
+        .chevron {
+            padding-top: 0.5rem;
+            padding-left: 0.5rem;
+
+            &.open {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
 
         .catalogAccordion {
             position: absolute;
@@ -72,6 +88,7 @@
             overflow: hidden;
             border-radius: $standart-b-radius;
 
+
             &.open {
                 max-height: 13rem;
                 transition: all 0.2s ease-in;
@@ -79,7 +96,7 @@
             }
 
             .listItem {
-                padding: 0.2rem 1rem;
+                padding: 0.5rem 1.5rem;
                 border-bottom: 1px dashed black;
                 border-top: 1px dashed black;
 
@@ -89,18 +106,10 @@
             }
         }
 
-        .chevron {
-            position: absolute;
-            top: 0.6rem;
-            right: -1.5rem;
 
-            &.open {
-                svg {
-                    transform: rotate(180deg);
-                }
-            }
-        }
     }
+
+
 }
 
 

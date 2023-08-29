@@ -50,9 +50,10 @@ export default function Header() {
         </Link>
         <Link href="/">
           <a className={css.headerLink}>
-            <div>Home</div>
+            <div>About Project</div>
           </a>
         </Link>
+
         <a
           className={cx(css.headerLink)}
           onClick={() => setIsCatalogAccordeonOpen(!isCatalogAccordeonOpen)}
@@ -62,6 +63,7 @@ export default function Header() {
           <div className={cx(css.chevron, isCatalogAccordeonOpen && css.open)}>
             <BiChevronDown />
           </div>
+
           <div
             className={cx(
               css.catalogAccordion,
@@ -92,9 +94,9 @@ export default function Header() {
         <SearchForm />
 
         <Cart />
-        <div className={css.userIcon}>
+        {/* <div className={css.userIcon}>
           <BiSolidUserCircle />
-        </div>
+        </div> */}
       </div>
     </>
   );
