@@ -156,7 +156,6 @@
             }
 
             .productsList {
-
                 justify-content: space-between;
 
                 .productListHeader {
@@ -166,7 +165,7 @@
                 .product {
                     height: 7rem;
                     overflow: hidden;
-                    line-height: 1;
+                    line-height: 1.1;
                     padding: 0.5rem;
 
                     .img {
@@ -183,7 +182,7 @@
 
                     .productName {
 
-                        margin: 0 0.5rem;
+                        margin: 0.5rem;
                         overflow: hidden;
                     }
 

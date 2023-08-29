@@ -15,8 +15,11 @@ export default function Products({ category, filter }) {
     category: category,
     filter: filter,
   };
-  const { data: productsData, isSuccess: productsDataSuccess } =
-    useGetProductsQuery(params);
+  const {
+    data: productsData,
+    isSuccess: productsDataSuccess,
+    isLoading: catalogLoading,
+  } = useGetProductsQuery(params);
   const router = useRouter();
   const [postCart] = usePostCartMutation();
   const [specificProductLoading, setSpecificProductLoading] = useState(null);
@@ -86,7 +89,12 @@ export default function Products({ category, filter }) {
           </div>
         ))
       ) : (
-        <div>LOADING</div>
+        <div
+        // className={css.loadingGlobalWrap}
+        >
+          {catalogLoading && <BiLoaderAlt className={css.loadingGlobal} />}
+          <div className={css.loadingCaption}>Loading...</div>
+        </div>
       )}
     </div>
   );
