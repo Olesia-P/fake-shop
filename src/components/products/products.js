@@ -9,6 +9,7 @@ import {
 import { useRouter } from "next/router";
 import { BiLoaderAlt } from "react-icons/bi";
 import { useState } from "react";
+import cx from "classnames";
 
 export default function Products({ category, filter }) {
   const params = {
@@ -23,6 +24,7 @@ export default function Products({ category, filter }) {
   const router = useRouter();
   const [postCart] = usePostCartMutation();
   const [specificProductLoading, setSpecificProductLoading] = useState(null);
+  const [buttonDisabled, setButtondisabled] = useState(false);
 
   const {
     data: localApiCartData,
@@ -34,6 +36,7 @@ export default function Products({ category, filter }) {
 
   const addToCart = async (product) => {
     setSpecificProductLoading(product.id);
+    setButtondisabled(true);
     if (localApiCartDataSuccess) {
       const identicalObject = localApiCartData.find(
         (it) => it.product.id === product.id
@@ -47,6 +50,7 @@ export default function Products({ category, filter }) {
       try {
         await postCart(params); // Wait for the cart mutation to finish
         setSpecificProductLoading(null); // Reset loading product after the mutation is complete
+        setButtondisabled(false);
       } catch {}
     }
   };
@@ -76,10 +80,11 @@ export default function Products({ category, filter }) {
             </div>
 
             <div
-              className={css.addToCartBtn}
+              className={cx(css.addToCartBtn, buttonDisabled && css.disabled)}
               onClick={() => {
                 addToCart(element);
               }}
+              aria-disabled={buttonDisabled}
             >
               {specificProductLoading === element.id && (
                 <BiLoaderAlt className={css.loading} />
