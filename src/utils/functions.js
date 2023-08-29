@@ -13,3 +13,12 @@ export const countOrderCost = (cart) => {
 
   return roundedSum;
 };
+export const countProductsQuantity = (cart) => {
+  const initialValue = 0;
+  const sum = cart?.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.quantity,
+    initialValue
+  );
+
+  return sum;
+};

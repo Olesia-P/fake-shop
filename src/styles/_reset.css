@@ -1,5 +1,12 @@
 @import "mixins.scss";
 
+*,
+*::before,
+*::after {
+  /* -webkit-box-sizing: inherit; */
+  box-sizing: border-box;
+}
+
 abbr[title] {
   text-decoration: none;
 }
@@ -24,7 +31,7 @@ body {
   }
 }
 
-html {
+/* html {
   font-size: 16px;
 
   @media screen and (min-width: 1920px) {
@@ -42,7 +49,7 @@ html {
   @media screen and (max-width: 768px) {
     font-size: 16px;
   }
-}
+} */
 
 html,
 body {
@@ -59,6 +66,11 @@ input {
   /* -webkit-appearance: none; */
   appearance: none;
   outline: none;
+}
+
+textarea {
+  border-radius: 0;
+  -webkit-border-radius: 0;
 }
 
 button {

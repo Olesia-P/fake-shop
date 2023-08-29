@@ -56,6 +56,7 @@ export default function Header() {
         <a
           className={cx(css.headerLink)}
           onClick={() => setIsCatalogAccordeonOpen(!isCatalogAccordeonOpen)}
+          ref={catalogAccordionRef}
         >
           <div>Catalog</div>
           <div className={cx(css.chevron, isCatalogAccordeonOpen && css.open)}>
@@ -66,7 +67,6 @@ export default function Header() {
               css.catalogAccordion,
               isCatalogAccordeonOpen && css.open
             )}
-            ref={catalogAccordionRef}
           >
             {categories.map((element) => (
               <div
