@@ -94,9 +94,7 @@ export default function Products({ category, filter }) {
           </div>
         ))
       ) : (
-        <div
-        // className={css.loadingGlobalWrap}
-        >
+        <div>
           {catalogLoading && <BiLoaderAlt className={css.loadingGlobal} />}
           <div className={css.loadingCaption}>Loading...</div>
         </div>

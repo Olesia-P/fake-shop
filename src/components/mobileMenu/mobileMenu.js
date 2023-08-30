@@ -28,12 +28,9 @@ export default function MobileMenu() {
       )} */}
 
       <div className={cx(css.container, isMobileMenuOpen && css.open)}>
-        <div className={css.userIcon}>
-          <BiSolidUserCircle />
-        </div>
         <Link href="/">
           <a className={css.headerLink}>
-            <div>Home</div>
+            <div>About Project</div>
           </a>
         </Link>
         <Link href="/catalog">

@@ -1,4 +1,4 @@
-@import "mixins.scss";
+@import "../styles/main.scss";
 
 *,
 *::before,
@@ -24,11 +24,14 @@ body {
     color: black;
   }
 
-  *::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar space */
+  /* *::-webkit-scrollbar {
+    width: 0; 
     height: 0;
-    background: transparent; /* Optional: just make scrollbar invisible */
-  }
+    background: transparent; 
+  } */
+
+
+
 }
 
 /* html {

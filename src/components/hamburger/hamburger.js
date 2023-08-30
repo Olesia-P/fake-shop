@@ -4,15 +4,37 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { changeIsMobileMenuOpen } from "../../store/modules/openingsSlice";
 import { useEffect } from "react";
+import { useRef } from "react";
 
 export default function Hamburger() {
   const dispatch = useDispatch();
   const { isMobileMenuOpen } = useSelector(({ openings }) => openings);
 
+  const mobileMenuRef = useRef();
+
+  const handleOutsideClick = (event) => {
+    if (mobileMenuRef.current.contains(event.target)) {
+      return;
+    }
+    dispatch(changeIsMobileMenuOpen(false));
+  };
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <div
       className={css.container}
       onClick={() => dispatch(changeIsMobileMenuOpen(!isMobileMenuOpen))}
+      ref={mobileMenuRef}
     >
       <TiThMenu />
     </div>
