@@ -76,7 +76,15 @@ export default function Header() {
                 className={css.listItem}
                 onClick={() => {
                   dispatch(changeCatalogCategory(element.link));
-                  router.push(`catalog`);
+                  element.link !== ""
+                    ? router.push(
+                        `catalog/?category=${element.link}`,
+                        undefined,
+                        {
+                          shallow: true,
+                        }
+                      )
+                    : router.push(`catalog`);
                 }}
               >
                 {capitalizeFirstLetter(element.name)}

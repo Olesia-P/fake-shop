@@ -7,6 +7,7 @@ import { capitalizeFirstLetter } from "../utils/functions";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCatalogCategory } from "../store/modules/catalogSlice";
 import { BiChevronDown } from "react-icons/bi";
+import { useRouter } from "next/router";
 
 export default function Catalog() {
   const { catalogCategory } = useSelector(({ catalog }) => catalog);
@@ -16,6 +17,11 @@ export default function Catalog() {
   const [filterAccordion, setFilterAccordion] = useState();
 
   const allFilters = { alphabet: filterLink, limit: "" };
+  const router = useRouter();
+  console.log(router.query);
+  if (router.query.category) {
+    dispatch(changeCatalogCategory(router.query.category));
+  }
 
   return (
     <div className={css.container}>
@@ -28,6 +34,11 @@ export default function Catalog() {
                 name="productsType"
                 onChange={() => {
                   dispatch(changeCatalogCategory(element.link));
+                  element.link !== ""
+                    ? router.push(`?category=${element.link}`, undefined, {
+                        shallow: true,
+                      })
+                    : router.push(`catalog`);
                 }}
                 checked={catalogCategory === element.link}
               />
@@ -71,7 +82,7 @@ export default function Catalog() {
         </div>
       </div>
       <div className={css.productsArea}>
-        <Products category={catalogCategory} filter={allFilters} />
+        <Products filter={allFilters} />
       </div>
     </div>
   );

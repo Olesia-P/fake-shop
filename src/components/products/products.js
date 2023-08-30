@@ -10,10 +10,12 @@ import { useRouter } from "next/router";
 import { BiLoaderAlt } from "react-icons/bi";
 import { useState } from "react";
 import cx from "classnames";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function Products({ category, filter }) {
+export default function Products({ filter }) {
+  const { catalogCategory } = useSelector(({ catalog }) => catalog);
   const params = {
-    category: category,
+    category: catalogCategory,
     filter: filter,
   };
   const {
