@@ -8,10 +8,8 @@
     background-color: $red;
     color: white;
     border-radius: $standart-b-radius;
-
+    @include hoverAnimation;
     cursor: pointer;
-
-
 
     &.widthM {
         width: 10rem;
@@ -40,9 +38,7 @@
 
     }
 
-    &.hover {
-        @include hoverAnimation;
-    }
+
 
     &.alignSelfEnd {
         align-self: flex-end;
@@ -59,6 +55,6 @@
     &.disabled {
         filter: saturate(60%);
         cursor: not-allowed;
+        pointer-events: none;
     }
-
 }

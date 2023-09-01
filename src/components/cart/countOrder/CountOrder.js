@@ -38,7 +38,6 @@ export default function CountOrder() {
                 isDisabled={false}
                 width={"width100"}
                 fontSize={"fontP"}
-                isHover={false}
                 isAlignSelfEnd={false}
                 type={"button"}
                 onSubmit={null}

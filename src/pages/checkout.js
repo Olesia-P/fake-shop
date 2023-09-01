@@ -103,6 +103,8 @@ export default function Checkout() {
     }
   }, []);
 
+  // console.log(router.pathname);
+
   return (
     <>
       <div className={css.title}>Checkout</div>
@@ -147,18 +149,6 @@ export default function Checkout() {
             Total: <strong>{total}$</strong>
           </div>
 
-          {/* <button
-            type="submit"
-            className={css.submit}
-            onSubmit={(event) => {
-              event.preventDefault();
-              {
-                console.log("submitted");
-              }
-            }}
-          >
-            Place order
-          </button> */}
           <Button
             onSubmit={(event) => {
               event.preventDefault();
@@ -170,7 +160,6 @@ export default function Checkout() {
             isDisabled={false}
             width={"widthL"}
             fontSize={"fontHeader"}
-            isHover={true}
             isAlignSelfEnd={false}
             type={"sumbit"}
             onClick={null}

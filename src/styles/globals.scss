@@ -5,10 +5,8 @@ body {
     font-family: $main-font;
     background: $white;
     margin: 0;
-    scrollbar-gutter: stable
+    scrollbar-gutter: stable;
 }
-
-
 
 /* Width */
 ::-webkit-scrollbar {

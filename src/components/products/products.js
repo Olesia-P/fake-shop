@@ -26,6 +26,7 @@ export default function Products() {
     data: productsData,
     isSuccess: productsDataSuccess,
     isLoading: catalogLoading,
+    isFetching,
   } = useGetProductsQuery(params);
   const router = useRouter();
   const [postCart] = usePostCartMutation();
@@ -65,7 +66,7 @@ export default function Products() {
 
   return (
     <div className={css.container}>
-      {productsDataSuccess ? (
+      {productsDataSuccess && !isFetching ? (
         productsData.map((element) => (
           <div key={element.id} className={css.productContainer}>
             <div
@@ -103,7 +104,6 @@ export default function Products() {
               isDisabled={buttonDisabled}
               width={"widthM"}
               fontSize={"fontP"}
-              isHover={true}
               isAlignSelfEnd={false}
               type={"button"}
               onSubmit={null}
@@ -112,7 +112,7 @@ export default function Products() {
         ))
       ) : (
         <div>
-          {catalogLoading && <BiLoaderAlt className={css.loadingGlobal} />}
+          {isFetching && <BiLoaderAlt className={css.loadingGlobal} />}
           <div className={css.loadingCaption}>Loading...</div>
         </div>
       )}

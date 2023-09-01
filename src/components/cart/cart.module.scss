@@ -5,18 +5,20 @@
 .container {
     position: relative;
     margin: 0 1rem;
-    @include hoverAnimation;
     border-radius: $standart-b-radius;
 
 
     .cartIcon {
         @include dfc;
         height: 2.5rem;
+        width: 2.5rem;
         cursor: pointer;
+        @include hoverAnimation;
+
 
         svg {
-            height: 2.5rem;
-            width: 2.5rem;
+            height: 100%;
+            width: 100%;
 
         }
     }
@@ -54,7 +56,12 @@
         &.open {
             height: 30rem;
             transition: all 0.3s ease-in;
-            overflow: auto;
+            overflow-y: auto;
+
+        }
+
+        &.noScroll {
+            overflow: hidden;
         }
 
 

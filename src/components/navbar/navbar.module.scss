@@ -84,6 +84,7 @@
             transition: all 0.2s ease-in;
             overflow: hidden;
             border-radius: $standart-b-radius;
+            border: 1px solid $white;
 
 
             &.open {

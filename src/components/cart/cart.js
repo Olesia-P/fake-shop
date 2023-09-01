@@ -37,7 +37,13 @@ export default function Cart({}) {
           {localApiCartData?.length}
         </div>
 
-        <div className={cx(css.cart, isCartOpen && css.open)}>
+        <div
+          className={cx(
+            css.cart,
+            isCartOpen && css.open,
+            localApiCartData?.length === 0 && css.noScroll
+          )}
+        >
           <div className={css.header}>In your cart</div>
           <CartProduct cartProducts={localApiCartData} />
           <CountOrder />

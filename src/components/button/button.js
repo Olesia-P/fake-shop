@@ -8,7 +8,7 @@ export default function Button({
   isDisabled,
   width,
   fontSize,
-  isHover,
+
   isAlignSelfEnd,
   type,
   onSubmit,
@@ -21,8 +21,6 @@ export default function Button({
         css[width],
         css[fontSize],
         isDisabled && css.disabled,
-
-        isHover && css.hover,
         isAlignSelfEnd && css.alignSelfEnd
       )}
       onClick={clickHandler}

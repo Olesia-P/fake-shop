@@ -67,7 +67,6 @@ export default function ProductsId() {
                 isDisabled={false}
                 width={"widthM"}
                 fontSize={"fontP"}
-                isHover={true}
                 isAlignSelfEnd={true}
                 type={"button"}
                 onSubmit={null}
