@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   catalogCategory: "",
+  catalogFilters: { alphabet: "asc", limit: "" },
 };
 
 const catalogSlice = createSlice({
@@ -11,8 +12,12 @@ const catalogSlice = createSlice({
     changeCatalogCategory: (state, action) => {
       state.catalogCategory = action.payload;
     },
+    changeCatalogFiltersAlph: (state, action) => {
+      state.catalogFilters.alphabet = action.payload;
+    },
   },
 });
 
 export default catalogSlice.reducer;
-export const { changeCatalogCategory } = catalogSlice.actions;
+export const { changeCatalogCategory, changeCatalogFiltersAlph } =
+  catalogSlice.actions;

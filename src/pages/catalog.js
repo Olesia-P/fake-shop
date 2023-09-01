@@ -1,50 +1,88 @@
 import css from "../styles/pageStyles/catalog.module.scss";
 import cx from "classnames";
 import Products from "../components/products/products";
-import { useState } from "react";
-import { categories } from "../utils/objects";
+import { useEffect, useState } from "react";
 import { capitalizeFirstLetter } from "../utils/functions";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCatalogCategory } from "../store/modules/catalogSlice";
+import {
+  changeCatalogCategory,
+  changeCatalogFiltersAlph,
+} from "../store/modules/catalogSlice";
 import { BiChevronDown } from "react-icons/bi";
 import { useRouter } from "next/router";
+import { useGetCategoriesQuery } from "../store/modules/apiSlice";
 
 export default function Catalog() {
-  const { catalogCategory } = useSelector(({ catalog }) => catalog);
-  const dispatch = useDispatch();
   const [filter, setFilter] = useState("A-Z");
-  const [filterLink, setFilterLink] = useState("asc");
   const [filterAccordion, setFilterAccordion] = useState();
+  const { catalogCategory, catalogFilters } = useSelector(
+    ({ catalog }) => catalog
+  );
+  const {
+    data: categories,
+    error,
+    isError,
+    isLoading,
+    isSuccess: categoriesSuccess,
+  } = useGetCategoriesQuery();
 
-  const allFilters = { alphabet: filterLink, limit: "" };
+  const dispatch = useDispatch();
   const router = useRouter();
-  console.log(router.query);
-  if (router.query.category) {
-    dispatch(changeCatalogCategory(router.query.category));
-  }
+
+  const changeFilterName = () => {
+    if (catalogFilters.alphabet === "asc") {
+      setFilter("A-Z");
+    }
+    if (catalogFilters.alphabet === "desc") {
+      setFilter("Z-A");
+    }
+  };
+
+  useEffect(() => {
+    if (router.query.category) {
+      dispatch(changeCatalogCategory(router.query.category));
+    }
+    if (router.query.sort) {
+      dispatch(changeCatalogFiltersAlph(router.query.sort));
+    }
+  }, [router.query]);
+
+  useEffect(() => {
+    changeFilterName();
+  }, [catalogFilters.alphabet]);
 
   return (
     <div className={css.container}>
       <div className={css.sideMenu}>
         <div className={css.list}>
-          {categories.map((element) => (
-            <label key={element.name} className={css.listItemSideMenu}>
-              <input
-                type="radio"
-                name="productsType"
-                onChange={() => {
-                  dispatch(changeCatalogCategory(element.link));
-                  element.link !== ""
-                    ? router.push(`?category=${element.link}`, undefined, {
-                        shallow: true,
-                      })
-                    : router.push(`catalog`);
-                }}
-                checked={catalogCategory === element.link}
-              />
-              {capitalizeFirstLetter(element.name)}
-            </label>
-          ))}
+          {categoriesSuccess &&
+            categories.map((element) => (
+              <label key={element.name} className={css.listItemSideMenu}>
+                <input
+                  type="radio"
+                  name="productsType"
+                  onChange={() => {
+                    dispatch(changeCatalogCategory(element.link));
+                    router.push(
+                      {
+                        pathname: router.pathname,
+                        query: {
+                          category: element.link,
+                          sort: catalogFilters.alphabet,
+                        },
+                      },
+                      undefined,
+                      { shallow: true }
+                    );
+                  }}
+                  checked={
+                    decodeURI(catalogCategory) === element.name ||
+                    (catalogCategory === "" && element.name === "all products")
+                  }
+                />
+                {capitalizeFirstLetter(element.name)}
+              </label>
+            ))}
         </div>
         <div className={cx(css.filter, filterAccordion && css.open)}>
           <div className={css.filterHeader}>Filter:</div>
@@ -55,8 +93,18 @@ export default function Catalog() {
                 className={css.filterOption}
                 onClick={() => {
                   setFilterAccordion(false),
-                    setFilter("A-Z"),
-                    setFilterLink("asc");
+                    dispatch(changeCatalogFiltersAlph("asc"));
+                  router.push(
+                    {
+                      pathname: router.pathname,
+                      query: {
+                        category: catalogCategory,
+                        sort: "asc",
+                      },
+                    },
+                    undefined,
+                    { shallow: true }
+                  );
                 }}
               >
                 A-Z
@@ -65,8 +113,18 @@ export default function Catalog() {
                 className={css.filterOption}
                 onClick={() => {
                   setFilterAccordion(false),
-                    setFilter("Z-A"),
-                    setFilterLink("desc");
+                    dispatch(changeCatalogFiltersAlph("desc"));
+                  router.push(
+                    {
+                      pathname: router.pathname,
+                      query: {
+                        category: catalogCategory,
+                        sort: "desc",
+                      },
+                    },
+                    undefined,
+                    { shallow: true }
+                  );
                 }}
               >
                 Z-A
@@ -82,10 +140,21 @@ export default function Catalog() {
         </div>
       </div>
       <div className={css.productsArea}>
-        <Products filter={allFilters} />
+        <Products />
       </div>
     </div>
   );
 }
 
 //&apos;
+
+// const handleSorting = () => {
+//   router.push(
+//     {
+//       pathname: router.pathname,
+//       query: { category: catalogCategory, sort: catalogFilters.alphabet },
+//     },
+//     undefined,
+//     { shallow: true }
+//   );
+// };

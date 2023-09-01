@@ -5,15 +5,23 @@ import Link from "next/link";
 import Cart from "../cart/cart";
 import Hamburger from "../hamburger/hamburger";
 import { useEffect, useRef, useState } from "react";
-import { categories } from "../../utils/objects";
 import { capitalizeFirstLetter } from "../../utils/functions";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCatalogCategory } from "../../store/modules/catalogSlice";
 import { useRouter } from "next/router";
 import SearchForm from "./searchForm/searchForm";
+import { useGetCategoriesQuery } from "../../store/modules/apiSlice";
 
 export default function Header() {
+  const { catalogFilters } = useSelector(({ catalog }) => catalog);
   const [isCatalogAccordeonOpen, setIsCatalogAccordeonOpen] = useState(false);
+  const {
+    data: categories,
+    error,
+    isError,
+    isLoading,
+    isSuccess: categoriesSuccess,
+  } = useGetCategoriesQuery();
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -70,26 +78,27 @@ export default function Header() {
               isCatalogAccordeonOpen && css.open
             )}
           >
-            {categories.map((element) => (
-              <div
-                key={element.name}
-                className={css.listItem}
-                onClick={() => {
-                  dispatch(changeCatalogCategory(element.link));
-                  element.link !== ""
-                    ? router.push(
-                        `catalog/?category=${element.link}`,
-                        undefined,
-                        {
-                          shallow: true,
-                        }
-                      )
-                    : router.push(`catalog`);
-                }}
-              >
-                {capitalizeFirstLetter(element.name)}
-              </div>
-            ))}
+            {categoriesSuccess &&
+              categories.map((element) => (
+                <div
+                  key={element.name}
+                  className={css.listItem}
+                  onClick={() => {
+                    dispatch(changeCatalogCategory(element.link));
+                    element.link !== ""
+                      ? router.push(
+                          `catalog/?category=${element.link}&sort=&${catalogFilters.alphabet}`,
+                          undefined,
+                          {
+                            shallow: true,
+                          }
+                        )
+                      : router.push(`catalog/?sort=${catalogFilters.alphabet}`);
+                  }}
+                >
+                  {capitalizeFirstLetter(element.name)}
+                </div>
+              ))}
           </div>
         </a>
 

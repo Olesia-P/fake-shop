@@ -1,0 +1,64 @@
+@import "../../styles/main.scss";
+
+.addToCartBtn {
+    @include dfc;
+    height: 3rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    background-color: $red;
+    color: white;
+    border-radius: $standart-b-radius;
+
+    cursor: pointer;
+
+
+
+    &.widthM {
+        width: 10rem;
+    }
+
+    &.widthL {
+        width: 14rem;
+    }
+
+
+
+    &.width100 {
+        width: 100%;
+    }
+
+    &.fontP {
+        font-size: $size-p;
+    }
+
+    &.fontHeader {
+        font-size: $size-header;
+    }
+
+    &.fontHuge {
+        font-size: $size-huge;
+
+    }
+
+    &.hover {
+        @include hoverAnimation;
+    }
+
+    &.alignSelfEnd {
+        align-self: flex-end;
+    }
+
+
+
+    .loading {
+        @include spinningAnimation;
+        animation: spin-clockwise 1s infinite ease-in;
+
+    }
+
+    &.disabled {
+        filter: saturate(60%);
+        cursor: not-allowed;
+    }
+
+}

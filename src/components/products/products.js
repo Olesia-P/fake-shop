@@ -11,12 +11,16 @@ import { BiLoaderAlt } from "react-icons/bi";
 import { useState } from "react";
 import cx from "classnames";
 import { useDispatch, useSelector } from "react-redux";
+import Button from "../button/button";
+import { changeIsCartOpen } from "../../store/modules/openingsSlice";
 
-export default function Products({ filter }) {
-  const { catalogCategory } = useSelector(({ catalog }) => catalog);
+export default function Products() {
+  const { catalogCategory, catalogFilters } = useSelector(
+    ({ catalog }) => catalog
+  );
   const params = {
     category: catalogCategory,
-    filter: filter,
+    filter: catalogFilters,
   };
   const {
     data: productsData,
@@ -35,6 +39,8 @@ export default function Products({ filter }) {
     isLoading,
     isSuccess: localApiCartDataSuccess,
   } = useGetCartQuery();
+
+  const dispatch = useDispatch();
 
   const addToCart = async (product) => {
     setSpecificProductLoading(product.id);
@@ -64,35 +70,44 @@ export default function Products({ filter }) {
           <div key={element.id} className={css.productContainer}>
             <div
               className={css.img}
-              onClick={() => router.push(`/products/${element.id}`)}
+              onClick={() => {
+                router.push(`/products/${element.id}`);
+                dispatch(changeIsCartOpen(false));
+              }}
             >
               <img src={element.image} />
             </div>
             <div
               className={css.title}
-              onClick={() => router.push(`/products/${element.id}`)}
+              onClick={() => {
+                router.push(`/products/${element.id}`);
+                dispatch(changeIsCartOpen(false));
+              }}
             >
               {element.title}
             </div>
             <div
               className={css.price}
-              onClick={() => router.push(`/products/${element.id}`)}
+              onClick={() => {
+                router.push(`/products/${element.id}`);
+                dispatch(changeIsCartOpen(false));
+              }}
             >
               {element.price}$
             </div>
-
-            <div
-              className={cx(css.addToCartBtn, buttonDisabled && css.disabled)}
-              onClick={() => {
+            <Button
+              clickHandler={() => {
                 addToCart(element);
               }}
-              aria-disabled={buttonDisabled}
-            >
-              {specificProductLoading === element.id && (
-                <BiLoaderAlt className={css.loading} />
-              )}
-              Add to cart
-            </div>
+              isFetching={specificProductLoading === element.id}
+              isDisabled={buttonDisabled}
+              width={"widthM"}
+              fontSize={"fontP"}
+              isHover={true}
+              isAlignSelfEnd={false}
+              type={"button"}
+              onSubmit={null}
+            />
           </div>
         ))
       ) : (

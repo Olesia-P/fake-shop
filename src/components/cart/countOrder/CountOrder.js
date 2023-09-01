@@ -4,6 +4,7 @@ import { useGetCartQuery } from "../../../store/modules/localApiSlice";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { changeIsCartOpen } from "../../../store/modules/openingsSlice";
+import Button from "../../button/button";
 
 export default function CountOrder() {
   const dispatch = useDispatch();
@@ -28,13 +29,20 @@ export default function CountOrder() {
               <div className={css.title}>Final cost</div>
               <div className={css.sum}>{sum}₴</div>
             </div>
-            <div
-              className={css.submitBtnContainer}
-              onClick={() => {
-                router.push("/checkout"), dispatch(changeIsCartOpen(false));
-              }}
-            >
-              <div className={css.submitBtn}>Order</div>
+            <div className={css.submitBtnContainer}>
+              <Button
+                clickHandler={() => {
+                  router.push("/checkout"), dispatch(changeIsCartOpen(false));
+                }}
+                isFetching={false}
+                isDisabled={false}
+                width={"width100"}
+                fontSize={"fontP"}
+                isHover={false}
+                isAlignSelfEnd={false}
+                type={"button"}
+                onSubmit={null}
+              />
             </div>
           </div>
         </div>

@@ -8,6 +8,7 @@ import {
   usePostCartMutation,
   useGetCartQuery,
 } from "../../store/modules/localApiSlice";
+import Button from "../../components/button/button";
 
 export default function ProductsId() {
   const router = useRouter();
@@ -59,12 +60,18 @@ export default function ProductsId() {
               <div className={css.title}>{productData.title}</div>
               <div className={css.description}>{productData.description}</div>
               <div className={css.price}>{productData.price}$</div>
-              <div
-                className={css.addToCartBtn}
-                onClick={() => addToCart(productData)}
-              >
-                Add to cart
-              </div>
+
+              <Button
+                clickHandler={() => addToCart(productData)}
+                isFetching={false}
+                isDisabled={false}
+                width={"widthM"}
+                fontSize={"fontP"}
+                isHover={true}
+                isAlignSelfEnd={true}
+                type={"button"}
+                onSubmit={null}
+              />
             </div>
           </div>
         ) : (

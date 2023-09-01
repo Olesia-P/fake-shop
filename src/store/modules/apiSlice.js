@@ -21,11 +21,28 @@ export const fakeShopApi = createApi({
           },
         };
       },
-
       // async onQueryStarted(_, { dispatch, queryFulfilled }) {
       // const { data: productsData } = await queryFulfilled;
+    }),
+    getCategories: builder.query({
+      query: (params) => `products/categories`,
+      transformResponse: (response) => {
+        const categoriesObject = response.map((category) => ({
+          name: category,
+          link: encodeURI(category),
+        }));
+        const transformedCategories = [
+          ...categoriesObject,
+          { name: "all products", link: "" },
+        ];
+        return transformedCategories;
+      },
     }),
   }),
 });
 
-export const { useGetOneProductQuery, useGetProductsQuery } = fakeShopApi;
+export const {
+  useGetOneProductQuery,
+  useGetProductsQuery,
+  useGetCategoriesQuery,
+} = fakeShopApi;

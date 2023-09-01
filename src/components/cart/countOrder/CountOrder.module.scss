@@ -25,12 +25,12 @@
         .submitBtnContainer {
             height: 3rem;
             width: 100%;
-            background-color: $red;
-            color: white;
-            font-size: $size-p;
-            border-radius: $standart-b-radius;
+            // background-color: $red;
+            // color: white;
+            // font-size: $size-p;
+            // border-radius: $standart-b-radius;
             @include dfc;
-            cursor: pointer;
+            // cursor: pointer;
         }
     }
 }

@@ -1,9 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { useState } from "react";
+import Button from "../components/button/button";
+import { useEffect, useState } from "react";
 import css from "../styles/pageStyles/checkout.module.scss";
 import CheckoutInput from "../components/checkoutInput/checkoutInput";
 import { useGetCartQuery } from "../store/modules/localApiSlice";
 import { countProductsQuantity, countOrderCost } from "../utils/functions";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 export default function Checkout() {
   const [formData, setFormData] = useState({
@@ -14,8 +17,16 @@ export default function Checkout() {
     phoneNumber: "",
     comment: "",
   });
+  const {
+    data: localApiCartData,
+    error,
+    isError,
+    isLoading,
+    isSuccess,
+  } = useGetCartQuery();
+  const { catalogFilters } = useSelector(({ catalog }) => catalog);
+  const router = useRouter();
 
-  // const numbersPattern = /^[0-9]+[\-]*$/i;
   const numberPattern = /^[0-9[\-\(\)\s+]]*$/;
   const mamePattern = /^[a-zA-Z.[\-]\s]*$/;
   const emailPattern = /^[a-zA-Z0-9.[_+\-]]+@[a-zA-Z0-9.[\-]]+\.[a-zA-Z]{2,}$/;
@@ -79,16 +90,18 @@ export default function Checkout() {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-  const {
-    data: localApiCartData,
-    error,
-    isError,
-    isLoading,
-    isSuccess,
-  } = useGetCartQuery();
 
   const productsQuantity = countProductsQuantity(localApiCartData);
   const total = countOrderCost(localApiCartData);
+
+  useEffect(() => {
+    if (
+      localApiCartData?.length === 0 ||
+      localApiCartData?.length === undefined
+    ) {
+      router.push(`catalog/?sort=${catalogFilters.alphabet}`);
+    }
+  }, []);
 
   return (
     <>
@@ -134,7 +147,7 @@ export default function Checkout() {
             Total: <strong>{total}$</strong>
           </div>
 
-          <button
+          {/* <button
             type="submit"
             className={css.submit}
             onSubmit={(event) => {
@@ -145,7 +158,23 @@ export default function Checkout() {
             }}
           >
             Place order
-          </button>
+          </button> */}
+          <Button
+            onSubmit={(event) => {
+              event.preventDefault();
+              {
+                console.log("submitted");
+              }
+            }}
+            isFetching={false}
+            isDisabled={false}
+            width={"widthL"}
+            fontSize={"fontHeader"}
+            isHover={true}
+            isAlignSelfEnd={false}
+            type={"sumbit"}
+            onClick={null}
+          />
         </div>
       </form>
     </>

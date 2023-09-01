@@ -81,19 +81,28 @@
                     font-weight: 600;
                 }
 
-                .addToCartBtn {
-                    @include dfc;
-                    height: 3rem;
-                    width: 10rem;
-                    margin-top: 0.5rem;
-                    background-color: $red;
-                    color: white;
-                    border-radius: $standart-b-radius;
-                    font-weight: 600;
-                    cursor: pointer;
-                    align-self: flex-end;
 
-                    @include hoverAnimation;
+            }
+        }
+    }
+}
+
+@include tablet {
+    .container {
+        .card {
+            .backBtnWrap {
+                padding: 0;
+                width: 10rem;
+                height: 5rem;
+            }
+
+            .product {
+                @include dfcc;
+
+                .info {
+                    .title {
+                        margin-top: 2rem;
+                    }
                 }
             }
         }

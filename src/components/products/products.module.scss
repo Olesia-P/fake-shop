@@ -50,36 +50,15 @@
             font-size: $size-header;
         }
 
-        .addToCartBtn {
-            @include dfc;
-            height: 3rem;
-            width: 10rem;
-            margin-top: 0.5rem;
-            background-color: $red;
-            color: white;
-            border-radius: $standart-b-radius;
-            font-weight: 600;
-            cursor: pointer;
-            @include hoverAnimation;
 
-            .loading {
-                animation: spin-clockwise 1s infinite ease-in;
-
-            }
-
-            &.disabled {
-                filter: saturate(60%);
-                cursor: not-allowed;
-            }
-
-        }
     }
 
 
     .loadingGlobal {
         width: 20rem;
         height: 20rem;
-        margin-left: 90%;
+        margin-left: 100%;
+        margin-top: 40%;
         color: $asphalt;
         animation: spin-clockwise 1s infinite ease-in;
 
@@ -87,7 +66,7 @@
 
     .loadingCaption {
         font-size: 30pt;
-        margin-left: 115%;
+        margin-left: 125%;
 
     }
 
@@ -112,69 +91,69 @@
     ;
 }
 
-@include tablet {
-    .container {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
+// @include tablet {
+//     .container {
+//         display: flex;
+//         justify-content: center;
+//         flex-wrap: wrap;
 
-        .productContainer {
-            border: 2px dashed black;
-            margin: 1rem 0.5rem;
-            width: 14rem;
-            box-sizing: border-box;
-            display: flex;
-            padding: 1rem;
-            flex-direction: column;
-            align-items: center;
-            background-color: white;
-            border-radius: $standart-b-radius;
-            cursor: pointer;
-            text-decoration: none;
-            color: black;
-
-
-            .img {
-                height: 14.1rem;
-                width: 12.1rem;
-                @include dfc;
-                box-sizing: border-box;
-
-                img {
-                    max-height: 14rem;
-                    max-width: 12rem;
-                    box-sizing: border-box;
-                    padding: 1rem;
-                }
-            }
+//         .productContainer {
+//             border: 2px dashed black;
+//             margin: 1rem 0.5rem;
+//             width: 14rem;
+//             box-sizing: border-box;
+//             display: flex;
+//             padding: 1rem;
+//             flex-direction: column;
+//             align-items: center;
+//             background-color: white;
+//             border-radius: $standart-b-radius;
+//             cursor: pointer;
+//             text-decoration: none;
+//             color: black;
 
 
-            .title {
-                align-self: flex-start;
-                height: 4rem;
-                overflow: hidden;
-                margin: 0.2rem 0;
-            }
+//             .img {
+//                 height: 14.1rem;
+//                 width: 12.1rem;
+//                 @include dfc;
+//                 box-sizing: border-box;
 
-            .price {
-                align-self: flex-end;
+//                 img {
+//                     max-height: 14rem;
+//                     max-width: 12rem;
+//                     box-sizing: border-box;
+//                     padding: 1rem;
+//                 }
+//             }
 
-                font-weight: 600;
-                font-size: $size-header;
-            }
 
-            .addToCartBtn {
-                @include dfc;
-                height: 3rem;
-                width: 10rem;
-                margin-top: 0.5rem;
-                background-color: $red;
-                color: white;
-                border-radius: $standart-b-radius;
-                font-weight: 600;
-                cursor: pointer;
-                @include hoverAnimation;
-            }
-        }
-    }
-}
+//             .title {
+//                 align-self: flex-start;
+//                 height: 4rem;
+//                 overflow: hidden;
+//                 margin: 0.2rem 0;
+//             }
+
+//             .price {
+//                 align-self: flex-end;
+
+//                 font-weight: 600;
+//                 font-size: $size-header;
+//             }
+
+//             .addToCartBtn {
+//                 @include dfc;
+//                 height: 3rem;
+//                 width: 10rem;
+//                 margin-top: 0.5rem;
+//                 background-color: $red;
+//                 color: white;
+//                 border-radius: $standart-b-radius;
+//                 font-weight: 600;
+//                 cursor: pointer;
+//                 @include hoverAnimation;
+//             }
+//         }
+//     }
+// }
