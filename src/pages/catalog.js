@@ -10,7 +10,10 @@ import {
 } from "../store/modules/catalogSlice";
 import { BiChevronDown } from "react-icons/bi";
 import { useRouter } from "next/router";
-import { useGetCategoriesQuery } from "../store/modules/apiSlice";
+import {
+  useGetCategoriesQuery,
+  useGetProductsQuery,
+} from "../store/modules/apiSlice";
 
 export default function Catalog() {
   const [filter, setFilter] = useState("A-Z");
@@ -18,38 +21,53 @@ export default function Catalog() {
   const { catalogCategory, catalogFilters } = useSelector(
     ({ catalog }) => catalog
   );
+
+  const params = {
+    category: catalogCategory,
+    filter: catalogFilters,
+  };
+
   const {
     data: categories,
     error,
     isError,
     isLoading,
     isSuccess: categoriesSuccess,
-  } = useGetCategoriesQuery();
+  } = useGetCategoriesQuery(params);
+
+  const {
+    data: productsData,
+    isSuccess: productsDataSuccess,
+    isLoading: catalogLoading,
+    isFetching,
+  } = useGetProductsQuery(params);
 
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const changeFilterName = () => {
-    if (catalogFilters.alphabet === "asc") {
-      setFilter("A-Z");
-    }
-    if (catalogFilters.alphabet === "desc") {
-      setFilter("Z-A");
-    }
-  };
-
   useEffect(() => {
-    if (router.query.category) {
+    if (router.query.category && router.query.category !== "") {
       dispatch(changeCatalogCategory(router.query.category));
     }
     if (router.query.sort) {
       dispatch(changeCatalogFiltersAlph(router.query.sort));
     }
-  }, [router.query]);
+  }, [router.isReady]);
 
   useEffect(() => {
-    changeFilterName();
-  }, [catalogFilters.alphabet]);
+    router.isReady &&
+      router.push(
+        {
+          pathname: router.pathname,
+          query: {
+            ...(catalogCategory !== "" && { category: catalogCategory }),
+            sort: catalogFilters.alphabet,
+          },
+        },
+        undefined,
+        { shallow: true }
+      );
+  }, [catalogFilters, catalogCategory]);
 
   return (
     <div className={css.container}>
@@ -63,17 +81,6 @@ export default function Catalog() {
                   name="productsType"
                   onChange={() => {
                     dispatch(changeCatalogCategory(element.link));
-                    router.push(
-                      {
-                        pathname: router.pathname,
-                        query: {
-                          category: element.link,
-                          sort: catalogFilters.alphabet,
-                        },
-                      },
-                      undefined,
-                      { shallow: true }
-                    );
                   }}
                   checked={
                     decodeURI(catalogCategory) === element.name ||
@@ -87,24 +94,16 @@ export default function Catalog() {
         <div className={cx(css.filter, filterAccordion && css.open)}>
           <div className={css.filterHeader}>Filter:</div>
           <div className={css.filterListWrap}>
-            <div className={css.filterChosen}>{filter}</div>
+            <div className={css.filterChosen}>
+              {catalogFilters.alphabet === "asc" && "A-Z"}
+              {catalogFilters.alphabet === "desc" && "Z-A"}
+            </div>
             <div className={css.filterAccordion}>
               <div
                 className={css.filterOption}
                 onClick={() => {
                   setFilterAccordion(false),
                     dispatch(changeCatalogFiltersAlph("asc"));
-                  router.push(
-                    {
-                      pathname: router.pathname,
-                      query: {
-                        category: catalogCategory,
-                        sort: "asc",
-                      },
-                    },
-                    undefined,
-                    { shallow: true }
-                  );
                 }}
               >
                 A-Z
@@ -140,21 +139,12 @@ export default function Catalog() {
         </div>
       </div>
       <div className={css.productsArea}>
-        <Products />
+        <Products
+          productsData={productsData}
+          isFetching={isFetching}
+          productsDataSuccess={productsDataSuccess}
+        />
       </div>
     </div>
   );
 }
-
-//&apos;
-
-// const handleSorting = () => {
-//   router.push(
-//     {
-//       pathname: router.pathname,
-//       query: { category: catalogCategory, sort: catalogFilters.alphabet },
-//     },
-//     undefined,
-//     { shallow: true }
-//   );
-// };

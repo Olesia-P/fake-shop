@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 
 import css from "./products.module.scss";
-import { useGetProductsQuery } from "../../store/modules/apiSlice";
 import {
   usePostCartMutation,
   useGetCartQuery,
@@ -14,32 +13,18 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../button/button";
 import { changeIsCartOpen } from "../../store/modules/openingsSlice";
 
-export default function Products() {
-  const { catalogCategory, catalogFilters } = useSelector(
-    ({ catalog }) => catalog
-  );
-  const params = {
-    category: catalogCategory,
-    filter: catalogFilters,
-  };
-  const {
-    data: productsData,
-    isSuccess: productsDataSuccess,
-    isLoading: catalogLoading,
-    isFetching,
-  } = useGetProductsQuery(params);
+export default function Products({
+  productsData,
+  isFetching,
+  productsDataSuccess,
+}) {
   const router = useRouter();
   const [postCart] = usePostCartMutation();
   const [specificProductLoading, setSpecificProductLoading] = useState(null);
   const [buttonDisabled, setButtondisabled] = useState(false);
 
-  const {
-    data: localApiCartData,
-    error,
-    isError,
-    isLoading,
-    isSuccess: localApiCartDataSuccess,
-  } = useGetCartQuery();
+  const { data: localApiCartData, isSuccess: localApiCartDataSuccess } =
+    useGetCartQuery();
 
   const dispatch = useDispatch();
 
