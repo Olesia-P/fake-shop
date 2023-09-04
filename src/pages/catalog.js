@@ -55,31 +55,27 @@ export default function Catalog() {
   };
 
   useEffect(() => {
-    if (router.query.category) {
+    if (router.query.category && router.query.category !== "") {
       dispatch(changeCatalogCategory(router.query.category));
     }
-
-    // if (router.query.sort) {
-    //   dispatch(changeCatalogFiltersAlph(router.query.sort));
-    // }
-    // dispatch(changeCatalogCategory(router.query.category));
-    // console.log("router.query", router.query);
-    // console.log("catalogCategory", catalogCategory);
-    // console.log("catalogFilters.alphabet", catalogFilters.alphabet);
+    if (router.query.sort) {
+      dispatch(changeCatalogFiltersAlph(router.query.sort));
+    }
   }, [router.isReady]);
 
   useEffect(() => {
-    if (router.query.category !== "") {
+    router.isReady &&
       router.push(
         {
           pathname: router.pathname,
-          query: { category: catalogCategory, sort: catalogFilters.alphabet },
+          query: {
+            ...(catalogCategory !== "" && { category: catalogCategory }),
+            sort: catalogFilters.alphabet,
+          },
         },
         undefined,
         { shallow: true }
       );
-    }
-    console.log("category", catalogCategory);
   }, [catalogFilters, catalogCategory]);
 
   useEffect(() => {
@@ -98,17 +94,6 @@ export default function Catalog() {
                   name="productsType"
                   onChange={() => {
                     dispatch(changeCatalogCategory(element.link));
-                    // router.push(
-                    //   {
-                    //     pathname: router.pathname,
-                    //     query: {
-                    //       category: element.link,
-                    //       sort: catalogFilters.alphabet,
-                    //     },
-                    //   },
-                    //   undefined,
-                    //   { shallow: true }
-                    // );
                   }}
                   checked={
                     decodeURI(catalogCategory) === element.name ||
@@ -129,17 +114,6 @@ export default function Catalog() {
                 onClick={() => {
                   setFilterAccordion(false),
                     dispatch(changeCatalogFiltersAlph("asc"));
-                  // router.push(
-                  //   {
-                  //     pathname: router.pathname,
-                  //     query: {
-                  //       category: catalogCategory,
-                  //       sort: "asc",
-                  //     },
-                  //   },
-                  //   undefined,
-                  //   { shallow: true }
-                  // );
                 }}
               >
                 A-Z
@@ -184,16 +158,3 @@ export default function Catalog() {
     </div>
   );
 }
-
-//&apos;
-
-// const handleSorting = () => {
-//   router.push(
-//     {
-//       pathname: router.pathname,
-//       query: { category: catalogCategory, sort: catalogFilters.alphabet },
-//     },
-//     undefined,
-//     { shallow: true }
-//   );
-// };

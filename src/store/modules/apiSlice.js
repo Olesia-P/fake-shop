@@ -32,8 +32,8 @@ export const fakeShopApi = createApi({
           link: encodeURI(category),
         }));
         const transformedCategories = [
-          ...categoriesObject,
           { name: "all products", link: "" },
+          ...categoriesObject,
         ];
         return transformedCategories;
       },
