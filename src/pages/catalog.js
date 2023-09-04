@@ -45,15 +45,6 @@ export default function Catalog() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const changeFilterName = () => {
-    if (catalogFilters.alphabet === "asc") {
-      setFilter("A-Z");
-    }
-    if (catalogFilters.alphabet === "desc") {
-      setFilter("Z-A");
-    }
-  };
-
   useEffect(() => {
     if (router.query.category && router.query.category !== "") {
       dispatch(changeCatalogCategory(router.query.category));
@@ -77,10 +68,6 @@ export default function Catalog() {
         { shallow: true }
       );
   }, [catalogFilters, catalogCategory]);
-
-  useEffect(() => {
-    changeFilterName();
-  }, [catalogFilters.alphabet]);
 
   return (
     <div className={css.container}>
@@ -107,7 +94,10 @@ export default function Catalog() {
         <div className={cx(css.filter, filterAccordion && css.open)}>
           <div className={css.filterHeader}>Filter:</div>
           <div className={css.filterListWrap}>
-            <div className={css.filterChosen}>{filter}</div>
+            <div className={css.filterChosen}>
+              {catalogFilters.alphabet === "asc" && "A-Z"}
+              {catalogFilters.alphabet === "desc" && "Z-A"}
+            </div>
             <div className={css.filterAccordion}>
               <div
                 className={css.filterOption}
