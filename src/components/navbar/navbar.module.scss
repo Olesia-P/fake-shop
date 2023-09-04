@@ -80,7 +80,7 @@
             font-size: $size-p;
             max-height: 0rem;
             background-image: url(/cloth.jpg);
-            box-shadow: $main-shadow;
+            box-shadow: none;
             transition: all 0.2s ease-in;
             overflow: hidden;
             border-radius: $standart-b-radius;
@@ -91,6 +91,7 @@
                 max-height: 13rem;
                 transition: all 0.2s ease-in;
                 border: 1px dashed black;
+                box-shadow: $main-shadow;
             }
 
             .listItem {

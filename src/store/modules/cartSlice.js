@@ -47,17 +47,6 @@ const cartSlice = createSlice({
               .quantity - 1)
         : 1;
     },
-
-    // updateProductCost: (state, action) => {
-    //   const receivedId = action.payload;
-    //   state.products.find((it) => it.id === receivedId).currentCost =
-    //     state.products.find((it) => it.id === receivedId).quantity *
-    //     state.products.find((it) => it.id === receivedId).currentPrice;
-
-    //   state.products.find((it) => it.id === receivedId).oldCost =
-    //     state.products.find((it) => it.id === receivedId).quantity *
-    //     state.products.find((it) => it.id === receivedId).oldPrice;
-    // },
   },
 });
 

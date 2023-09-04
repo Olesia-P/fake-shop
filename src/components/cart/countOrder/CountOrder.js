@@ -36,11 +36,11 @@ export default function CountOrder() {
                 }}
                 isFetching={false}
                 isDisabled={false}
-                width={"width100"}
                 fontSize={"fontP"}
-                isAlignSelfEnd={false}
+                isWide={true}
                 type={"button"}
                 onSubmit={null}
+                text={"Go to checkout"}
               />
             </div>
           </div>

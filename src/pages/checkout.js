@@ -7,6 +7,7 @@ import { useGetCartQuery } from "../store/modules/localApiSlice";
 import { countProductsQuantity, countOrderCost } from "../utils/functions";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import { usePostOrderMutation } from "../store/modules/localApiSlice";
 
 export default function Checkout() {
   const [formData, setFormData] = useState({
@@ -75,7 +76,6 @@ export default function Checkout() {
       required: true,
       errorMessage: "Use a valid phone number.",
       pattern: `${numberPattern.source}`,
-      // ``,
     },
     {
       lable: "Comment",
@@ -103,7 +103,7 @@ export default function Checkout() {
     }
   }, []);
 
-  // console.log(router.pathname);
+  const [postOrder] = usePostOrderMutation();
 
   return (
     <>
@@ -122,7 +122,11 @@ export default function Checkout() {
           <div className={css.productsList}>
             <div className={css.productListHeader}>In your order:</div>
             {localApiCartData?.map((element) => (
-              <div key={element.product.id} className={css.product}>
+              <div
+                key={element.product.id}
+                className={css.product}
+                onClick={() => router.push(`/products/${element.product.id}`)}
+              >
                 <div className={css.img}>
                   <img src={element.product.image} />
                 </div>
@@ -152,17 +156,22 @@ export default function Checkout() {
           <Button
             onSubmit={(event) => {
               event.preventDefault();
-              {
-                console.log("submitted");
-              }
+
+              const fullOrderInfo = {
+                cart: localApiCartData,
+                id: Date.now(),
+                personalData: formData,
+              };
+              postOrder(fullOrderInfo);
             }}
             isFetching={false}
             isDisabled={false}
             width={"widthL"}
-            fontSize={"fontHeader"}
-            isAlignSelfEnd={false}
+            wide={false}
             type={"sumbit"}
             onClick={null}
+            text={"Submit order"}
+            fontSize={"fontP"}
           />
         </div>
       </form>

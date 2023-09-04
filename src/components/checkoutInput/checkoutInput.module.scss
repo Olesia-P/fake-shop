@@ -11,7 +11,7 @@
 }
 
 .input {
-    height: 1.5rem;
+
     width: 70%;
     background-color: white;
     box-shadow: inset 1px 0px 6px rgba(0, 0, 0, 0.3);
@@ -44,44 +44,18 @@
 
 @include tablet {
     .lable {
-        //         display: inline-block;
         margin: 0.5rem 0;
-        //         width: 10rem;
-        //         font-weight: 600;
         text-align: start;
     }
 
     .input {
-        // height: 1.5rem;
         width: 100%;
-        //         background-color: white;
-        //         box-shadow: inset 1px 0px 6px rgba(0, 0, 0, 0.3);
-        //         border-radius: $standart-b-radius;
-        //         font-size: $size-p;
-
-        &.input:focus {
-            //             border: 2px solid rgb(175, 175, 175);
-        }
-
-        &.input:invalid[unfocused="true"] {
-            //             border: 2px solid rgb(208, 24, 37);
-        }
-
-        &.input:invalid[unfocused="true"]~div {
-            //             display: block;
-
-        }
-
-
     }
 
     .errorMessage {
-        //         color: rgb(208, 24, 37);
         margin-left: 0;
         margin-top: 0.5rem;
-        //         display: none;
-        //         font-size: smaller;
-        //         line-height: 1;
+
     }
 
 }

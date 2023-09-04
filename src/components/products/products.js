@@ -104,9 +104,10 @@ export default function Products() {
               isDisabled={buttonDisabled}
               width={"widthM"}
               fontSize={"fontP"}
-              isAlignSelfEnd={false}
+              isWide={false}
               type={"button"}
               onSubmit={null}
+              text={"Add to cart"}
             />
           </div>
         ))

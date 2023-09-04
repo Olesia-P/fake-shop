@@ -27,6 +27,15 @@ export const localFakeShopApi = createApi({
       }),
       invalidatesTags: ["Cart"],
     }),
+
+    postOrder: builder.mutation({
+      query: (order) => ({
+        url: `/orders`,
+        method: "POST",
+        body: order,
+      }),
+      // invalidatesTags: ["Cart"],
+    }),
   }),
 });
 
@@ -35,5 +44,5 @@ export const {
   useLazyGetCartQuery,
   useGetCartQuery,
   useDeleteProductMutation,
-  usePostProductMutation,
+  usePostOrderMutation,
 } = localFakeShopApi;

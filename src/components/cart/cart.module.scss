@@ -5,7 +5,7 @@
 .container {
     position: relative;
     margin: 0 1rem;
-    border-radius: $standart-b-radius;
+
 
 
     .cartIcon {
@@ -13,6 +13,8 @@
         height: 2.5rem;
         width: 2.5rem;
         cursor: pointer;
+        border-radius: $standart-b-radius;
+
         @include hoverAnimation;
 
 

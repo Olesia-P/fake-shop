@@ -1,0 +1,45 @@
+@import "../../../styles/main.scss";
+
+
+.container {
+    background-color: $asphalt;
+    height: 6rem;
+    width: 100%;
+    color: $white;
+    margin-top: 2rem;
+    @include dfc;
+
+
+
+    .gitLink {
+        text-decoration: none;
+        font-size: $size-p;
+
+        padding-top: 2rem;
+        @include dfc;
+        cursor: pointer;
+        color: $white;
+        width: 20rem;
+
+
+        &:visited {
+            color: $white;
+        }
+
+        &:hover {
+            color: $green;
+        }
+
+        .iconWrap {
+            width: 2rem;
+            height: 2rem;
+            margin-right: 1rem;
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+    }
+}

@@ -4,8 +4,10 @@ import { IoIosBasket } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { changeIsCartOpen } from "../../store/modules/openingsSlice";
 import CartProduct from "./cartProduct/cartProduct";
-import CountOrder from "./countOrder/CountOrder";
+import CountOrder from "./countOrder/countOrder";
 import { useGetCartQuery } from "../../store/modules/localApiSlice";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Cart({}) {
   const { isCartOpen } = useSelector(({ openings }) => openings);
@@ -19,6 +21,13 @@ export default function Cart({}) {
   } = useGetCartQuery();
 
   const dispatch = useDispatch();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.pathname === "/checkout") dispatch(changeIsCartOpen(false));
+  }, [isCartOpen]);
+
   return (
     <>
       <div className={css.container}>

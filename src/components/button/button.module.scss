@@ -19,9 +19,7 @@
         width: 14rem;
     }
 
-
-
-    &.width100 {
+    &.wide {
         width: 100%;
     }
 
@@ -35,16 +33,7 @@
 
     &.fontHuge {
         font-size: $size-huge;
-
     }
-
-
-
-    &.alignSelfEnd {
-        align-self: flex-end;
-    }
-
-
 
     .loading {
         @include spinningAnimation;

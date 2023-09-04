@@ -8,27 +8,30 @@ export default function Button({
   isDisabled,
   width,
   fontSize,
-
-  isAlignSelfEnd,
+  text,
   type,
   onSubmit,
+  isWide,
 }) {
   return (
     <button
       type={type}
       className={cx(
         css.addToCartBtn,
-        css[width],
-        css[fontSize],
         isDisabled && css.disabled,
-        isAlignSelfEnd && css.alignSelfEnd
+        width === "widthM" && css.widthM,
+        width === "widthL" && css.widthL,
+        fontSize === "fontP" && css.fontP,
+        fontSize === "fontHeader " && css.fontHeader,
+        fontSize === "fontHuge" && css.fontHuge,
+        isWide && css.wide
       )}
       onClick={clickHandler}
       aria-disabled={isDisabled}
       onSubmit={onSubmit}
     >
       {isFetching && <BiLoaderAlt className={css.loading} />}
-      Add to cart
+      {text}
     </button>
   );
 }
