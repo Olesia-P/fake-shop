@@ -3,24 +3,19 @@
 
 .container {
     background-color: $asphalt;
-    height: 6rem;
+    height: 3rem;
     width: 100%;
     color: $white;
     margin-top: 2rem;
     @include dfc;
 
-
-
     .gitLink {
         text-decoration: none;
         font-size: $size-p;
-
-        padding-top: 2rem;
         @include dfc;
         cursor: pointer;
         color: $white;
         width: 20rem;
-
 
         &:visited {
             color: $white;
@@ -40,6 +35,5 @@
                 height: 100%;
             }
         }
-
     }
 }

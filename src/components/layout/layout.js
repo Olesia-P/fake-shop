@@ -8,7 +8,7 @@ export default function Layout({ children }) {
       <Navbar />
       <MobileMenu />
       {children}
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

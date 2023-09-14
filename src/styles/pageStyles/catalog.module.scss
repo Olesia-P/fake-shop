@@ -8,10 +8,12 @@
     .sideMenu {
         position: fixed;
         top: 4rem;
-        height: 40rem;
+        height: 100vh;
+        bottom: 2rem;
         width: 15rem;
         box-shadow: $main-shadow;
         padding: 1rem;
+
 
         .list {
             padding: 0 0 1rem 0;
