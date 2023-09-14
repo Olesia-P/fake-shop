@@ -1,0 +1,21 @@
+@import "../main.scss";
+
+.container {
+    padding-top: 6rem;
+    @include dfc;
+
+    .messageWrap {
+        // margin: 0 auto;
+        font-size: $size-huge;
+        background-color: $grey;
+        height: 25rem;
+        width: 50rem;
+        border-radius: $standart-b-radius;
+        box-shadow: $main-shadow;
+        @include dfc;
+
+        .message {
+            text-align: center;
+        }
+    }
+}

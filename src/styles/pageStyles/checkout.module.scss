@@ -100,6 +100,7 @@
         height: 15rem;
         border-radius: $standart-b-radius;
         margin: 2rem;
+        @include dfcc;
 
         // .productsQuantity {}
 
@@ -125,7 +126,7 @@
 
         .orderFinalInfo {
             width: 70%;
-            @include dfcc;
+
         }
     }
 }

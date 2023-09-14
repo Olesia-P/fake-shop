@@ -22,7 +22,7 @@ export default function Button({
         width === "widthM" && css.widthM,
         width === "widthL" && css.widthL,
         fontSize === "fontP" && css.fontP,
-        fontSize === "fontHeader " && css.fontHeader,
+        fontSize === "fontHeader" && css.fontHeader,
         fontSize === "fontHuge" && css.fontHuge,
         isWide && css.wide
       )}

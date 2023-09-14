@@ -3,11 +3,14 @@ import Button from "../components/button/button";
 import { useEffect, useState } from "react";
 import css from "../styles/pageStyles/checkout.module.scss";
 import CheckoutInput from "../components/checkoutInput/checkoutInput";
-import { useGetCartQuery } from "../store/modules/localApiSlice";
+import {
+  useGetCartQuery,
+  usePostOrderMutation,
+} from "../store/modules/localApiSlice";
 import { countProductsQuantity, countOrderCost } from "../utils/functions";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-import { usePostOrderMutation } from "../store/modules/localApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { changeLastOrderId } from "../store/modules/cartSlice";
 
 export default function Checkout() {
   const [formData, setFormData] = useState({
@@ -18,15 +21,10 @@ export default function Checkout() {
     phoneNumber: "",
     comment: "",
   });
-  const {
-    data: localApiCartData,
-    error,
-    isError,
-    isLoading,
-    isSuccess,
-  } = useGetCartQuery();
+  const { data: localApiCartData } = useGetCartQuery();
   const { catalogFilters } = useSelector(({ catalog }) => catalog);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const numberPattern = /^[0-9[\-\(\)\s+]]*$/;
   const mamePattern = /^[a-zA-Z.[\-]\s]*$/;
@@ -105,6 +103,10 @@ export default function Checkout() {
 
   const [postOrder] = usePostOrderMutation();
 
+  // console.log("localApiCartData", localApiCartData);
+  // console.log("formData", formData);
+  // console.log(Date.now());
+
   return (
     <>
       <div className={css.title}>Checkout</div>
@@ -163,6 +165,8 @@ export default function Checkout() {
                 personalData: formData,
               };
               postOrder(fullOrderInfo);
+              changeLastOrderId(fullOrderInfo.id);
+              router.push("/api/finishedOrder");
             }}
             isFetching={false}
             isDisabled={false}
@@ -171,7 +175,7 @@ export default function Checkout() {
             type={"sumbit"}
             onClick={null}
             text={"Submit order"}
-            fontSize={"fontP"}
+            fontSize={"fontHeader"}
           />
         </div>
       </form>

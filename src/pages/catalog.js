@@ -1,5 +1,5 @@
 import css from "../styles/pageStyles/catalog.module.scss";
-import cx from "classnames";
+import DropdownFilter from "../components/dropdownFilter/dropdownFilter";
 import Products from "../components/products/products";
 import { useEffect, useState } from "react";
 import { capitalizeFirstLetter } from "../utils/functions";
@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeCatalogCategory,
   changeCatalogFiltersAlph,
+  changeCatalogFiltersLimit,
 } from "../store/modules/catalogSlice";
-import { BiChevronDown } from "react-icons/bi";
+
 import { useRouter } from "next/router";
 import {
   useGetCategoriesQuery,
@@ -17,7 +18,8 @@ import {
 
 export default function Catalog() {
   const [filter, setFilter] = useState("A-Z");
-  const [filterAccordion, setFilterAccordion] = useState();
+  const [filterAlphAccordion, setFilterAlphAccordion] = useState();
+  const [filterLimitAccordion, setFilterLimitAccordion] = useState();
   const { catalogCategory, catalogFilters } = useSelector(
     ({ catalog }) => catalog
   );
@@ -27,23 +29,71 @@ export default function Catalog() {
     filter: catalogFilters,
   };
 
-  const {
-    data: categories,
-    error,
-    isError,
-    isLoading,
-    isSuccess: categoriesSuccess,
-  } = useGetCategoriesQuery(params);
+  const { data: categories, isSuccess: categoriesSuccess } =
+    useGetCategoriesQuery(params);
 
   const {
     data: productsData,
     isSuccess: productsDataSuccess,
-    isLoading: catalogLoading,
     isFetching,
   } = useGetProductsQuery(params);
 
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const alphabetFilterOptionsList = [
+    {
+      name: "A-Z",
+      onClickFunction: () => {
+        setFilterAlphAccordion(false),
+          dispatch(changeCatalogFiltersAlph("asc"));
+      },
+    },
+    {
+      name: "Z-A",
+      onClickFunction: () => {
+        setFilterAlphAccordion(false),
+          dispatch(changeCatalogFiltersAlph("desc"));
+      },
+    },
+  ];
+
+  const alphabetFilterChosenOption = () => {
+    if (catalogFilters.alphabet === "asc") {
+      return "A-Z";
+    }
+    if (catalogFilters.alphabet === "desc") {
+      return "Z-A";
+    }
+  };
+
+  const limitFilterOptionsList = [
+    {
+      name: "5",
+      onClickFunction: () => {
+        setFilterLimitAccordion(false),
+          dispatch(changeCatalogFiltersLimit("5"));
+      },
+    },
+    {
+      name: "10",
+      onClickFunction: () => {
+        setFilterLimitAccordion(false),
+          dispatch(changeCatalogFiltersLimit("10"));
+      },
+    },
+    {
+      name: "20",
+      onClickFunction: () => {
+        setFilterLimitAccordion(false),
+          dispatch(changeCatalogFiltersLimit("20"));
+      },
+    },
+  ];
+
+  const limitFilterChosenOption = () => {
+    return catalogFilters.limit;
+  };
 
   useEffect(() => {
     if (router.query.category && router.query.category !== "") {
@@ -51,6 +101,9 @@ export default function Catalog() {
     }
     if (router.query.sort) {
       dispatch(changeCatalogFiltersAlph(router.query.sort));
+    }
+    if (router.query.limit) {
+      dispatch(changeCatalogFiltersLimit(router.query.limit));
     }
   }, [router.isReady]);
 
@@ -62,6 +115,7 @@ export default function Catalog() {
           query: {
             ...(catalogCategory !== "" && { category: catalogCategory }),
             sort: catalogFilters.alphabet,
+            limit: catalogFilters.limit,
           },
         },
         undefined,
@@ -91,51 +145,21 @@ export default function Catalog() {
               </label>
             ))}
         </div>
-        <div className={cx(css.filter, filterAccordion && css.open)}>
-          <div className={css.filterHeader}>Filter:</div>
-          <div className={css.filterListWrap}>
-            <div className={css.filterChosen}>
-              {catalogFilters.alphabet === "asc" && "A-Z"}
-              {catalogFilters.alphabet === "desc" && "Z-A"}
-            </div>
-            <div className={css.filterAccordion}>
-              <div
-                className={css.filterOption}
-                onClick={() => {
-                  setFilterAccordion(false),
-                    dispatch(changeCatalogFiltersAlph("asc"));
-                }}
-              >
-                A-Z
-              </div>
-              <div
-                className={css.filterOption}
-                onClick={() => {
-                  setFilterAccordion(false),
-                    dispatch(changeCatalogFiltersAlph("desc"));
-                  router.push(
-                    {
-                      pathname: router.pathname,
-                      query: {
-                        category: catalogCategory,
-                        sort: "desc",
-                      },
-                    },
-                    undefined,
-                    { shallow: true }
-                  );
-                }}
-              >
-                Z-A
-              </div>
-            </div>
-          </div>
-          <div
-            className={css.chevron}
-            onClick={() => setFilterAccordion(!filterAccordion)}
-          >
-            <BiChevronDown />
-          </div>
+        <div className={css.filters}>
+          <DropdownFilter
+            isFilterOpened={filterAlphAccordion}
+            chosenOptionFunction={alphabetFilterChosenOption}
+            optionsList={alphabetFilterOptionsList}
+            setIsFilterOpened={setFilterAlphAccordion}
+            filterName={"In order"}
+          />
+          <DropdownFilter
+            isFilterOpened={filterLimitAccordion}
+            chosenOptionFunction={limitFilterChosenOption}
+            optionsList={limitFilterOptionsList}
+            setIsFilterOpened={setFilterLimitAccordion}
+            filterName={"Limit"}
+          />
         </div>
       </div>
       <div className={css.productsArea}>

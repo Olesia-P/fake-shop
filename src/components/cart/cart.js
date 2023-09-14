@@ -4,7 +4,7 @@ import { IoIosBasket } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { changeIsCartOpen } from "../../store/modules/openingsSlice";
 import CartProduct from "./cartProduct/cartProduct";
-import CountOrder from "./countOrder/countOrder";
+import CountOrder from "./countOrder/сountOrder";
 import { useGetCartQuery } from "../../store/modules/localApiSlice";
 import { useRouter } from "next/router";
 import { useEffect } from "react";

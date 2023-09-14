@@ -1,4 +1,4 @@
-import css from "./CountOrder.module.scss";
+import css from "./countOrder.module.scss";
 import { countOrderCost } from "../../../utils/functions";
 import { useGetCartQuery } from "../../../store/modules/localApiSlice";
 import { useRouter } from "next/router";

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { cartProducts: [] };
+const initialState = { cartProducts: [], lastOrderId: "" };
 
 // {product:
 // quantity:
@@ -47,6 +47,9 @@ const cartSlice = createSlice({
               .quantity - 1)
         : 1;
     },
+    changeLastOrderId: (state, action) => {
+      state.lastOrderId = action.payload;
+    },
   },
 });
 
@@ -58,4 +61,5 @@ export const {
   minusToQuantity,
   updateProductCost,
   countCost,
+  changeLastOrderId,
 } = cartSlice.actions;

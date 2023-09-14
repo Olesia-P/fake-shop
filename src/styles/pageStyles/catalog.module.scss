@@ -15,6 +15,7 @@
 
         .list {
             padding: 0 0 1rem 0;
+            border-bottom: 1px solid black;
 
             .listItemSideMenu {
                 margin: 0.5rem;
@@ -55,75 +56,9 @@
             }
         }
 
-        .filter {
-            margin: 0.5rem;
+        .filters {
             display: flex;
-            padding: 1rem 0;
-            border-top: 1px solid black;
-
-            &.open {
-
-                .chevron {
-                    transform: rotate(180deg);
-                }
-
-                .filterListWrap {
-                    .filterAccordion {
-                        transition: height 0.2s ease-in;
-                        height: 3.9rem;
-
-                    }
-                }
-            }
-
-            .filterHeader {
-                margin: 0 0.5rem;
-                font-weight: 600;
-            }
-
-            .filterListWrap {
-
-
-                .filterChosen {
-                    margin: 0 0.5rem;
-                    font-weight: 600;
-                    color: $red;
-                }
-
-                .filterAccordion {
-                    background-color: $grey;
-
-                    overflow: hidden;
-                    height: 0;
-                    transition: height 0.2s ease-in;
-
-                    .filterOption {
-                        border-top: 1px solid white;
-                        border-bottom: 1px solid white;
-                        padding: 0 0.5rem;
-                        cursor: pointer;
-
-                        &:hover {
-                            background-color: $green;
-                        }
-                    }
-                }
-            }
-
-            .chevron {
-                position: absolute;
-                left: 58%;
-                top: 40%;
-                cursor: pointer;
-                height: 1.5rem;
-                width: 1.5rem;
-
-                svg {
-                    height: 1.5rem;
-                    width: 1.5rem;
-                    padding: 0;
-                }
-            }
+            padding: 0.5rem;
         }
     }
 
@@ -145,12 +80,8 @@
             padding: 1rem;
             box-sizing: border-box;
 
-            .filter {
-
-                .chevron {
-                    top: 20.5rem;
-                    left: 9rem;
-                }
+            .filters {
+                padding: 0;
             }
         }
 
