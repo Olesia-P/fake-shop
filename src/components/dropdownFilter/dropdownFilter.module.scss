@@ -15,8 +15,11 @@
         .options {
             .filterListWrap {
                 .filterAccordion {
-                    // transition: display 0.2s ease-in;
-                    display: block;
+                    transition: transform 0.2s ease-in;
+                    // display: block;
+                    pointer-events: all;
+                    opacity: 1;
+                    transform: translateY(0rem);
                 }
             }
         }
@@ -40,13 +43,16 @@
             }
 
             .filterAccordion {
-                display: none;
+                // display: none;
                 height: 100%;
-                // transition: display 0.2s ease-in;
                 position: absolute;
                 top: 2rem;
                 right: 0;
                 left: 0;
+                pointer-events: none;
+                opacity: 0;
+                transform: translateY(5rem);
+                transition: transform 0.2s ease-in;
 
                 .filterOption {
                     border-top: 1px solid white;

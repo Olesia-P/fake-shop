@@ -26,6 +26,14 @@ export default function Checkout() {
   const { lastOrderId } = useSelector(({ lastOrderId }) => lastOrderId);
   const router = useRouter();
   const dispatch = useDispatch();
+  const productsQuantity = countProductsQuantity(localApiCartData);
+  const total = countOrderCost(localApiCartData);
+  const [postOrder, { data, isSuccess }] = usePostOrderMutation();
+  const fullOrderInfo = {
+    cart: localApiCartData,
+    id: Date.now(),
+    personalData: formData,
+  };
 
   const numberPattern = /^[0-9[\-\(\)\s+]]*$/;
   const namePattern = /^[a-zA-Z.[\-]\s]*$/;
@@ -90,8 +98,17 @@ export default function Checkout() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const productsQuantity = countProductsQuantity(localApiCartData);
-  const total = countOrderCost(localApiCartData);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const getResponse = async () => {
+      const result = await postOrder(fullOrderInfo);
+      return result;
+    };
+    dispatch(changeLastOrderId(getResponse().data.cart.id));
+    console.log("lastOrderId", lastOrderId);
+    // console.log("response", result.data);
+    // router.push("/finishedOrder");
+  };
 
   useEffect(() => {
     if (
@@ -102,30 +119,10 @@ export default function Checkout() {
     }
   }, []);
 
-  const [postOrder] = usePostOrderMutation();
-
-  const fullOrderInfo = {
-    cart: localApiCartData,
-    id: Date.now(),
-    personalData: formData,
-  };
-
-  // console.log("localApiCartData", localApiCartData);
-  // console.log("formData", formData);
-  // console.log(Date.now());
-  // console.log("fullOrderInfo", fullOrderInfo);
-
   return (
     <>
       <div className={css.title}>Checkout</div>
-      <form
-        className={css.container}
-        onSubmit={(event) => {
-          event.preventDefault();
-          postOrder(fullOrderInfo);
-          router.push("/finishedOrder");
-        }}
-      >
+      <form className={css.container} onSubmit={(event) => handleSubmit(event)}>
         {/*  */}
         <div className={css.orderForm}>
           <div className={css.personalInfoHeader}>Delivery information:</div>
