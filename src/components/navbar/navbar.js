@@ -11,39 +11,41 @@ import { changeCatalogCategory } from "../../store/modules/catalogSlice";
 import { useRouter } from "next/router";
 import SearchForm from "./searchForm/searchForm";
 import { useGetCategoriesQuery } from "../../store/modules/apiSlice";
+import useClickOutsideClose from "../../hooks/useClickOutsideClose";
 
 export default function Header() {
   const { catalogFilters } = useSelector(({ catalog }) => catalog);
   const [isCatalogAccordeonOpen, setIsCatalogAccordeonOpen] = useState(false);
-  const {
-    data: categories,
-    error,
-    isError,
-    isLoading,
-    isSuccess: categoriesSuccess,
-  } = useGetCategoriesQuery();
+  const { data: categories, isSuccess: categoriesSuccess } =
+    useGetCategoriesQuery();
   const dispatch = useDispatch();
   const router = useRouter();
 
   const catalogAccordionRef = useRef();
 
-  const handleOutsideClick = (event) => {
-    if (catalogAccordionRef.current.contains(event.target)) {
-      return;
-    }
-    setIsCatalogAccordeonOpen(false);
-  };
+  useClickOutsideClose(
+    catalogAccordionRef,
+    setIsCatalogAccordeonOpen,
+    isCatalogAccordeonOpen
+  );
 
-  useEffect(() => {
-    if (isCatalogAccordeonOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-    } else {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [isCatalogAccordeonOpen]);
+  // const handleOutsideClick = (event) => {
+  //   if (catalogAccordionRef.current.contains(event.target)) {
+  //     return;
+  //   }
+  //   setIsCatalogAccordeonOpen(false);
+  // };
+
+  // useEffect(() => {
+  //   if (isCatalogAccordeonOpen) {
+  //     document.addEventListener("mousedown", handleOutsideClick);
+  //   } else {
+  //     document.removeEventListener("mousedown", handleOutsideClick);
+  //   }
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleOutsideClick);
+  //   };
+  // }, [isCatalogAccordeonOpen]);
 
   return (
     <>

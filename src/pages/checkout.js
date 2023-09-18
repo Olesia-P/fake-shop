@@ -102,10 +102,11 @@ export default function Checkout() {
     event.preventDefault();
     const getResponse = async () => {
       const result = await postOrder(fullOrderInfo);
-      return result;
+      // dispatch(changeLastOrderId(result.data.cart.id));
+      // console.log("lastOrderId", lastOrderId);
     };
-    dispatch(changeLastOrderId(getResponse().data.cart.id));
-    console.log("lastOrderId", lastOrderId);
+    getResponse();
+
     // console.log("response", result.data);
     // router.push("/finishedOrder");
   };

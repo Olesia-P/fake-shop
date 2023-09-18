@@ -4,6 +4,7 @@ import { BiSearchAlt2 } from "react-icons/bi";
 import { useGetProductsQuery } from "../../../store/modules/apiSlice";
 import cx from "classnames";
 import { useRouter } from "next/router";
+import useClickOutsideClose from "../../../hooks/useClickOutsideClose";
 
 export default function SearchForm() {
   const [inputData, setInputData] = useState("");
@@ -12,12 +13,14 @@ export default function SearchForm() {
   const router = useRouter();
   const searchListRef = useRef();
 
-  const handleOutsideClick = (event) => {
-    if (searchListRef.current.contains(event.target)) {
-      return;
-    }
-    setIsSearchListOpen(false);
-  };
+  useClickOutsideClose(searchListRef, setIsSearchListOpen, isSearchListOpen);
+
+  // const handleOutsideClick = (event) => {
+  //   if (searchListRef.current.contains(event.target)) {
+  //     return;
+  //   }
+  //   setIsSearchListOpen(false);
+  // };
 
   const { data: productsData, isSuccess } = useGetProductsQuery({
     category: "",
@@ -40,16 +43,16 @@ export default function SearchForm() {
     handleSearch();
   }, [inputData]);
 
-  useEffect(() => {
-    if (isSearchListOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
-    } else {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [isSearchListOpen]);
+  // useEffect(() => {
+  //   if (isSearchListOpen) {
+  //     document.addEventListener("mousedown", handleOutsideClick);
+  //   } else {
+  //     document.removeEventListener("mousedown", handleOutsideClick);
+  //   }
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleOutsideClick);
+  //   };
+  // }, [isSearchListOpen]);
 
   return (
     <>
