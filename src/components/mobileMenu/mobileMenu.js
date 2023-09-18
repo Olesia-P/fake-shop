@@ -8,6 +8,7 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 
 export default function MobileMenu() {
   const { isMobileMenuOpen } = useSelector(({ openings }) => openings);
+  const { catalogFilters } = useSelector(({ catalog }) => catalog);
   const dispatch = useDispatch();
 
   // const isTablet = useMediaQuery(850);
@@ -33,7 +34,9 @@ export default function MobileMenu() {
             <div>About Project</div>
           </a>
         </Link>
-        <Link href="/catalog">
+        <Link
+          href={`/catalog/?&sort=&${catalogFilters.alphabet}&limit=&${catalogFilters.limit}`}
+        >
           <a className={css.headerLink}>
             <div>Catalog</div>
           </a>

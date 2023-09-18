@@ -15,8 +15,8 @@
         .options {
             .filterListWrap {
                 .filterAccordion {
-                    transition: height 0.2s ease-in;
-                    height: 100%;
+                    // transition: display 0.2s ease-in;
+                    display: block;
                 }
             }
         }
@@ -31,6 +31,8 @@
         display: flex;
 
         .filterListWrap {
+            position: relative;
+
             .filterChosen {
                 margin: 0 0.5rem;
                 font-weight: 600;
@@ -38,9 +40,13 @@
             }
 
             .filterAccordion {
-                overflow: hidden;
-                height: 0;
-                transition: height 0.2s ease-in;
+                display: none;
+                height: 100%;
+                // transition: display 0.2s ease-in;
+                position: absolute;
+                top: 2rem;
+                right: 0;
+                left: 0;
 
                 .filterOption {
                     border-top: 1px solid white;
@@ -48,6 +54,8 @@
                     cursor: pointer;
                     background-color: $grey;
                     text-align: center;
+
+
 
                     &:hover {
                         background-color: $green;

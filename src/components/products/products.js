@@ -82,16 +82,16 @@ export default function Products({
               {element.price}$
             </div>
             <Button
-              clickHandler={() => {
+              onClick={() => {
                 addToCart(element);
               }}
               isFetching={specificProductLoading === element.id}
               isDisabled={buttonDisabled}
               width={"widthM"}
               fontSize={"fontP"}
-              isWide={false}
-              type={"button"}
-              onSubmit={null}
+              // isWide={false}
+              // type={"button"}
+              // onSubmit={null}
               text={"Add to cart"}
             />
           </div>

@@ -8,6 +8,8 @@
     color: $white;
     margin-top: 2rem;
     @include dfc;
+    position: relative;
+
 
     .gitLink {
         text-decoration: none;

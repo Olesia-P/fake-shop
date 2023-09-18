@@ -3,15 +3,15 @@ import { BiLoaderAlt } from "react-icons/bi";
 import cx from "classnames";
 
 export default function Button({
-  clickHandler,
-  isFetching,
-  isDisabled,
+  onClick,
+  isFetching = false,
+  isDisabled = false,
   width,
   fontSize,
   text,
-  type,
-  onSubmit,
-  isWide,
+  type = "button",
+
+  isWide = false,
 }) {
   return (
     <button
@@ -26,9 +26,8 @@ export default function Button({
         fontSize === "fontHuge" && css.fontHuge,
         isWide && css.wide
       )}
-      onClick={clickHandler}
+      onClick={onClick}
       aria-disabled={isDisabled}
-      onSubmit={onSubmit}
     >
       {isFetching && <BiLoaderAlt className={css.loading} />}
       {text}

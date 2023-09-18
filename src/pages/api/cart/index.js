@@ -12,6 +12,8 @@ export default async function handler(req, res) {
     if (identicalObject) {
       localCart.find((it) => it.product.id === req.body.id).quantity =
         req.body.quantity;
+    } else if (req.body === "clean-cart") {
+      localCart.length = 0;
     } else {
       const externalApiResponse = await Axios.get(
         `https://fakestoreapi.com/products/${req.body.id}`

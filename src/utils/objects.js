@@ -7,15 +7,3 @@
 // ];
 
 export const localCart = [];
-
-// {
-//     "id": 1,
-//     "product": "shirt"
-// }
-
-// {
-//     "id": 2,
-//     "product": "pants"
-// }
-
-export const carts = [];

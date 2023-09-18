@@ -87,7 +87,7 @@ export default function Header() {
                     dispatch(changeCatalogCategory(element.link));
                     element.link !== ""
                       ? router.push(
-                          `catalog/?category=${element.link}&sort=&${catalogFilters.alphabet}`,
+                          `/catalog/?category=${element.link}&sort=&${catalogFilters.alphabet}&limit=&${catalogFilters.limit}`,
                           undefined,
                           {
                             shallow: true,

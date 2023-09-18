@@ -62,14 +62,14 @@ export default function ProductsId() {
               <div className={css.price}>{productData.price}$</div>
               <div className={css.btnWrap}>
                 <Button
-                  clickHandler={() => addToCart(productData)}
-                  isFetching={false}
-                  isDisabled={false}
+                  onClick={() => addToCart(productData)}
+                  // isFetching={false}
+                  // isDisabled={false}
                   width={"widthM"}
                   fontSize={"fontP"}
-                  isWide={false}
-                  type={"button"}
-                  onSubmit={null}
+                  // isWide={false}
+                  // type={"button"}
+                  // onSubmit={null}
                   text={"Add to cart"}
                 />
               </div>

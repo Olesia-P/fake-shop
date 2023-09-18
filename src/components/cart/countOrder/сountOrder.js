@@ -31,15 +31,15 @@ export default function CountOrder() {
             </div>
             <div className={css.submitBtnContainer}>
               <Button
-                clickHandler={() => {
+                onClick={() => {
                   router.push("/checkout"), dispatch(changeIsCartOpen(false));
                 }}
-                isFetching={false}
-                isDisabled={false}
+                // isFetching={false}
+                // isDisabled={false}
                 fontSize={"fontP"}
                 isWide={true}
-                type={"button"}
-                onSubmit={null}
+                // type={"button"}
+                // onSubmit={null}
                 text={"Go to checkout"}
               />
             </div>

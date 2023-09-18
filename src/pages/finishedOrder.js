@@ -1,14 +1,26 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import css from "../styles/pageStyles/finishedOrder.module.scss";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { usePostCartMutation } from "../store/modules/localApiSlice";
 
 export default function FinishedOrder() {
-  const { lastOrderId } = useSelector(({ cart }) => cart);
-  //   const existinglastOrderId = () => {
-  //     if (lastOrderId) {
-  //       return lastOrderId;
-  //     }
-  //   };
-  console.log("lastOrderId", lastOrderId);
+  // const dispatch = useDispatch();
+  // const {
+  //   data: localApiCartData,
+  //   error,
+  //   isError,
+  //   isLoading,
+  //   isSuccess,
+  // } = useGetCartQuery();
+
+  const [postCart] = usePostCartMutation();
+  const { lastOrderId } = useSelector(({ lastOrderId }) => lastOrderId);
+  const router = useRouter();
+
+  useEffect(() => {
+    postCart("clean-cart");
+  }, []);
   return (
     <div className={css.container}>
       <div className={css.messageWrap}>

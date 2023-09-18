@@ -10,7 +10,7 @@ import {
 import { countProductsQuantity, countOrderCost } from "../utils/functions";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { changeLastOrderId } from "../store/modules/cartSlice";
+import { changeLastOrderId } from "../store/modules/lastOrderIdSlice";
 
 export default function Checkout() {
   const [formData, setFormData] = useState({
@@ -23,11 +23,12 @@ export default function Checkout() {
   });
   const { data: localApiCartData } = useGetCartQuery();
   const { catalogFilters } = useSelector(({ catalog }) => catalog);
+  const { lastOrderId } = useSelector(({ lastOrderId }) => lastOrderId);
   const router = useRouter();
   const dispatch = useDispatch();
 
   const numberPattern = /^[0-9[\-\(\)\s+]]*$/;
-  const mamePattern = /^[a-zA-Z.[\-]\s]*$/;
+  const namePattern = /^[a-zA-Z.[\-]\s]*$/;
   const emailPattern = /^[a-zA-Z0-9.[_+\-]]+@[a-zA-Z0-9.[\-]]+\.[a-zA-Z]{2,}$/;
 
   const formFields = [
@@ -38,7 +39,7 @@ export default function Checkout() {
       name: "firstName",
       required: true,
       errorMessage: "Use letters, hyphens, spaces and dots only.",
-      pattern: `${mamePattern.source}`,
+      pattern: `${namePattern.source}`,
     },
     {
       lable: "Last name*",
@@ -47,7 +48,7 @@ export default function Checkout() {
       name: "lastname",
       required: true,
       errorMessage: "Use letters, hyphens, spaces and dots only.",
-      pattern: `${mamePattern.source}`,
+      pattern: `${namePattern.source}`,
     },
     {
       lable: "Email*",
@@ -103,14 +104,28 @@ export default function Checkout() {
 
   const [postOrder] = usePostOrderMutation();
 
+  const fullOrderInfo = {
+    cart: localApiCartData,
+    id: Date.now(),
+    personalData: formData,
+  };
+
   // console.log("localApiCartData", localApiCartData);
   // console.log("formData", formData);
   // console.log(Date.now());
+  // console.log("fullOrderInfo", fullOrderInfo);
 
   return (
     <>
       <div className={css.title}>Checkout</div>
-      <form className={css.container}>
+      <form
+        className={css.container}
+        onSubmit={(event) => {
+          event.preventDefault();
+          postOrder(fullOrderInfo);
+          router.push("/finishedOrder");
+        }}
+      >
         {/*  */}
         <div className={css.orderForm}>
           <div className={css.personalInfoHeader}>Delivery information:</div>
@@ -156,23 +171,12 @@ export default function Checkout() {
           </div>
 
           <Button
-            onSubmit={(event) => {
-              event.preventDefault();
-
-              const fullOrderInfo = {
-                cart: localApiCartData,
-                id: Date.now(),
-                personalData: formData,
-              };
-              postOrder(fullOrderInfo);
-              changeLastOrderId(fullOrderInfo.id);
-              router.push("/api/finishedOrder");
-            }}
-            isFetching={false}
-            isDisabled={false}
+            // onSubmit={null}
+            // isFetching={false}
+            // isDisabled={false}
             width={"widthL"}
-            wide={false}
-            type={"sumbit"}
+            // isWide={false}
+            type={"submit"}
             onClick={null}
             text={"Submit order"}
             fontSize={"fontHeader"}
@@ -182,3 +186,7 @@ export default function Checkout() {
     </>
   );
 }
+
+// postOrder(fullOrderInfo);
+// changeLastOrderId(fullOrderInfo.id);
+// router.push("/api/finishedOrder");

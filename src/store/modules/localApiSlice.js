@@ -34,7 +34,6 @@ export const localFakeShopApi = createApi({
         method: "POST",
         body: order,
       }),
-      // invalidatesTags: ["Cart"],
     }),
   }),
 });
