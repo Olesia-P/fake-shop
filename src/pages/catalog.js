@@ -15,6 +15,7 @@ import {
   useGetCategoriesQuery,
   useGetProductsQuery,
 } from "../store/modules/apiSlice";
+import { changeLastOrderId } from "../store/modules/lastOrderIdSlice";
 
 export default function Catalog() {
   const [filter, setFilter] = useState("A-Z");

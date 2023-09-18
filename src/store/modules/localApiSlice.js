@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { localCart } from "../../utils/objects";
+import { changeLastOrderId } from "./lastOrderIdSlice";
+import { useRouter } from "next/router";
 
 export const localFakeShopApi = createApi({
   reducerPath: "localFakeShopApi",
@@ -34,6 +36,12 @@ export const localFakeShopApi = createApi({
         method: "POST",
         body: order,
       }),
+      invalidatesTags: ["Cart"],
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        const { data: orderData } = await queryFulfilled;
+
+        dispatch(changeLastOrderId(orderData.id));
+      },
     }),
   }),
 });

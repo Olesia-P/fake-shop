@@ -12,10 +12,14 @@
         width: 50rem;
         border-radius: $standart-b-radius;
         box-shadow: $main-shadow;
-        @include dfc;
+        @include dfcc;
 
         .message {
             text-align: center;
+        }
+
+        .btn {
+            margin-top: 1rem;
         }
     }
 }

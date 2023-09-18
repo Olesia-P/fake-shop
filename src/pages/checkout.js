@@ -28,7 +28,7 @@ export default function Checkout() {
   const dispatch = useDispatch();
   const productsQuantity = countProductsQuantity(localApiCartData);
   const total = countOrderCost(localApiCartData);
-  const [postOrder, { data, isSuccess }] = usePostOrderMutation();
+  const [postOrder, { data, isSuccess, isLoading }] = usePostOrderMutation();
   const fullOrderInfo = {
     cart: localApiCartData,
     id: Date.now(),
@@ -100,15 +100,7 @@ export default function Checkout() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const getResponse = async () => {
-      const result = await postOrder(fullOrderInfo);
-      // dispatch(changeLastOrderId(result.data.cart.id));
-      // console.log("lastOrderId", lastOrderId);
-    };
-    getResponse();
-
-    // console.log("response", result.data);
-    // router.push("/finishedOrder");
+    postOrder(fullOrderInfo);
   };
 
   useEffect(() => {
@@ -119,6 +111,10 @@ export default function Checkout() {
       router.push(`catalog/?sort=${catalogFilters.alphabet}`);
     }
   }, []);
+
+  useEffect(() => {
+    isSuccess && router.push("/finishedOrder");
+  }, [isSuccess]);
 
   return (
     <>
@@ -170,8 +166,8 @@ export default function Checkout() {
 
           <Button
             // onSubmit={null}
-            // isFetching={false}
-            // isDisabled={false}
+            isFetching={isLoading}
+            isDisabled={isLoading}
             width={"widthL"}
             // isWide={false}
             type={"submit"}
