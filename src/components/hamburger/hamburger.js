@@ -16,11 +16,11 @@ export default function Hamburger() {
     dispatch(changeIsMobileMenuOpen(value));
   };
 
-  // useClickOutsideClose(
-  //   mobileMenuRef,
-  //   changeMobileWithDispatch(),
-  //   isMobileMenuOpen
-  // );
+  useClickOutsideClose(
+    mobileMenuRef,
+    changeMobileWithDispatch,
+    isMobileMenuOpen
+  );
 
   // const handleOutsideClick = (event) => {
   //   if (mobileMenuRef.current.contains(event.target)) {
