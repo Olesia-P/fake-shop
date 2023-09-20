@@ -7,9 +7,6 @@ export const fakeShopApi = createApi({
   endpoints: (builder) => ({
     getOneProduct: builder.query({
       query: (productId) => `products/${productId}`,
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        const { data: oneProductData } = await queryFulfilled;
-      },
     }),
     getProducts: builder.query({
       query: ({ category, filter }) => {
@@ -21,8 +18,6 @@ export const fakeShopApi = createApi({
           },
         };
       },
-      // async onQueryStarted(_, { dispatch, queryFulfilled }) {
-      // const { data: productsData } = await queryFulfilled;
     }),
     getCategories: builder.query({
       query: (params) => `products/categories`,

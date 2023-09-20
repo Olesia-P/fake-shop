@@ -1,14 +1,14 @@
 import css from "./dropdownFilter.module.scss";
 import cx from "classnames";
+import { useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 
 export default function DropdownFilter({
-  isFilterOpened,
-  setIsFilterOpened,
   chosenOptionFunction,
   optionsList,
   filterName,
 }) {
+  const [isFilterOpened, setIsFilterOpened] = useState(false);
   return (
     <div className={cx(css.filter, isFilterOpened && css.open)}>
       <div className={css.filterHeader}>{filterName}:</div>

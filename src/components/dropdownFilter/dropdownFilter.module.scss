@@ -15,7 +15,7 @@
         .options {
             .filterListWrap {
                 .filterAccordion {
-                    transition: transform 0.2s ease-in, opacity 0.2s ease-in;
+                    transition: opacity 0.2s ease-in;
                     // display: block;
                     pointer-events: all;
                     opacity: 1;
@@ -52,7 +52,7 @@
                 pointer-events: none;
                 opacity: 0;
                 transform: translateY(-100%);
-                transition: transform 0.2s ease-in, opacity 0.2s ease-in;
+                transition: transform 0.2s ease-in;
 
                 .filterOption {
                     border-top: 1px solid white;

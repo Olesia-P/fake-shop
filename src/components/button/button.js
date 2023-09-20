@@ -10,7 +10,6 @@ export default function Button({
   fontSize,
   text,
   type = "button",
-
   isWide = false,
 }) {
   return (

@@ -18,9 +18,6 @@ import {
 import { changeLastOrderId } from "../store/modules/lastOrderIdSlice";
 
 export default function Catalog() {
-  const [filter, setFilter] = useState("A-Z");
-  const [filterAlphAccordion, setFilterAlphAccordion] = useState();
-  const [filterLimitAccordion, setFilterLimitAccordion] = useState();
   const { catalogCategory, catalogFilters } = useSelector(
     ({ catalog }) => catalog
   );
@@ -148,17 +145,13 @@ export default function Catalog() {
         </div>
         <div className={css.filters}>
           <DropdownFilter
-            isFilterOpened={filterAlphAccordion}
             chosenOptionFunction={alphabetFilterChosenOption}
             optionsList={alphabetFilterOptionsList}
-            setIsFilterOpened={setFilterAlphAccordion}
             filterName={"In order"}
           />
           <DropdownFilter
-            isFilterOpened={filterLimitAccordion}
             chosenOptionFunction={limitFilterChosenOption}
             optionsList={limitFilterOptionsList}
-            setIsFilterOpened={setFilterLimitAccordion}
             filterName={"Limit"}
           />
         </div>
