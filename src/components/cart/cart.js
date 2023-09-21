@@ -7,23 +7,29 @@ import CartProduct from "./cartProduct/cartProduct";
 import CountOrder from "./countOrder/сountOrder";
 import { useGetCartQuery } from "../../store/modules/localApiSlice";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import useClickOutsideClose from "../../hooks/useClickOutsideClose";
 
 export default function Cart({}) {
   const { isCartOpen } = useSelector(({ openings }) => openings);
-
+  const cartRef = useRef();
   const { data: localApiCartData } = useGetCartQuery();
 
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const changeIsCartOpenWithDispatch = (value) => {
+    dispatch(changeIsCartOpen(value));
+  };
+
   useEffect(() => {
     if (router.pathname === "/checkout") dispatch(changeIsCartOpen(false));
   }, [isCartOpen]);
 
+  useClickOutsideClose(cartRef, changeIsCartOpenWithDispatch, isCartOpen);
   return (
     <>
-      <div className={css.container}>
+      <div className={css.container} ref={cartRef}>
         <div
           className={css.cartIcon}
           onClick={() => {
