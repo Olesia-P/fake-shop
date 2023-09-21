@@ -1,6 +1,6 @@
 @import "../../styles/main.scss";
 
-.lable {
+.label {
     display: inline-block;
     margin: 0.5rem 1rem;
     width: 10rem;
@@ -37,7 +37,7 @@
 }
 
 @include tablet {
-    .lable {
+    .label {
         margin: 0.5rem 0;
         text-align: start;
     }

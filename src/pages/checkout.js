@@ -37,7 +37,7 @@ export default function Checkout() {
 
   const formFields = [
     {
-      lable: "First name*",
+      label: "First name*",
       type: "text",
       state: formData.firstName,
       name: "firstName",
@@ -46,7 +46,7 @@ export default function Checkout() {
       pattern: `${namePattern.source}`,
     },
     {
-      lable: "Last name*",
+      label: "Last name*",
       type: "text",
       state: formData.lastname,
       name: "lastname",
@@ -55,7 +55,7 @@ export default function Checkout() {
       pattern: `${namePattern.source}`,
     },
     {
-      lable: "Email*",
+      label: "Email*",
       type: "text",
       state: formData.email,
       name: "email",
@@ -64,7 +64,7 @@ export default function Checkout() {
       pattern: `${emailPattern.source}`,
     },
     {
-      lable: "Delivery address*",
+      label: "Delivery address*",
       type: "text",
       state: formData.deliveryAddress,
       name: "deliveryAddress",
@@ -72,7 +72,7 @@ export default function Checkout() {
       errorMessage: "This field is required.",
     },
     {
-      lable: "Phone number*",
+      label: "Phone number*",
       type: "text",
       state: formData.phoneNumber,
       name: "phoneNumber",
@@ -81,7 +81,7 @@ export default function Checkout() {
       pattern: `${numberPattern.source}`,
     },
     {
-      lable: "Comment",
+      label: "Comment",
       type: "text",
       state: formData.comment,
       name: "comment",
@@ -121,7 +121,7 @@ export default function Checkout() {
           <div className={css.personalInfoHeader}>Delivery information:</div>
           <div className={css.personalInfo}>
             {formFields.map((element) => (
-              <div className={css.inputWrap} key={element.lable}>
+              <div className={css.inputWrap} key={element.label}>
                 <CheckoutInput {...element} onChange={handleInputChange} />
               </div>
             ))}

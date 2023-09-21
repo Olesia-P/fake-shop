@@ -2,17 +2,20 @@ import { useState } from "react";
 import css from "./checkoutInput.module.scss";
 
 export default function CheckoutInput(props) {
-  const { onChange, state, errorMessage, lable, ...inputProps } = props;
+  const { onChange, state, errorMessage, label, ...inputProps } = props;
 
   const [focused, setFocused] = useState(false);
 
   return (
     <>
-      <label className={css.lable}>{lable}</label>
+      <label className={css.label}>{label}</label>
       <input
         className={css.input}
         value={state}
-        onChange={(event) => onChange(event)}
+        onChange={(event) => {
+          onChange(event);
+          event.target.setCustomValidity("");
+        }}
         {...inputProps}
         onBlur={() => setFocused(true)}
         focused={focused.toString()}
