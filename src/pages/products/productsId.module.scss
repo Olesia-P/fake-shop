@@ -23,7 +23,6 @@
             text-decoration: none;
             color: black;
 
-
             .backBtn {
                 font-size: $size-header;
                 position: relative;
@@ -35,9 +34,6 @@
                 }
 
                 @include hoverAnimation;
-
-
-
             }
         }
 

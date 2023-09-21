@@ -38,7 +38,6 @@
     .loading {
         @include spinningAnimation;
         animation: spin-clockwise 1s infinite ease-in;
-
     }
 
     &.disabled {

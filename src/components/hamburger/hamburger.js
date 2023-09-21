@@ -3,7 +3,6 @@ import { TiThMenu } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { changeIsMobileMenuOpen } from "../../store/modules/openingsSlice";
-import { useEffect } from "react";
 import { useRef } from "react";
 import useClickOutsideClose from "../../hooks/useClickOutsideClose";
 
@@ -21,24 +20,6 @@ export default function Hamburger() {
     changeMobileWithDispatch,
     isMobileMenuOpen
   );
-
-  // const handleOutsideClick = (event) => {
-  //   if (mobileMenuRef.current.contains(event.target)) {
-  //     return;
-  //   }
-  //   dispatch(changeIsMobileMenuOpen(false));
-  // };
-
-  // useEffect(() => {
-  //   if (isMobileMenuOpen) {
-  //     document.addEventListener("mousedown", handleOutsideClick);
-  //   } else {
-  //     document.removeEventListener("mousedown", handleOutsideClick);
-  //   }
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleOutsideClick);
-  //   };
-  // }, [isMobileMenuOpen]);
 
   return (
     <div

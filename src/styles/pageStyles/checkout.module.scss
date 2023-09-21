@@ -91,22 +91,14 @@
     }
 
     .orderFinalInfo {
-
         width: 25%;
         background-color: $grey;
         font-size: $size-header;
         padding: 2rem;
-        box-sizing: border-box;
         height: 15rem;
         border-radius: $standart-b-radius;
         margin: 2rem;
         @include dfcc;
-
-        // .productsQuantity {}
-
-        // .total {}
-
-
     }
 }
 
@@ -126,7 +118,6 @@
 
         .orderFinalInfo {
             width: 70%;
-
         }
     }
 }
@@ -173,7 +164,6 @@
                     }
 
                     .productName {
-
                         margin: 0.5rem;
                         overflow: hidden;
                     }
@@ -181,7 +171,6 @@
                     .productInfo {
                         margin: 0.2rem;
                         line-height: 1.3;
-
                     }
                 }
             }

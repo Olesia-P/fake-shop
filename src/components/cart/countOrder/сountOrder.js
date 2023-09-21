@@ -9,13 +9,7 @@ import Button from "../../button/button";
 export default function CountOrder() {
   const dispatch = useDispatch();
 
-  const {
-    data: localApiCartData,
-    error,
-    isError,
-    isLoading,
-    isSuccess,
-  } = useGetCartQuery();
+  const { data: localApiCartData } = useGetCartQuery();
 
   const router = useRouter();
 
@@ -34,12 +28,8 @@ export default function CountOrder() {
                 onClick={() => {
                   router.push("/checkout"), dispatch(changeIsCartOpen(false));
                 }}
-                // isFetching={false}
-                // isDisabled={false}
                 fontSize={"fontP"}
                 isWide={true}
-                // type={"button"}
-                // onSubmit={null}
                 text={"Go to checkout"}
               />
             </div>

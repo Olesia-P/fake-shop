@@ -3,7 +3,6 @@ import openingsReducer from "./modules/openingsSlice";
 import { fakeShopApi } from "./modules/apiSlice";
 import catalogReducer from "./modules/catalogSlice";
 import lastOrderIdReducer from "./modules/lastOrderIdSlice";
-// import cartReducer from "./modules/cartSlice";
 import { localFakeShopApi } from "./modules/localApiSlice";
 
 export const store = configureStore({
@@ -12,7 +11,6 @@ export const store = configureStore({
     [fakeShopApi.reducerPath]: fakeShopApi.reducer,
     [localFakeShopApi.reducerPath]: localFakeShopApi.reducer,
     catalog: catalogReducer,
-    // cart: cartReducer,
     lastOrderId: lastOrderIdReducer,
   },
   middleware: (getDefaultMiddleware) =>

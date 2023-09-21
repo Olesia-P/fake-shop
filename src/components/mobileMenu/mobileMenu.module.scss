@@ -1,7 +1,5 @@
 @import "../../styles/main.scss";
 
-
-
 .container {
     width: 70%;
     height: 50%;
@@ -15,27 +13,12 @@
     display: flex;
     flex-direction: column;
     font-size: 24pt;
-    box-sizing: border-box;
     margin-top: 4rem;
-    // overflow-y: scroll;
 
     &.open {
         transform: translateX(0);
         transition: transform 0.3s ease-in;
     }
-
-    // .userIcon {
-
-    //     margin: 1rem;
-    //     border-radius: 2rem;
-    //     height: 3rem;
-    //     padding: 0.3rem;
-
-    //     svg {
-    //         width: 3rem;
-    //         height: 3rem;
-    //     }
-    // }
 
     .headerLink {
         margin: 1rem 0 0 1rem;
@@ -44,7 +27,6 @@
         text-decoration: none;
         color: black;
     }
-
 }
 
 @include desktop {

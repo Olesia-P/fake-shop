@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-
 import css from "./cartProduct.module.scss";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
@@ -16,13 +14,8 @@ export default function CartProduct({ cartProducts }) {
   const [postCart] = usePostCartMutation();
   const [deleteProduct] = useDeleteProductMutation();
 
-  const {
-    data: localApiCartData,
-    error,
-    isError,
-    isLoading,
-    isSuccess: localApiCartDataSuccess,
-  } = useGetCartQuery();
+  const { data: localApiCartData, isSuccess: localApiCartDataSuccess } =
+    useGetCartQuery();
 
   const addToCart = (cartProduct) => {
     if (localApiCartDataSuccess) {
@@ -90,7 +83,7 @@ export default function CartProduct({ cartProducts }) {
               className={css.img}
               onClick={() => router.push(`/products/${element.product.id}`)}
             >
-              <img src={element.product.image} />
+              <img src={element.product.image} alt={element.product.title} />
             </div>
             <div
               className={css.deleteIcon}

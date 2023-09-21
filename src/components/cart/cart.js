@@ -12,16 +12,9 @@ import { useEffect } from "react";
 export default function Cart({}) {
   const { isCartOpen } = useSelector(({ openings }) => openings);
 
-  const {
-    data: localApiCartData,
-    error,
-    isError,
-    isLoading,
-    isSuccess,
-  } = useGetCartQuery();
+  const { data: localApiCartData } = useGetCartQuery();
 
   const dispatch = useDispatch();
-
   const router = useRouter();
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import css from "../styles/pageStyles/catalog.module.scss";
 import DropdownFilter from "../components/dropdownFilter/dropdownFilter";
 import Products from "../components/products/products";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { capitalizeFirstLetter } from "../utils/functions";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,13 +9,11 @@ import {
   changeCatalogFiltersAlph,
   changeCatalogFiltersLimit,
 } from "../store/modules/catalogSlice";
-
 import { useRouter } from "next/router";
 import {
   useGetCategoriesQuery,
   useGetProductsQuery,
 } from "../store/modules/apiSlice";
-import { changeLastOrderId } from "../store/modules/lastOrderIdSlice";
 
 export default function Catalog() {
   const { catalogCategory, catalogFilters } = useSelector(
@@ -43,15 +41,13 @@ export default function Catalog() {
     {
       name: "A-Z",
       onClickFunction: () => {
-        setFilterAlphAccordion(false),
-          dispatch(changeCatalogFiltersAlph("asc"));
+        dispatch(changeCatalogFiltersAlph("asc"));
       },
     },
     {
       name: "Z-A",
       onClickFunction: () => {
-        setFilterAlphAccordion(false),
-          dispatch(changeCatalogFiltersAlph("desc"));
+        dispatch(changeCatalogFiltersAlph("desc"));
       },
     },
   ];
@@ -69,22 +65,19 @@ export default function Catalog() {
     {
       name: "5",
       onClickFunction: () => {
-        setFilterLimitAccordion(false),
-          dispatch(changeCatalogFiltersLimit("5"));
+        dispatch(changeCatalogFiltersLimit("5"));
       },
     },
     {
       name: "10",
       onClickFunction: () => {
-        setFilterLimitAccordion(false),
-          dispatch(changeCatalogFiltersLimit("10"));
+        dispatch(changeCatalogFiltersLimit("10"));
       },
     },
     {
       name: "20",
       onClickFunction: () => {
-        setFilterLimitAccordion(false),
-          dispatch(changeCatalogFiltersLimit("20"));
+        dispatch(changeCatalogFiltersLimit("20"));
       },
     },
   ];

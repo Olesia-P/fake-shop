@@ -1,8 +1,5 @@
 @import "../../../styles/main.scss";
 
-
-
-
 .searchFrom {
     @include dfc;
     height: 2rem;
@@ -16,7 +13,6 @@
         height: 100%;
         padding: 0 0.5rem;
         border-bottom-right-radius: $standart-b-radius;
-        box-sizing: border-box;
 
         svg {
             height: 1.3rem;
@@ -29,7 +25,6 @@
         position: relative;
         line-height: 1;
 
-
         input {
             background-color: $white;
             border: none;
@@ -40,15 +35,11 @@
             outline: none;
             height: 100%;
             width: 100%;
-            box-sizing: border-box;
             outline: none;
             font-family: $main-font;
-
         }
 
         .searchedList {
-            box-sizing: border-box;
-
             position: absolute;
             width: 100%;
             top: 2rem;
@@ -65,9 +56,7 @@
             .searchedItem {
                 padding: 0.5rem;
                 cursor: pointer;
-
             }
-
         }
     }
 }
@@ -81,11 +70,9 @@
         margin-left: 1rem;
 
         .searchIcon {
-            // border-bottom: 3px solid black;
             height: 100%;
             padding: 0 0.5rem;
             border-bottom-right-radius: $standart-b-radius;
-            box-sizing: border-box;
 
             svg {
                 height: 1.3rem;
@@ -95,14 +82,12 @@
         input {
             background-color: $white;
             border: none;
-            // border-bottom: 3px solid black;
             font-size: $size-p;
             border-bottom-left-radius: $standart-b-radius;
             padding: 0 0.5rem;
             outline: none;
             height: 100%;
             width: 100%;
-            box-sizing: border-box;
             outline: none;
             font-family: $main-font;
         }

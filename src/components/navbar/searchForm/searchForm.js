@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import css from "./searchForm.module.scss";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { useGetProductsQuery } from "../../../store/modules/apiSlice";
-import cx from "classnames";
 import { useRouter } from "next/router";
 import useClickOutsideClose from "../../../hooks/useClickOutsideClose";
 
@@ -14,13 +13,6 @@ export default function SearchForm() {
   const searchListRef = useRef();
 
   useClickOutsideClose(searchListRef, setIsSearchListOpen, isSearchListOpen);
-
-  // const handleOutsideClick = (event) => {
-  //   if (searchListRef.current.contains(event.target)) {
-  //     return;
-  //   }
-  //   setIsSearchListOpen(false);
-  // };
 
   const { data: productsData, isSuccess } = useGetProductsQuery({
     category: "",
@@ -42,17 +34,6 @@ export default function SearchForm() {
   useEffect(() => {
     handleSearch();
   }, [inputData]);
-
-  // useEffect(() => {
-  //   if (isSearchListOpen) {
-  //     document.addEventListener("mousedown", handleOutsideClick);
-  //   } else {
-  //     document.removeEventListener("mousedown", handleOutsideClick);
-  //   }
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleOutsideClick);
-  //   };
-  // }, [isSearchListOpen]);
 
   return (
     <>
@@ -92,10 +73,3 @@ export default function SearchForm() {
     </>
   );
 }
-
-//   onKeyUp={(event) => {
-//     if (event.key === "Enter") {
-//       handleSearch();
-//     }
-//   }}
-// onClick={() => }

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import Button from "../components/button/button";
 import { useEffect, useState } from "react";
 import css from "../styles/pageStyles/checkout.module.scss";
@@ -9,8 +8,7 @@ import {
 } from "../store/modules/localApiSlice";
 import { countProductsQuantity, countOrderCost } from "../utils/functions";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { changeLastOrderId } from "../store/modules/lastOrderIdSlice";
+import { useSelector } from "react-redux";
 
 export default function Checkout() {
   const [formData, setFormData] = useState({
@@ -23,12 +21,10 @@ export default function Checkout() {
   });
   const { data: localApiCartData } = useGetCartQuery();
   const { catalogFilters } = useSelector(({ catalog }) => catalog);
-  const { lastOrderId } = useSelector(({ lastOrderId }) => lastOrderId);
   const router = useRouter();
-  const dispatch = useDispatch();
   const productsQuantity = countProductsQuantity(localApiCartData);
   const total = countOrderCost(localApiCartData);
-  const [postOrder, { data, isSuccess, isLoading }] = usePostOrderMutation();
+  const [postOrder, { isSuccess, isLoading }] = usePostOrderMutation();
   const fullOrderInfo = {
     cart: localApiCartData,
     id: Date.now(),
@@ -139,7 +135,10 @@ export default function Checkout() {
                 onClick={() => router.push(`/products/${element.product.id}`)}
               >
                 <div className={css.img}>
-                  <img src={element.product.image} />
+                  <img
+                    src={element.product.image}
+                    alt={element.product.title}
+                  />
                 </div>
                 <div className={css.productName}>{element.product.title}</div>
                 <div className={css.productInfo}>
@@ -165,11 +164,9 @@ export default function Checkout() {
           </div>
 
           <Button
-            // onSubmit={null}
             isFetching={isLoading}
             isDisabled={isLoading}
             width={"widthL"}
-            // isWide={false}
             type={"submit"}
             onClick={null}
             text={"Submit order"}
@@ -180,7 +177,3 @@ export default function Checkout() {
     </>
   );
 }
-
-// postOrder(fullOrderInfo);
-// changeLastOrderId(fullOrderInfo.id);
-// router.push("/api/finishedOrder");

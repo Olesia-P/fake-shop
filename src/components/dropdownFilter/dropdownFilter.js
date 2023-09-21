@@ -20,7 +20,10 @@ export default function DropdownFilter({
               <div
                 key={element.name}
                 className={css.filterOption}
-                onClick={() => element.onClickFunction()}
+                onClick={() => {
+                  element.onClickFunction();
+                  setIsFilterOpened(false);
+                }}
               >
                 {element.name}
               </div>

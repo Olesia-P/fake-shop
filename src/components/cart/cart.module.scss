@@ -1,12 +1,8 @@
 @import "../../styles/main.scss";
 
-
-
 .container {
     position: relative;
     margin: 0 1rem;
-
-
 
     .cartIcon {
         @include dfc;
@@ -14,9 +10,7 @@
         width: 2.5rem;
         cursor: pointer;
         border-radius: $standart-b-radius;
-
         @include hoverAnimation;
-
 
         svg {
             height: 100%;
@@ -46,14 +40,10 @@
         background-color: white;
         overflow: hidden;
         border-radius: $standart-b-radius;
-
         transition: all 0.3s ease-in;
         display: flex;
         flex-direction: column;
         align-items: center;
-        box-sizing: border-box;
-
-
 
         &.open {
             height: 30rem;
@@ -66,14 +56,12 @@
             overflow: hidden;
         }
 
-
         .header {
             text-align: center;
             padding: 0 1rem;
             margin: 1rem;
             border: 3px solid $grey;
             border-radius: $standart-b-radius;
-
             font-weight: 600;
         }
     }

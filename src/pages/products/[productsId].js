@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/router";
 import css from "./productsId.module.scss";
 import { PiArrowBendUpLeft } from "react-icons/pi";
@@ -17,13 +15,8 @@ export default function ProductsId() {
 
   const [postCart] = usePostCartMutation();
 
-  const {
-    data: localApiCartData,
-    error,
-    isError,
-    isLoading,
-    isSuccess: localApiCartDataSuccess,
-  } = useGetCartQuery();
+  const { data: localApiCartData, isSuccess: localApiCartDataSuccess } =
+    useGetCartQuery();
 
   const addToCart = (product) => {
     if (localApiCartDataSuccess) {
@@ -54,7 +47,7 @@ export default function ProductsId() {
         {isSuccess ? (
           <div className={css.product}>
             <div className={css.image}>
-              <img src={productData.image} />
+              <img src={productData.image} alt={productData.image} />
             </div>
             <div className={css.info}>
               <div className={css.title}>{productData.title}</div>
@@ -63,13 +56,8 @@ export default function ProductsId() {
               <div className={css.btnWrap}>
                 <Button
                   onClick={() => addToCart(productData)}
-                  // isFetching={false}
-                  // isDisabled={false}
                   width={"widthM"}
                   fontSize={"fontP"}
-                  // isWide={false}
-                  // type={"button"}
-                  // onSubmit={null}
                   text={"Add to cart"}
                 />
               </div>

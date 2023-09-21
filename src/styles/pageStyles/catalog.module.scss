@@ -3,7 +3,6 @@
 .container {
     display: flex;
     font-size: $size-p;
-    box-sizing: border-box;
 
     .sideMenu {
         position: fixed;
@@ -14,7 +13,6 @@
         box-shadow: $main-shadow;
         padding: 1rem;
 
-
         .list {
             padding: 0 0 1rem 0;
             border-bottom: 1px solid black;
@@ -24,8 +22,6 @@
                 display: flex;
                 gap: 0.5em;
                 cursor: pointer;
-
-
 
                 input[type="radio"] {
                     appearance: none;
@@ -80,7 +76,6 @@
             width: 100%;
             margin-top: 4rem;
             padding: 1rem;
-            box-sizing: border-box;
 
             .filters {
                 padding: 0;

@@ -16,7 +16,6 @@
             .filterListWrap {
                 .filterAccordion {
                     transition: opacity 0.2s ease-in;
-                    // display: block;
                     pointer-events: all;
                     opacity: 1;
                     transform: translateY(0%);
@@ -43,7 +42,6 @@
             }
 
             .filterAccordion {
-                // display: none;
                 height: 100%;
                 position: absolute;
                 top: 2rem;
@@ -60,8 +58,6 @@
                     cursor: pointer;
                     background-color: $grey;
                     text-align: center;
-
-
 
                     &:hover {
                         background-color: $green;

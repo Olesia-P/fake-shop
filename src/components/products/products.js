@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-
 import css from "./products.module.scss";
 import {
   usePostCartMutation,
@@ -8,8 +6,7 @@ import {
 import { useRouter } from "next/router";
 import { BiLoaderAlt } from "react-icons/bi";
 import { useState } from "react";
-import cx from "classnames";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "../button/button";
 import { changeIsCartOpen } from "../../store/modules/openingsSlice";
 
@@ -61,7 +58,7 @@ export default function Products({
                 dispatch(changeIsCartOpen(false));
               }}
             >
-              <img src={element.image} />
+              <img src={element.image} alt={element.title} />
             </div>
             <div
               className={css.title}
@@ -89,9 +86,6 @@ export default function Products({
               isDisabled={buttonDisabled}
               width={"widthM"}
               fontSize={"fontP"}
-              // isWide={false}
-              // type={"button"}
-              // onSubmit={null}
               text={"Add to cart"}
             />
           </div>

@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import css from "../styles/pageStyles/finishedOrder.module.scss";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -24,11 +24,8 @@ export default function FinishedOrder() {
           <div>It&apos;s a fake shop after all!</div>
         </div>
         <div className={css.btn}>
-          <Button // onSubmit={null}
-            // isFetching={isLoading}
-            // isDisabled={isLoading}
+          <Button
             width={"widthL"}
-            // isWide={false}
             type={"submit"}
             onClick={() => {
               router.push("/catalog");

@@ -1,10 +1,10 @@
 import css from "./navbar.module.scss";
 import cx from "classnames";
-import { BiSolidUserCircle, BiChevronDown } from "react-icons/bi";
+import { BiChevronDown } from "react-icons/bi";
 import Link from "next/link";
 import Cart from "../cart/cart";
 import Hamburger from "../hamburger/hamburger";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { capitalizeFirstLetter } from "../../utils/functions";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCatalogCategory } from "../../store/modules/catalogSlice";
@@ -29,24 +29,6 @@ export default function Header() {
     isCatalogAccordeonOpen
   );
 
-  // const handleOutsideClick = (event) => {
-  //   if (catalogAccordionRef.current.contains(event.target)) {
-  //     return;
-  //   }
-  //   setIsCatalogAccordeonOpen(false);
-  // };
-
-  // useEffect(() => {
-  //   if (isCatalogAccordeonOpen) {
-  //     document.addEventListener("mousedown", handleOutsideClick);
-  //   } else {
-  //     document.removeEventListener("mousedown", handleOutsideClick);
-  //   }
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleOutsideClick);
-  //   };
-  // }, [isCatalogAccordeonOpen]);
-
   return (
     <>
       <div className={css.container}>
@@ -63,7 +45,6 @@ export default function Header() {
             <div>About Project</div>
           </a>
         </Link>
-
         <a
           className={cx(css.headerLink)}
           onClick={() => setIsCatalogAccordeonOpen(!isCatalogAccordeonOpen)}
@@ -95,7 +76,9 @@ export default function Header() {
                             shallow: true,
                           }
                         )
-                      : router.push(`catalog/?sort=${catalogFilters.alphabet}`);
+                      : router.push(
+                          `/catalog/?sort=${catalogFilters.alphabet}&limit=&${catalogFilters.limit}`
+                        );
                   }}
                 >
                   {capitalizeFirstLetter(element.name)}
@@ -103,19 +86,13 @@ export default function Header() {
               ))}
           </div>
         </a>
-
         <Link href="/contacts">
           <a className={css.headerLink}>
             <div>Contacts</div>
           </a>
         </Link>
-
         <SearchForm />
-
         <Cart />
-        {/* <div className={css.userIcon}>
-          <BiSolidUserCircle />
-        </div> */}
       </div>
     </>
   );
