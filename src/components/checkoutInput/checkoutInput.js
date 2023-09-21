@@ -4,7 +4,7 @@ import css from "./checkoutInput.module.scss";
 export default function CheckoutInput(props) {
   const { onChange, state, errorMessage, lable, ...inputProps } = props;
 
-  const [unfocused, setUnfocused] = useState(false);
+  const [focused, setFocused] = useState(false);
 
   return (
     <>
@@ -14,8 +14,8 @@ export default function CheckoutInput(props) {
         value={state}
         onChange={(event) => onChange(event)}
         {...inputProps}
-        onBlur={() => setUnfocused(true)}
-        unfocused={unfocused.toString()}
+        onBlur={() => setFocused(true)}
+        focused={focused.toString()}
         onInvalid={(event) => {
           state.length === 0
             ? event.target.setCustomValidity("This field is required")

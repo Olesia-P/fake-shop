@@ -7,7 +7,6 @@ import Button from "../components/button/button";
 export default function FinishedOrder() {
   const { lastOrderId } = useSelector(({ lastOrderId }) => lastOrderId);
   const router = useRouter();
-  console.log("lastOrderId", lastOrderId);
 
   useEffect(() => {
     if (lastOrderId === "") {

@@ -3,6 +3,7 @@
 .container {
     display: flex;
     align-items: center;
+    justify-content: space-around;
     height: 4rem;
     font-size: $size-header;
     box-shadow: $main-shadow;

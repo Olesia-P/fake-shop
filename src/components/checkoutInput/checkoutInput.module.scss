@@ -19,11 +19,11 @@
         border: 2px solid rgb(175, 175, 175);
     }
 
-    &.input:invalid[unfocused="true"] {
+    &.input:invalid[focused="true"] {
         border: 2px solid rgb(208, 24, 37);
     }
 
-    &.input:invalid[unfocused="true"]~div {
+    &.input:invalid[focused="true"]~div {
         display: block;
     }
 }
