@@ -7,7 +7,7 @@ export const countOrderCost = (cart) => {
   const sum = cart?.reduce(
     (accumulator, currentValue) =>
       accumulator + currentValue.product.price * currentValue.quantity,
-    initialValue
+    initialValue,
   );
   const roundedSum = sum?.toFixed(2);
 
@@ -17,7 +17,7 @@ export const countProductsQuantity = (cart) => {
   const initialValue = 0;
   const sum = cart?.reduce(
     (accumulator, currentValue) => accumulator + currentValue.quantity,
-    initialValue
+    initialValue,
   );
 
   return sum;

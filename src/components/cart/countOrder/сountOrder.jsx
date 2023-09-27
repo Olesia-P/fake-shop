@@ -1,10 +1,11 @@
-import css from "./countOrder.module.scss";
-import { countOrderCost } from "../../../utils/functions";
-import { useGetCartQuery } from "../../../store/modules/localApiSlice";
-import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { changeIsCartOpen } from "../../../store/modules/openingsSlice";
-import Button from "../../button/button";
+import React from 'react';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import css from './countOrder.module.scss';
+import { countOrderCost } from '../../../utils/functions';
+import { useGetCartQuery } from '../../../store/modules/localApiSlice';
+import { changeIsCartOpen } from '../../../store/modules/openingsSlice';
+import Button from '../../button/button';
 
 export default function CountOrder() {
   const dispatch = useDispatch();
@@ -26,11 +27,12 @@ export default function CountOrder() {
             <div className={css.submitBtnContainer}>
               <Button
                 onClick={() => {
-                  router.push("/checkout"), dispatch(changeIsCartOpen(false));
+                  router.push('/checkout');
+                  dispatch(changeIsCartOpen(false));
                 }}
-                fontSize={"fontP"}
-                isWide={true}
-                text={"Go to checkout"}
+                fontSize="fontP"
+                isWide
+                text="Go to checkout"
               />
             </div>
           </div>

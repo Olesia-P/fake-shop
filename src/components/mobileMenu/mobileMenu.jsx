@@ -1,7 +1,8 @@
-import css from "./mobileMenu.module.scss";
-import { useSelector } from "react-redux";
-import cx from "classnames";
-import Link from "next/link";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import cx from 'classnames';
+import Link from 'next/link';
+import css from './mobileMenu.module.scss';
 
 export default function MobileMenu() {
   const { isMobileMenuOpen } = useSelector(({ openings }) => openings);

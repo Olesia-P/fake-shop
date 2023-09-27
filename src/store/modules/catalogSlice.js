@@ -1,22 +1,37 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  catalogCategory: "",
-  catalogFilters: { alphabet: "asc", limit: "20" },
+  catalogCategory: '',
+  catalogFilters: { alphabet: 'asc', limit: '20' },
 };
 
 const catalogSlice = createSlice({
-  name: "catalog",
+  name: 'catalog',
   initialState,
   reducers: {
     changeCatalogCategory: (state, action) => {
-      state.catalogCategory = action.payload;
+      return {
+        ...state,
+        catalogCategory: action.payload,
+      };
     },
     changeCatalogFiltersAlph: (state, action) => {
-      state.catalogFilters.alphabet = action.payload;
+      return {
+        ...state,
+        catalogFilters: {
+          ...state.catalogFilters,
+          alphabet: action.payload,
+        },
+      };
     },
     changeCatalogFiltersLimit: (state, action) => {
-      state.catalogFilters.limit = action.payload;
+      return {
+        ...state,
+        catalogFilters: {
+          ...state.catalogFilters,
+          limit: action.payload,
+        },
+      };
     },
   },
 });

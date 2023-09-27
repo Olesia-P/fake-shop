@@ -1,9 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import openingsReducer from "./modules/openingsSlice";
-import { fakeShopApi } from "./modules/apiSlice";
-import catalogReducer from "./modules/catalogSlice";
-import lastOrderIdReducer from "./modules/lastOrderIdSlice";
-import { localFakeShopApi } from "./modules/localApiSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import openingsReducer from './modules/openingsSlice';
+import { fakeShopApi } from './modules/apiSlice';
+import catalogReducer from './modules/catalogSlice';
+import mixedPurposeSliceReducer from './modules/mixedPurposeSlice';
+import { localFakeShopApi } from './modules/localApiSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +11,7 @@ export const store = configureStore({
     [fakeShopApi.reducerPath]: fakeShopApi.reducer,
     [localFakeShopApi.reducerPath]: localFakeShopApi.reducer,
     catalog: catalogReducer,
-    lastOrderId: lastOrderIdReducer,
+    mixedPurpose: mixedPurposeSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

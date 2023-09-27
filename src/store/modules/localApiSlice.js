@@ -1,40 +1,40 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { changeLastOrderId } from "./lastOrderIdSlice";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { changeLastOrderId } from './mixedPurposeSlice';
 
 export const localFakeShopApi = createApi({
-  reducerPath: "localFakeShopApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
-  tagTypes: ["Cart"],
+  reducerPath: 'localFakeShopApi',
+  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+  tagTypes: ['Cart'],
   endpoints: (builder) => ({
     getCart: builder.query({
-      query: () => "/cart",
-      providesTags: ["Cart"],
+      query: () => '/cart',
+      providesTags: ['Cart'],
     }),
 
     postCart: builder.mutation({
       query: (cart) => ({
-        url: "/cart",
-        method: "POST",
+        url: '/cart',
+        method: 'POST',
         body: cart,
       }),
-      invalidatesTags: ["Cart"],
+      invalidatesTags: ['Cart'],
     }),
 
     deleteProduct: builder.mutation({
       query: (productId) => ({
         url: `/cart/products/${productId}`,
-        method: "DELETE",
+        method: 'DELETE',
       }),
-      invalidatesTags: ["Cart"],
+      invalidatesTags: ['Cart'],
     }),
 
     postOrder: builder.mutation({
       query: (order) => ({
-        url: `/orders`,
-        method: "POST",
+        url: '/orders',
+        method: 'POST',
         body: order,
       }),
-      invalidatesTags: ["Cart"],
+      invalidatesTags: ['Cart'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const { data: orderData } = await queryFulfilled;
         dispatch(changeLastOrderId(orderData.id));

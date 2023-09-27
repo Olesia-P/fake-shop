@@ -1,14 +1,14 @@
-import css from "./products.module.scss";
+import { useState, React } from 'react';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
+import { BiLoaderAlt } from 'react-icons/bi';
 import {
   usePostCartMutation,
   useGetCartQuery,
-} from "../../store/modules/localApiSlice";
-import { useRouter } from "next/router";
-import { BiLoaderAlt } from "react-icons/bi";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import Button from "../button/button";
-import { changeIsCartOpen } from "../../store/modules/openingsSlice";
+} from '../../store/modules/localApiSlice';
+import Button from '../button/button';
+import { changeIsCartOpen } from '../../store/modules/openingsSlice';
+import css from './products.module.scss';
 
 export default function Products({
   productsData,
@@ -30,7 +30,7 @@ export default function Products({
     setButtondisabled(true);
     if (localApiCartDataSuccess) {
       const identicalObject = localApiCartData.find(
-        (it) => it.product.id === product.id
+        (it) => it.product.id === product.id,
       );
       const finalQuantity =
         product.id === identicalObject?.product.id
@@ -42,7 +42,13 @@ export default function Products({
         await postCart(params); // Wait for the cart mutation to finish
         setSpecificProductLoading(null); // Reset loading product after the mutation is complete
         setButtondisabled(false);
-      } catch {}
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(
+          'An error occurred while adding the product to the cart:',
+          error,
+        );
+      }
     }
   };
 
@@ -84,9 +90,9 @@ export default function Products({
               }}
               isFetching={specificProductLoading === element.id}
               isDisabled={buttonDisabled}
-              width={"widthM"}
-              fontSize={"fontP"}
-              text={"Add to cart"}
+              width="widthM"
+              fontSize="fontP"
+              text="Add to cart"
             />
           </div>
         ))

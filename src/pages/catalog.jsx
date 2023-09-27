@@ -1,23 +1,23 @@
-import css from "../styles/pageStyles/catalog.module.scss";
-import DropdownFilter from "../components/dropdownFilter/dropdownFilter";
-import Products from "../components/products/products";
-import { useEffect } from "react";
-import { capitalizeFirstLetter } from "../utils/functions";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, React } from 'react';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   changeCatalogCategory,
   changeCatalogFiltersAlph,
   changeCatalogFiltersLimit,
-} from "../store/modules/catalogSlice";
-import { useRouter } from "next/router";
+} from '../store/modules/catalogSlice';
 import {
   useGetCategoriesQuery,
   useGetProductsQuery,
-} from "../store/modules/apiSlice";
+} from '../store/modules/apiSlice';
+import css from '../styles/pageStyles/catalog.module.scss';
+import DropdownFilter from '../components/dropdownFilter/dropdownFilter';
+import Products from '../components/products/products';
+import { capitalizeFirstLetter } from '../utils/functions';
 
 export default function Catalog() {
   const { catalogCategory, catalogFilters } = useSelector(
-    ({ catalog }) => catalog
+    ({ catalog }) => catalog,
   );
 
   const params = {
@@ -39,45 +39,46 @@ export default function Catalog() {
 
   const alphabetFilterOptionsList = [
     {
-      name: "A-Z",
+      name: 'A-Z',
       onClickFunction: () => {
-        dispatch(changeCatalogFiltersAlph("asc"));
+        dispatch(changeCatalogFiltersAlph('asc'));
       },
     },
     {
-      name: "Z-A",
+      name: 'Z-A',
       onClickFunction: () => {
-        dispatch(changeCatalogFiltersAlph("desc"));
+        dispatch(changeCatalogFiltersAlph('desc'));
       },
     },
   ];
 
   const alphabetFilterChosenOption = () => {
-    if (catalogFilters.alphabet === "asc") {
-      return "A-Z";
+    if (catalogFilters.alphabet === 'asc') {
+      return 'A-Z';
     }
-    if (catalogFilters.alphabet === "desc") {
-      return "Z-A";
+    if (catalogFilters.alphabet === 'desc') {
+      return 'Z-A';
     }
+    return '';
   };
 
   const limitFilterOptionsList = [
     {
-      name: "5",
+      name: '5',
       onClickFunction: () => {
-        dispatch(changeCatalogFiltersLimit("5"));
+        dispatch(changeCatalogFiltersLimit('5'));
       },
     },
     {
-      name: "10",
+      name: '10',
       onClickFunction: () => {
-        dispatch(changeCatalogFiltersLimit("10"));
+        dispatch(changeCatalogFiltersLimit('10'));
       },
     },
     {
-      name: "20",
+      name: '20',
       onClickFunction: () => {
-        dispatch(changeCatalogFiltersLimit("20"));
+        dispatch(changeCatalogFiltersLimit('20'));
       },
     },
   ];
@@ -87,7 +88,7 @@ export default function Catalog() {
   };
 
   useEffect(() => {
-    if (router.query.category && router.query.category !== "") {
+    if (router.query.category && router.query.category !== '') {
       dispatch(changeCatalogCategory(router.query.category));
     }
     if (router.query.sort) {
@@ -104,13 +105,13 @@ export default function Catalog() {
         {
           pathname: router.pathname,
           query: {
-            ...(catalogCategory !== "" && { category: catalogCategory }),
+            ...(catalogCategory !== '' && { category: catalogCategory }),
             sort: catalogFilters.alphabet,
             limit: catalogFilters.limit,
           },
         },
         undefined,
-        { shallow: true }
+        { shallow: true },
       );
   }, [catalogFilters, catalogCategory]);
 
@@ -120,8 +121,13 @@ export default function Catalog() {
         <div className={css.list}>
           {categoriesSuccess &&
             categories.map((element) => (
-              <label key={element.name} className={css.listItemSideMenu}>
+              <label
+                htmlFor={`catalogRadioInput${element.name}`}
+                key={element.name}
+                className={css.listItemSideMenu}
+              >
                 <input
+                  id={`catalogRadioInput${element.name}`}
                   type="radio"
                   name="productsType"
                   onChange={() => {
@@ -129,7 +135,7 @@ export default function Catalog() {
                   }}
                   checked={
                     decodeURI(catalogCategory) === element.name ||
-                    (catalogCategory === "" && element.name === "all products")
+                    (catalogCategory === '' && element.name === 'all products')
                   }
                 />
                 {capitalizeFirstLetter(element.name)}
@@ -140,12 +146,12 @@ export default function Catalog() {
           <DropdownFilter
             chosenOptionFunction={alphabetFilterChosenOption}
             optionsList={alphabetFilterOptionsList}
-            filterName={"In order"}
+            filterName="In order"
           />
           <DropdownFilter
             chosenOptionFunction={limitFilterChosenOption}
             optionsList={limitFilterOptionsList}
-            filterName={"Limit"}
+            filterName="Limit"
           />
         </div>
       </div>

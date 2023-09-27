@@ -1,13 +1,15 @@
-import css from "./cartProduct.module.scss";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import { MdDelete } from "react-icons/md";
-import cx from "classnames";
-import { useRouter } from "next/router";
+import React from 'react';
+import { useRouter } from 'next/router';
+import cx from 'classnames';
+import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
+import { MdDelete } from 'react-icons/md';
+import css from './cartProduct.module.scss';
+
 import {
   usePostCartMutation,
   useGetCartQuery,
   useDeleteProductMutation,
-} from "../../../store/modules/localApiSlice";
+} from '../../../store/modules/localApiSlice';
 
 export default function CartProduct({ cartProducts }) {
   const router = useRouter();
@@ -20,7 +22,7 @@ export default function CartProduct({ cartProducts }) {
   const addToCart = (cartProduct) => {
     if (localApiCartDataSuccess) {
       const identicalObject = localApiCartData.find(
-        (it) => it.product.id === cartProduct.product.id
+        (it) => it.product.id === cartProduct.product.id,
       );
       const finalQuantity = identicalObject.quantity + 1;
       const params = { id: cartProduct.product.id, quantity: finalQuantity };
@@ -31,7 +33,7 @@ export default function CartProduct({ cartProducts }) {
   const minusProduct = (cartProduct) => {
     if (localApiCartDataSuccess) {
       const identicalObject = localApiCartData.find(
-        (it) => it.product.id === cartProduct.product.id
+        (it) => it.product.id === cartProduct.product.id,
       );
       const finalQuantity =
         identicalObject.quantity > 1 ? identicalObject.quantity - 1 : 1;
@@ -41,7 +43,7 @@ export default function CartProduct({ cartProducts }) {
   };
 
   return (
-    <>
+    <div>
       {cartProducts?.map((element) => (
         <div key={element.product.id} className={css.product}>
           <div className={css.productInfo}>
@@ -57,7 +59,7 @@ export default function CartProduct({ cartProducts }) {
                 <AiOutlineMinus
                   className={cx(
                     css.minusBtn,
-                    element.quantity <= 1 && css.stopMinusBtn
+                    element.quantity <= 1 && css.stopMinusBtn,
                   )}
                   onClick={() => {
                     minusProduct(element);
@@ -96,6 +98,6 @@ export default function CartProduct({ cartProducts }) {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }

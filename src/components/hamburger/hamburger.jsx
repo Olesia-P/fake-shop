@@ -1,10 +1,9 @@
-import css from "./hamburger.module.scss";
-import { TiThMenu } from "react-icons/ti";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { changeIsMobileMenuOpen } from "../../store/modules/openingsSlice";
-import { useRef } from "react";
-import useClickOutsideClose from "../../hooks/useClickOutsideClose";
+import { TiThMenu } from 'react-icons/ti';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRef, React } from 'react';
+import { changeIsMobileMenuOpen } from '../../store/modules/openingsSlice';
+import useClickOutsideClose from '../../hooks/useClickOutsideClose';
+import css from './hamburger.module.scss';
 
 export default function Hamburger() {
   const dispatch = useDispatch();
@@ -18,7 +17,7 @@ export default function Hamburger() {
   useClickOutsideClose(
     mobileMenuRef,
     changeMobileWithDispatch,
-    isMobileMenuOpen
+    isMobileMenuOpen,
   );
 
   return (

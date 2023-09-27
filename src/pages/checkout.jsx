@@ -1,23 +1,24 @@
-import Button from "../components/button/button";
-import { useEffect, useState } from "react";
-import css from "../styles/pageStyles/checkout.module.scss";
-import CheckoutInput from "../components/checkoutInput/checkoutInput";
+/* eslint-disable no-useless-escape */
+import { useEffect, useState, React } from 'react';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import css from '../styles/pageStyles/checkout.module.scss';
+import CheckoutInput from '../components/checkoutInput/checkoutInput';
 import {
   useGetCartQuery,
   usePostOrderMutation,
-} from "../store/modules/localApiSlice";
-import { countProductsQuantity, countOrderCost } from "../utils/functions";
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+} from '../store/modules/localApiSlice';
+import { countProductsQuantity, countOrderCost } from '../utils/functions';
+import Button from '../components/button/button';
 
 export default function Checkout() {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastname: "",
-    email: "",
-    deliveryAddress: "",
-    phoneNumber: "",
-    comment: "",
+    firstName: '',
+    lastname: '',
+    email: '',
+    deliveryAddress: '',
+    phoneNumber: '',
+    comment: '',
   });
   const { data: localApiCartData } = useGetCartQuery();
   const { catalogFilters } = useSelector(({ catalog }) => catalog);
@@ -37,54 +38,54 @@ export default function Checkout() {
 
   const formFields = [
     {
-      label: "First name*",
-      type: "text",
+      label: 'First name*',
+      type: 'text',
       state: formData.firstName,
-      name: "firstName",
+      name: 'firstName',
       required: true,
-      errorMessage: "Use letters, hyphens, spaces and dots only.",
+      errorMessage: 'Use letters, hyphens, spaces and dots only.',
       pattern: `${namePattern.source}`,
     },
     {
-      label: "Last name*",
-      type: "text",
+      label: 'Last name*',
+      type: 'text',
       state: formData.lastname,
-      name: "lastname",
+      name: 'lastname',
       required: true,
-      errorMessage: "Use letters, hyphens, spaces and dots only.",
+      errorMessage: 'Use letters, hyphens, spaces and dots only.',
       pattern: `${namePattern.source}`,
     },
     {
-      label: "Email*",
-      type: "text",
+      label: 'Email*',
+      type: 'text',
       state: formData.email,
-      name: "email",
+      name: 'email',
       required: true,
-      errorMessage: "Use a valid email.",
+      errorMessage: 'Use a valid email.',
       pattern: `${emailPattern.source}`,
     },
     {
-      label: "Delivery address*",
-      type: "text",
+      label: 'Delivery address*',
+      type: 'text',
       state: formData.deliveryAddress,
-      name: "deliveryAddress",
+      name: 'deliveryAddress',
       required: true,
-      errorMessage: "This field is required.",
+      errorMessage: 'This field is required.',
     },
     {
-      label: "Phone number*",
-      type: "text",
+      label: 'Phone number*',
+      type: 'text',
       state: formData.phoneNumber,
-      name: "phoneNumber",
+      name: 'phoneNumber',
       required: true,
-      errorMessage: "Use a valid phone number.",
+      errorMessage: 'Use a valid phone number.',
       pattern: `${numberPattern.source}`,
     },
     {
-      label: "Comment",
-      type: "text",
+      label: 'Comment',
+      type: 'text',
       state: formData.comment,
-      name: "comment",
+      name: 'comment',
       required: false,
     },
   ];
@@ -109,7 +110,7 @@ export default function Checkout() {
   }, []);
 
   useEffect(() => {
-    isSuccess && router.push("/finishedOrder");
+    isSuccess && router.push('/finishedOrder');
   }, [isSuccess]);
 
   return (
@@ -166,11 +167,11 @@ export default function Checkout() {
           <Button
             isFetching={isLoading}
             isDisabled={isLoading}
-            width={"widthL"}
-            type={"submit"}
+            width="widthL"
+            type="submit"
             onClick={null}
-            text={"Submit order"}
-            fontSize={"fontHeader"}
+            text="Submit order"
+            fontSize="fontHeader"
           />
         </div>
       </form>

@@ -1,16 +1,16 @@
-import { useSelector } from "react-redux";
-import css from "../styles/pageStyles/finishedOrder.module.scss";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import Button from "../components/button/button";
+import { useEffect, React } from 'react';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import Button from '../components/button/button';
+import css from '../styles/pageStyles/finishedOrder.module.scss';
 
 export default function FinishedOrder() {
-  const { lastOrderId } = useSelector(({ lastOrderId }) => lastOrderId);
+  const { lastOrderId } = useSelector(({ mixedPurpose }) => mixedPurpose);
   const router = useRouter();
 
   useEffect(() => {
-    if (lastOrderId === "") {
-      router.push("/catalog");
+    if (lastOrderId === '') {
+      router.push('/catalog');
     }
   }, []);
   return (
@@ -24,13 +24,13 @@ export default function FinishedOrder() {
         </div>
         <div className={css.btn}>
           <Button
-            width={"widthL"}
-            type={"submit"}
+            width="widthL"
+            type="submit"
             onClick={() => {
-              router.push("/catalog");
+              router.push('/catalog');
             }}
-            text={"Back to shopping"}
-            fontSize={"fontP"}
+            text="Back to shopping"
+            fontSize="fontP"
           />
         </div>
       </div>

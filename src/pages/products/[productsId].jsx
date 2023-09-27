@@ -1,12 +1,13 @@
-import { useRouter } from "next/router";
-import css from "./productsId.module.scss";
-import { PiArrowBendUpLeft } from "react-icons/pi";
-import { useGetOneProductQuery } from "../../store/modules/apiSlice";
+import React from 'react';
+import { useRouter } from 'next/router';
+import { PiArrowBendUpLeft } from 'react-icons/pi';
+import { useGetOneProductQuery } from '../../store/modules/apiSlice';
 import {
   usePostCartMutation,
   useGetCartQuery,
-} from "../../store/modules/localApiSlice";
-import Button from "../../components/button/button";
+} from '../../store/modules/localApiSlice';
+import Button from '../../components/button/button';
+import css from './productsId.module.scss';
 
 export default function ProductsId() {
   const router = useRouter();
@@ -21,7 +22,7 @@ export default function ProductsId() {
   const addToCart = (product) => {
     if (localApiCartDataSuccess) {
       const identicalObject = localApiCartData.find(
-        (it) => it.product.id === product.id
+        (it) => it.product.id === product.id,
       );
       const finalQuantity =
         product.id === identicalObject?.product.id
@@ -36,7 +37,7 @@ export default function ProductsId() {
     <div className={css.container}>
       <div className={css.card}>
         <div
-          onClick={() => router.push(`/catalog`)}
+          onClick={() => router.push('/catalog')}
           className={css.backBtnWrap}
         >
           <div className={css.backBtn}>
@@ -56,9 +57,9 @@ export default function ProductsId() {
               <div className={css.btnWrap}>
                 <Button
                   onClick={() => addToCart(productData)}
-                  width={"widthM"}
-                  fontSize={"fontP"}
-                  text={"Add to cart"}
+                  width="widthM"
+                  fontSize="fontP"
+                  text="Add to cart"
                 />
               </div>
             </div>

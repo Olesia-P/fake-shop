@@ -1,7 +1,8 @@
-import "../styles/globals.scss";
-import Layout from "../components/layout/layout";
-import { Provider } from "react-redux";
-import { store } from "../store/index";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from '../store/index';
+import Layout from '../components/layout/layout';
+import '../styles/globals.scss';
 
 function MyApp({ Component, pageProps }) {
   return (
