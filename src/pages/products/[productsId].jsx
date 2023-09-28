@@ -1,11 +1,11 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { PiArrowBendUpLeft } from 'react-icons/pi';
-import { useGetOneProductQuery } from '../../store/modules/apiSlice';
+import { useGetOneProductQuery } from '../../store/modules/api-slice';
 import {
   usePostCartMutation,
   useGetCartQuery,
-} from '../../store/modules/localApiSlice';
+} from '../../store/modules/local-api-slice';
 import Button from '../../components/button/button';
 import css from './productsId.module.scss';
 

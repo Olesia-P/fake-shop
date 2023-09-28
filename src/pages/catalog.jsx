@@ -7,13 +7,13 @@ import {
   // changeCatalogFiltersAlph,
   // changeCatalogFiltersLimit,
   changeCatalogFilters,
-} from '../store/modules/catalogSlice';
+} from '../store/modules/catalog-slice';
 import {
   useGetCategoriesQuery,
   useGetProductsQuery,
-} from '../store/modules/apiSlice';
+} from '../store/modules/api-slice';
 import css from '../styles/pageStyles/catalog.module.scss';
-import DropdownFilter from '../components/dropdownFilter/dropdownFilter';
+import DropdownFilter from '../components/dropdown-filter/dropdown-filter';
 import Products from '../components/products/products';
 import { capitalizeFirstLetter } from '../utils/functions';
 

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { changeLastOrderId } from './mixedPurposeSlice';
+import { changeLastOrderId } from './mixed-purpose-slice';
 
 export const localFakeShopApi = createApi({
   reducerPath: 'localFakeShopApi',

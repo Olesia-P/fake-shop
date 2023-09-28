@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IoIosBasket } from 'react-icons/io';
 import cx from 'classnames';
 import css from './cart.module.scss';
-import { changeIsCartOpen } from '../../store/modules/openingsSlice';
-import CartProduct from './cartProduct/cartProduct';
-import CountOrder from './countOrder/сountOrder';
-import { useGetCartQuery } from '../../store/modules/localApiSlice';
-import useClickOutsideClose from '../../hooks/useClickOutsideClose';
+import { changeIsCartOpen } from '../../store/modules/openings-slice';
+import CartProduct from './cart-product/cart-product';
+import CountOrder from './count-order/count-order';
+import { useGetCartQuery } from '../../store/modules/local-api-slice';
+import useClickOutsideClose from '../../hooks/use-click-outside-close';
 
 export default function Cart() {
   const { isCartOpen } = useSelector(({ openings }) => openings);

@@ -1,8 +1,8 @@
 import { TiThMenu } from 'react-icons/ti';
 import { useDispatch, useSelector } from 'react-redux';
 import { React } from 'react';
-import { changeIsMobileMenuOpen } from '../../store/modules/openingsSlice';
-import useClickOutsideClose from '../../hooks/useClickOutsideClose';
+import { changeIsMobileMenuOpen } from '../../store/modules/openings-slice';
+import useClickOutsideClose from '../../hooks/use-click-outside-close';
 import css from './hamburger.module.scss';
 
 export default function Hamburger() {

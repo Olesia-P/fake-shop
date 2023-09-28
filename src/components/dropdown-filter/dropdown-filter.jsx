@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import { useState, React } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
-import css from './dropdownFilter.module.scss';
+import css from './dropdown-filter.module.scss';
 
 export default function DropdownFilter({
   chosenOptionFunction,

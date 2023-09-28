@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import { useState, React } from 'react';
-import css from './checkoutInput.module.scss';
+import css from './checkout-input.module.scss';
 
 export default function CheckoutInput(props) {
   const { onChange, state, errorMessage, label, name, ...inputProps } = props;

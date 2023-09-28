@@ -3,11 +3,11 @@ import { useEffect, useState, React } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import css from '../styles/pageStyles/checkout.module.scss';
-import CheckoutInput from '../components/checkoutInput/checkoutInput';
+import CheckoutInput from '../components/checkout-input/checkout-input';
 import {
   useGetCartQuery,
   usePostOrderMutation,
-} from '../store/modules/localApiSlice';
+} from '../store/modules/local-api-slice';
 import { countProductsQuantity, countOrderCost } from '../utils/functions';
 import Button from '../components/button/button';
 
@@ -110,7 +110,7 @@ export default function Checkout() {
   }, []);
 
   useEffect(() => {
-    isSuccess && router.push('/finishedOrder');
+    isSuccess && router.push('/finished-order');
   }, [isSuccess]);
 
   return (

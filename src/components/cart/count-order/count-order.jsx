@@ -1,10 +1,10 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import css from './countOrder.module.scss';
+import css from './count-order.module.scss';
 import { countOrderCost } from '../../../utils/functions';
-import { useGetCartQuery } from '../../../store/modules/localApiSlice';
-import { changeIsCartOpen } from '../../../store/modules/openingsSlice';
+import { useGetCartQuery } from '../../../store/modules/local-api-slice';
+import { changeIsCartOpen } from '../../../store/modules/openings-slice';
 import Button from '../../button/button';
 
 export default function CountOrder() {

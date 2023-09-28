@@ -5,9 +5,9 @@ import { BiLoaderAlt } from 'react-icons/bi';
 import {
   usePostCartMutation,
   useGetCartQuery,
-} from '../../store/modules/localApiSlice';
+} from '../../store/modules/local-api-slice';
 import Button from '../button/button';
-import { changeIsCartOpen } from '../../store/modules/openingsSlice';
+import { changeIsCartOpen } from '../../store/modules/openings-slice';
 import css from './products.module.scss';
 
 export default function Products({
