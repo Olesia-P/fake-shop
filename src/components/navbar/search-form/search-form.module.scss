@@ -56,6 +56,10 @@
             .searchedItem {
                 padding: 0.5rem;
                 cursor: pointer;
+
+                &:hover {
+                    background-color: $green;
+                }
             }
         }
     }

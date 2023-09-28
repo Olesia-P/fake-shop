@@ -4,8 +4,6 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   changeCatalogCategory,
-  // changeCatalogFiltersAlph,
-  // changeCatalogFiltersLimit,
   changeCatalogFilters,
 } from '../store/modules/catalog-slice';
 import {
@@ -21,6 +19,7 @@ export default function Catalog() {
   const { catalogCategory, catalogFilters } = useSelector(
     ({ catalog }) => catalog,
   );
+  const { searchResults } = useSelector(({ mixedPurpose }) => mixedPurpose);
 
   const params = {
     category: catalogCategory,
@@ -49,24 +48,20 @@ export default function Catalog() {
     // return '';
   };
 
+  const limitFilterChosenOption = () => {
+    return catalogFilters.limit;
+  };
+
   const handleFilterChange = (filterName, value) => {
     dispatch(changeCatalogFilters({ ...catalogFilters, [filterName]: value }));
   };
 
   const alphabetFilterOptionsList = [
     {
-      // name: 'A-Z',
-      // onClickFunction: () => {
-      //   handleFilterChange('alphabet', 'asc');
-      // },
       value: 'asc',
       render: 'A-Z',
     },
     {
-      // name: 'Z-A',
-      // onClickFunction: () => {
-      //   dispatch(changeCatalogFilters('asc', catalogFilters.limit));
-      // },
       value: 'desc',
       render: 'Z-A',
     },
@@ -74,34 +69,18 @@ export default function Catalog() {
 
   const limitFilterOptionsList = [
     {
-      // name: '5',
-      // onClickFunction: () => {
-      //   dispatch(changeCatalogFiltersLimit('5'));
-      // },
       value: '5',
       render: '5',
     },
     {
-      // name: '10',
-      // onClickFunction: () => {
-      //   dispatch(changeCatalogFiltersLimit('10'));
-      // },
       value: '10',
       render: '10',
     },
     {
-      // name: '20',
-      // onClickFunction: () => {
-      //   dispatch(changeCatalogFiltersLimit('20'));
-      // },
       value: '20',
       render: '20',
     },
   ];
-
-  const limitFilterChosenOption = () => {
-    return catalogFilters.limit;
-  };
 
   useEffect(() => {
     if (router.query.category && router.query.category !== '') {
@@ -150,8 +129,10 @@ export default function Catalog() {
                     dispatch(changeCatalogCategory(element.link));
                   }}
                   checked={
-                    decodeURI(catalogCategory) === element.name ||
-                    (catalogCategory === '' && element.name === 'all products')
+                    (decodeURI(catalogCategory) === element.name ||
+                      (catalogCategory === '' &&
+                        element.name === 'all products')) &&
+                    searchResults.length === 0
                   }
                 />
                 {capitalizeFirstLetter(element.name)}
@@ -159,20 +140,24 @@ export default function Catalog() {
             ))}
         </div>
         <div className={css.filters}>
-          <DropdownFilter
-            chosenOptionFunction={alphabetFilterChosenOption}
-            optionsList={alphabetFilterOptionsList}
-            filterTitle="In order"
-            onClick={handleFilterChange}
-            filterName="alphabet"
-          />
-          <DropdownFilter
-            chosenOptionFunction={limitFilterChosenOption}
-            optionsList={limitFilterOptionsList}
-            filterTitle="Limit"
-            onClick={handleFilterChange}
-            filterName="limit"
-          />
+          {searchResults.length === 0 && (
+            <>
+              <DropdownFilter
+                chosenOptionFunction={alphabetFilterChosenOption}
+                optionsList={alphabetFilterOptionsList}
+                filterTitle="In order"
+                onClick={handleFilterChange}
+                filterName="alphabet"
+              />
+              <DropdownFilter
+                chosenOptionFunction={limitFilterChosenOption}
+                optionsList={limitFilterOptionsList}
+                filterTitle="Limit"
+                onClick={handleFilterChange}
+                filterName="limit"
+              />
+            </>
+          )}
         </div>
       </div>
       <div className={css.productsArea}>

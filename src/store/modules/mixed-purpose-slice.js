@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   lastOrderId: '',
+  searchResults: [],
 };
 
 const mixedPurposeSlice = createSlice({
@@ -14,8 +15,15 @@ const mixedPurposeSlice = createSlice({
         lastOrderId: action.payload,
       };
     },
+    changeSearchResults: (state, action) => {
+      return {
+        ...state,
+        searchResults: action.payload,
+      };
+    },
   },
 });
 
 export default mixedPurposeSlice.reducer;
-export const { changeLastOrderId } = mixedPurposeSlice.actions;
+export const { changeLastOrderId, changeSearchResults } =
+  mixedPurposeSlice.actions;

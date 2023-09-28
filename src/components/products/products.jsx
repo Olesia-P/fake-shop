@@ -1,5 +1,5 @@
-import { useState, React } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, React, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { BiLoaderAlt } from 'react-icons/bi';
 import {
@@ -8,6 +8,7 @@ import {
 } from '../../store/modules/local-api-slice';
 import Button from '../button/button';
 import { changeIsCartOpen } from '../../store/modules/openings-slice';
+import { changeSearchResults } from '../../store/modules/mixed-purpose-slice';
 import css from './products.module.scss';
 
 export default function Products({
@@ -19,6 +20,8 @@ export default function Products({
   const [postCart] = usePostCartMutation();
   const [specificProductLoading, setSpecificProductLoading] = useState(null);
   const [buttonDisabled, setButtondisabled] = useState(false);
+  const { searchResults } = useSelector(({ mixedPurpose }) => mixedPurpose);
+  const [productsToRender, setProductsToRender] = useState([]);
 
   const { data: localApiCartData, isSuccess: localApiCartDataSuccess } =
     useGetCartQuery();
@@ -52,10 +55,29 @@ export default function Products({
     }
   };
 
+  const chooseDataForProducts = () => {
+    if (productsDataSuccess && !isFetching) {
+      if (searchResults.length !== 0) {
+        setProductsToRender(searchResults);
+      } else {
+        setProductsToRender(productsData);
+      }
+    }
+  };
+
+  useEffect(() => {
+    chooseDataForProducts();
+    dispatch(changeSearchResults([]));
+  }, [productsData]);
+
+  useEffect(() => {
+    chooseDataForProducts();
+  }, [searchResults]);
+
   return (
     <div className={css.container}>
       {productsDataSuccess && !isFetching ? (
-        productsData.map((element) => (
+        productsToRender.map((element) => (
           <div key={element.id} className={css.productContainer}>
             <div
               className={css.img}
