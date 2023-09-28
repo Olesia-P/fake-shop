@@ -15,30 +15,38 @@ const catalogSlice = createSlice({
         catalogCategory: action.payload,
       };
     },
-    changeCatalogFiltersAlph: (state, action) => {
+    changeCatalogFilters: (state, action) => {
       return {
         ...state,
-        catalogFilters: {
-          ...state.catalogFilters,
-          alphabet: action.payload,
-        },
-      };
-    },
-    changeCatalogFiltersLimit: (state, action) => {
-      return {
-        ...state,
-        catalogFilters: {
-          ...state.catalogFilters,
-          limit: action.payload,
-        },
+        catalogFilters: action.payload,
       };
     },
   },
+
+  // changeCatalogFiltersAlph: (state, action) => {
+  //   return {
+  //     ...state,
+  //     catalogFilters: {
+  //       ...state.catalogFilters,
+  //       alphabet: action.payload,
+  //     },
+  //   };
+  // },
+  // changeCatalogFiltersLimit: (state, action) => {
+  //   return {
+  //     ...state,
+  //     catalogFilters: {
+  //       ...state.catalogFilters,
+  //       limit: action.payload,
+  //     },
+  //   };
+  // },
 });
 
 export default catalogSlice.reducer;
 export const {
   changeCatalogCategory,
-  changeCatalogFiltersAlph,
-  changeCatalogFiltersLimit,
+  // changeCatalogFiltersAlph,
+  // changeCatalogFiltersLimit,
+  changeCatalogFilters,
 } = catalogSlice.actions;

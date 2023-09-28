@@ -1,12 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-export default function useClickOutsideClose(
-  ref,
-  setOpeningState,
-  openingState,
-) {
+export default function useClickOutsideClose(setOpeningState, openingState) {
+  const ref = useRef();
+
   const handleOutsideClick = (event) => {
-    if (ref.current.contains(event.target)) {
+    if (ref.current && ref.current.contains(event.target)) {
       return;
     }
     setOpeningState(false);
@@ -22,4 +20,6 @@ export default function useClickOutsideClose(
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, [openingState]);
+
+  return ref;
 }

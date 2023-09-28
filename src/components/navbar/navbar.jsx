@@ -1,7 +1,8 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unused-expressions */
 import cx from 'classnames';
 import { BiChevronDown } from 'react-icons/bi';
-import { useRef, useState, React } from 'react';
+import { useState, React } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -22,10 +23,7 @@ export default function Header() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const catalogAccordionRef = useRef();
-
-  useClickOutsideClose(
-    catalogAccordionRef,
+  const ref = useClickOutsideClose(
     setIsCatalogAccordeonOpen,
     isCatalogAccordeonOpen,
   );
@@ -48,7 +46,7 @@ export default function Header() {
       <a
         className={cx(css.headerLink)}
         onClick={() => setIsCatalogAccordeonOpen(!isCatalogAccordeonOpen)}
-        ref={catalogAccordionRef}
+        ref={ref}
       >
         <div>Catalog</div>
         <div className={cx(css.chevron, isCatalogAccordeonOpen && css.open)}>
@@ -70,17 +68,14 @@ export default function Header() {
                   dispatch(changeCatalogCategory(element.link));
                   element.link !== ''
                     ? router.push(
-                        `/catalog/?category=${element.link}
-                        &sort=&${catalogFilters.alphabet}
-                        &limit=&${catalogFilters.limit}`,
+                        `/catalog/?category=${element.link}&sort=&${catalogFilters.alphabet}&limit=&${catalogFilters.limit}`,
                         undefined,
                         {
                           shallow: true,
                         },
                       )
                     : router.push(
-                        `/catalog/?sort=${catalogFilters.alphabet}
-                        &limit=&${catalogFilters.limit}`,
+                        `/catalog/?sort=${catalogFilters.alphabet}&limit=&${catalogFilters.limit}`,
                       );
                 }}
               >

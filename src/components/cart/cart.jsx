@@ -1,4 +1,4 @@
-import { useEffect, useRef, React } from 'react';
+import { useEffect, React } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { IoIosBasket } from 'react-icons/io';
@@ -16,7 +16,6 @@ export default function Cart() {
 
   const dispatch = useDispatch();
   const router = useRouter();
-  const cartRef = useRef();
 
   const changeIsCartOpenWithDispatch = (value) => {
     dispatch(changeIsCartOpen(value));
@@ -26,9 +25,9 @@ export default function Cart() {
     if (router.pathname === '/checkout') dispatch(changeIsCartOpen(false));
   }, [isCartOpen]);
 
-  useClickOutsideClose(cartRef, changeIsCartOpenWithDispatch, isCartOpen);
+  const ref = useClickOutsideClose(changeIsCartOpenWithDispatch, isCartOpen);
   return (
-    <div className={css.container} ref={cartRef}>
+    <div className={css.container} ref={ref}>
       <div
         className={css.cartIcon}
         onClick={() => {

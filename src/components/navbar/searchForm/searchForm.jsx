@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, React } from 'react';
+import { useState, useEffect, React } from 'react';
 import { useRouter } from 'next/router';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { useGetProductsQuery } from '../../../store/modules/apiSlice';
@@ -10,9 +10,8 @@ export default function SearchForm() {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearchListOpen, setIsSearchListOpen] = useState(false);
   const router = useRouter();
-  const searchListRef = useRef();
 
-  useClickOutsideClose(searchListRef, setIsSearchListOpen, isSearchListOpen);
+  const ref = useClickOutsideClose(setIsSearchListOpen, isSearchListOpen);
 
   const { data: productsData, isSuccess } = useGetProductsQuery({
     category: '',
@@ -36,7 +35,7 @@ export default function SearchForm() {
   }, [inputData]);
 
   return (
-    <div className={css.searchFrom} ref={searchListRef}>
+    <div className={css.searchFrom} ref={ref}>
       <div className={css.searchWrap}>
         <input
           type="search"

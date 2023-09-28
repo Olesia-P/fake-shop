@@ -6,27 +6,29 @@ import css from './dropdownFilter.module.scss';
 export default function DropdownFilter({
   chosenOptionFunction,
   optionsList,
+  filterTitle,
+  onClick,
   filterName,
 }) {
   const [isFilterOpened, setIsFilterOpened] = useState(false);
 
   return (
     <div className={cx(css.filter, isFilterOpened && css.open)}>
-      <div className={css.filterHeader}>{filterName}:</div>
+      <div className={css.filterHeader}>{filterTitle}:</div>
       <div className={css.options}>
         <div className={css.filterListWrap}>
           <div className={css.filterChosen}>{chosenOptionFunction()}</div>
           <div className={css.filterAccordion}>
             {optionsList.map((element) => (
               <div
-                key={element.name}
+                key={element.value}
                 className={css.filterOption}
                 onClick={() => {
-                  element.onClickFunction();
+                  onClick(filterName, element.value);
                   setIsFilterOpened(false);
                 }}
               >
-                {element.name}
+                {element.render}
               </div>
             ))}
           </div>

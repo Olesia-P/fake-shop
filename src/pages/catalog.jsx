@@ -1,10 +1,12 @@
+/* eslint-disable consistent-return */
 import { useEffect, React } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   changeCatalogCategory,
-  changeCatalogFiltersAlph,
-  changeCatalogFiltersLimit,
+  // changeCatalogFiltersAlph,
+  // changeCatalogFiltersLimit,
+  changeCatalogFilters,
 } from '../store/modules/catalogSlice';
 import {
   useGetCategoriesQuery,
@@ -37,21 +39,6 @@ export default function Catalog() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const alphabetFilterOptionsList = [
-    {
-      name: 'A-Z',
-      onClickFunction: () => {
-        dispatch(changeCatalogFiltersAlph('asc'));
-      },
-    },
-    {
-      name: 'Z-A',
-      onClickFunction: () => {
-        dispatch(changeCatalogFiltersAlph('desc'));
-      },
-    },
-  ];
-
   const alphabetFilterChosenOption = () => {
     if (catalogFilters.alphabet === 'asc') {
       return 'A-Z';
@@ -59,27 +46,56 @@ export default function Catalog() {
     if (catalogFilters.alphabet === 'desc') {
       return 'Z-A';
     }
-    return '';
+    // return '';
   };
+
+  const handleFilterChange = (filterName, value) => {
+    dispatch(changeCatalogFilters({ ...catalogFilters, [filterName]: value }));
+  };
+
+  const alphabetFilterOptionsList = [
+    {
+      // name: 'A-Z',
+      // onClickFunction: () => {
+      //   handleFilterChange('alphabet', 'asc');
+      // },
+      value: 'asc',
+      render: 'A-Z',
+    },
+    {
+      // name: 'Z-A',
+      // onClickFunction: () => {
+      //   dispatch(changeCatalogFilters('asc', catalogFilters.limit));
+      // },
+      value: 'desc',
+      render: 'Z-A',
+    },
+  ];
 
   const limitFilterOptionsList = [
     {
-      name: '5',
-      onClickFunction: () => {
-        dispatch(changeCatalogFiltersLimit('5'));
-      },
+      // name: '5',
+      // onClickFunction: () => {
+      //   dispatch(changeCatalogFiltersLimit('5'));
+      // },
+      value: '5',
+      render: '5',
     },
     {
-      name: '10',
-      onClickFunction: () => {
-        dispatch(changeCatalogFiltersLimit('10'));
-      },
+      // name: '10',
+      // onClickFunction: () => {
+      //   dispatch(changeCatalogFiltersLimit('10'));
+      // },
+      value: '10',
+      render: '10',
     },
     {
-      name: '20',
-      onClickFunction: () => {
-        dispatch(changeCatalogFiltersLimit('20'));
-      },
+      // name: '20',
+      // onClickFunction: () => {
+      //   dispatch(changeCatalogFiltersLimit('20'));
+      // },
+      value: '20',
+      render: '20',
     },
   ];
 
@@ -92,10 +108,10 @@ export default function Catalog() {
       dispatch(changeCatalogCategory(router.query.category));
     }
     if (router.query.sort) {
-      dispatch(changeCatalogFiltersAlph(router.query.sort));
+      handleFilterChange('alphabet', router.query.sort);
     }
     if (router.query.limit) {
-      dispatch(changeCatalogFiltersLimit(router.query.limit));
+      handleFilterChange('limit', router.query.limit);
     }
   }, [router.isReady]);
 
@@ -146,12 +162,16 @@ export default function Catalog() {
           <DropdownFilter
             chosenOptionFunction={alphabetFilterChosenOption}
             optionsList={alphabetFilterOptionsList}
-            filterName="In order"
+            filterTitle="In order"
+            onClick={handleFilterChange}
+            filterName="alphabet"
           />
           <DropdownFilter
             chosenOptionFunction={limitFilterChosenOption}
             optionsList={limitFilterOptionsList}
-            filterName="Limit"
+            filterTitle="Limit"
+            onClick={handleFilterChange}
+            filterName="limit"
           />
         </div>
       </div>
