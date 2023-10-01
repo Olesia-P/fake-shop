@@ -14,6 +14,7 @@ import css from '../styles/pageStyles/catalog.module.scss';
 import DropdownFilter from '../components/dropdown-filter/dropdown-filter';
 import Products from '../components/products/products';
 import { capitalizeFirstLetter } from '../utils/functions';
+import SearchForm from '../components/search-form/search-form';
 
 export default function Catalog() {
   const { catalogCategory, catalogFilters } = useSelector(
@@ -114,6 +115,7 @@ export default function Catalog() {
   return (
     <div className={css.container}>
       <div className={css.sideMenu}>
+        <SearchForm />
         <div className={css.list}>
           {categoriesSuccess &&
             categories.map((element) => (

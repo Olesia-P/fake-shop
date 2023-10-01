@@ -9,7 +9,7 @@ export default function Footer() {
         <div className={css.iconWrap}>
           <AiFillGithub />
         </div>
-        Project source code
+        Source code - Git repository
       </a>
     </footer>
   );

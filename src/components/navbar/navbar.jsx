@@ -10,7 +10,6 @@ import { useGetCategoriesQuery } from '../../store/modules/api-slice';
 import { changeCatalogCategory } from '../../store/modules/catalog-slice';
 import useClickOutsideClose from '../../hooks/use-click-outside-close';
 import css from './navbar.module.scss';
-import SearchForm from './search-form/search-form';
 import Cart from '../cart/cart';
 import Hamburger from '../hamburger/hamburger';
 import { capitalizeFirstLetter } from '../../utils/functions';
@@ -89,7 +88,7 @@ export default function Header() {
           <div>Contacts</div>
         </a>
       </Link>
-      <SearchForm />
+
       <Cart />
     </div>
   );

@@ -2,10 +2,10 @@ import { useState, useEffect, React } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { BiSearchAlt2 } from 'react-icons/bi';
-import { useGetProductsQuery } from '../../../store/modules/api-slice';
-import useClickOutsideClose from '../../../hooks/use-click-outside-close';
+import { useGetProductsQuery } from '../../store/modules/api-slice';
+import useClickOutsideClose from '../../hooks/use-click-outside-close';
 import css from './search-form.module.scss';
-import { changeSearchResults } from '../../../store/modules/mixed-purpose-slice';
+import { changeSearchResults } from '../../store/modules/mixed-purpose-slice';
 
 export default function SearchForm() {
   const [inputData, setInputData] = useState('');
@@ -77,7 +77,10 @@ export default function SearchForm() {
             ))}
         </div>
       </div>
-      <div className={css.searchIcon}>
+      <div
+        className={css.searchIcon}
+        onClick={() => dispatch(changeSearchResults(temporarySearchResults))}
+      >
         <BiSearchAlt2 />
       </div>
     </div>

@@ -1,18 +1,19 @@
-@import "../../../styles/main.scss";
+@import "../../styles/main.scss";
 
 .searchFrom {
     @include dfc;
     height: 2rem;
     width: 100%;
-    max-width: 60%;
-    margin-left: 1.5rem;
     z-index: 2;
+    margin-bottom: 1rem;
+    position: relative;
 
     .searchIcon {
         border-bottom: 2px solid black;
         height: 100%;
         padding: 0 0.5rem;
         border-bottom-right-radius: $standart-b-radius;
+        cursor: pointer;
 
         svg {
             height: 1.3rem;
@@ -41,17 +42,16 @@
 
         .searchedList {
             position: absolute;
-            width: 100%;
+            width: 120%;
+            max-height: 70vh;
             top: 2rem;
             left: 0;
             font-size: $size-p;
             background-color: $white;
             font-weight: 600;
             box-shadow: $main-shadow;
-
-            &.none {
-                display: none;
-            }
+            overflow-y: scroll;
+            overflow-x: hidden;
 
             .searchedItem {
                 padding: 0.5rem;

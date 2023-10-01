@@ -56,25 +56,6 @@ export default function Products({
     }
   };
 
-  // if (productsError) {
-  //   if (productsError.status.startsWith('5')) {
-  //     <>
-  //       <div className={css.errorMessage}>{productsError.message}</div>
-  //       <div className={css.errorMessage}>
-  //         I am using an external api for this project
-  //         (https://fakestoreapi.com/docs). Unforunately it stops working from
-  //         time to time and returns Internal Server Error instead of data.
-  //       </div>
-  //       <div className={css.errorMessage}>
-  //         There is nothing I can do about it, as the project is already built
-  //         with this api, but the api usually resumes working after a few minutes
-  //       </div>
-  //     </>;
-  //   } else {
-  //     <div>Error: {productsError.message}</div>;
-  //   }
-  // }
-
   const chooseDataForProducts = () => {
     if (productsDataSuccess && !isFetching) {
       if (searchResults.length !== 0) {

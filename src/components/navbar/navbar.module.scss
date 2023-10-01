@@ -3,7 +3,7 @@
 .container {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    // justify-content: space-around;
     height: 4rem;
     font-size: $size-header;
     box-shadow: $main-shadow;
@@ -34,7 +34,7 @@
     }
 
     .headerLink {
-        margin-left: 1rem;
+        margin-left: 2.5rem;
         border-radius: $standart-b-radius;
         padding: 0.5rem;
         text-decoration: none;
