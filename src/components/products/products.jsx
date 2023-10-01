@@ -15,6 +15,7 @@ export default function Products({
   productsData,
   isFetching,
   productsDataSuccess,
+  productsError,
 }) {
   const router = useRouter();
   const [postCart] = usePostCartMutation();
@@ -54,6 +55,25 @@ export default function Products({
       }
     }
   };
+
+  // if (productsError) {
+  //   if (productsError.status.startsWith('5')) {
+  //     <>
+  //       <div className={css.errorMessage}>{productsError.message}</div>
+  //       <div className={css.errorMessage}>
+  //         I am using an external api for this project
+  //         (https://fakestoreapi.com/docs). Unforunately it stops working from
+  //         time to time and returns Internal Server Error instead of data.
+  //       </div>
+  //       <div className={css.errorMessage}>
+  //         There is nothing I can do about it, as the project is already built
+  //         with this api, but the api usually resumes working after a few minutes
+  //       </div>
+  //     </>;
+  //   } else {
+  //     <div>Error: {productsError.message}</div>;
+  //   }
+  // }
 
   const chooseDataForProducts = () => {
     if (productsDataSuccess && !isFetching) {
@@ -120,9 +140,38 @@ export default function Products({
         ))
       ) : (
         <div>
-          {isFetching && <BiLoaderAlt className={css.loadingGlobal} />}
-          <div className={css.loadingCaption}>Loading...</div>
+          {isFetching && !productsError && (
+            <>
+              <BiLoaderAlt className={css.loadingGlobal} />
+              <div className={css.loadingCaption}>Loading...</div>
+            </>
+          )}
         </div>
+      )}
+      {productsError &&
+      productsError.originalStatus.toString().startsWith('5') ? (
+        <div className={css.errorWrap}>
+          <div className={css.errorMessage}>Error: {productsError.error}</div>
+          <div className={css.errorMessageSpecial}>
+            I am using an external api for this project
+            (https://fakestoreapi.com/docs). Unforunately it stops working from
+            time to time and returns Internal Server Error instead of data.
+          </div>
+          <div className={css.errorMessageSpecial}>
+            The api usually resumes work after a few minutes.
+          </div>
+          <div className={css.errorMessageSpecial}>
+            I got to know about this behaviour only after the project had
+            already been built, so at the moment there is not much I can do
+            about it.
+          </div>
+        </div>
+      ) : (
+        productsError && (
+          <div className={css.errorWrap}>
+            <div className={css.errorMessage}>Error: {productsError.error}</div>
+          </div>
+        )
       )}
     </div>
   );

@@ -33,6 +33,7 @@ export default function Catalog() {
     data: productsData,
     isSuccess: productsDataSuccess,
     isFetching,
+    error: productsError,
   } = useGetProductsQuery(params);
 
   const dispatch = useDispatch();
@@ -165,6 +166,7 @@ export default function Catalog() {
           productsData={productsData}
           isFetching={isFetching}
           productsDataSuccess={productsDataSuccess}
+          productsError={productsError}
         />
       </div>
     </div>

@@ -58,7 +58,27 @@
         font-size: 30pt;
         margin-left: 125%;
     }
+
+    .errorWrap {
+        margin: 5rem;
+
+        .errorMessage {
+            font-size: 24pt;
+            font-weight: bold;
+            text-align: center;
+            color: rgb(162, 30, 30);
+        }
+
+        .errorMessageSpecial {
+            font-size: 24pt;
+            font-weight: bold;
+            text-align: center;
+            background-color: $grey;
+            padding: 1rem;
+        }
+    }
 }
+
 
 @keyframes spin-clockwise {
     0% {
