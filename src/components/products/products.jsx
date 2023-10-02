@@ -134,17 +134,17 @@ export default function Products({
         <div className={css.errorWrap}>
           <div className={css.errorMessage}>Error: {productsError.error}</div>
           <div className={css.errorMessageSpecial}>
-            I am using an external api for this project
-            (https://fakestoreapi.com/docs). Unforunately it stops working from
+            I am using a free external api for this project
+            (https://fakestoreapi.com/docs). Unfortunately it stops working from
             time to time and returns Internal Server Error instead of data.
           </div>
           <div className={css.errorMessageSpecial}>
             The api usually resumes work after a few minutes.
           </div>
           <div className={css.errorMessageSpecial}>
-            I got to know about this behaviour only after the project had
-            already been built, so at the moment there is not much I can do
-            about it.
+            I learned about its instability in a hard way, but hey, at least I
+            learned how to handle the errors :) (and how relying on free API
+            comes back at you)
           </div>
         </div>
       ) : (
