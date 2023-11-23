@@ -1,6 +1,54 @@
 @import "../main.scss";
 
-.container {
+.wrapper {
     padding-top: 6rem;
-    height: 30rem;
+    font-family: $main-font;
+
+    .header {
+        font-size: $size-huge;
+        font-weight: 600;
+        padding: 0.3rem 1rem;
+        margin: 0 auto 2rem auto;
+        width: 24rem;
+        max-width: 90%;
+        background-color: $grey;
+        box-shadow: $main-shadow;
+        border-radius: $standart-b-radius;
+        background-image: url(/cloth.jpg);
+        border: 2px solid $grey;
+    }
+
+    .container {
+        padding: 2rem;
+        width: 70%;
+        margin: 0 auto 2rem auto;
+        background-color: white;
+        border-radius: $standart-b-radius;
+        border: 2px dashed black;
+        box-shadow: $main-shadow;
+
+        .title {
+            font-size: $size-header;
+            color: $red;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .list {
+            margin: 0;
+            font-size: $size-p;
+        }
+    }
+}
+
+@include tablet {
+    .wrapper {
+        .container {
+            width: 90%;
+
+            .list {
+                padding-left: 0.5rem;
+            }
+        }
+    }
 }
