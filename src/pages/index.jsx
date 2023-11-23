@@ -18,6 +18,8 @@ export default function Home() {
     'Implementing a simple search engine;',
     'Creating and managing URL hierarchy using React Router;',
     'Building input forms with thorough validation; ',
+    'Configuring ESlint ruleset; ',
+    'Implementing ‘Husky’ pre-commit check.',
   ];
   return (
     <div className={css.wrapper}>

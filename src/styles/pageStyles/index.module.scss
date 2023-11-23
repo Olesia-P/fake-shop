@@ -15,7 +15,7 @@
         box-shadow: $main-shadow;
         border-radius: $standart-b-radius;
         background-image: url(/cloth.jpg);
-        border: 2px solid $grey;
+        border: 2px solid $asphalt;
     }
 
     .container {
@@ -26,6 +26,10 @@
         border-radius: $standart-b-radius;
         border: 2px dashed black;
         box-shadow: $main-shadow;
+
+        .text {
+            font-size: $size-p;
+        }
 
         .title {
             font-size: $size-header;
