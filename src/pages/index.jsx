@@ -2,28 +2,9 @@ import React from 'react';
 import css from '../styles/pageStyles/index.module.scss';
 
 export default function Home() {
-  const features = [
-    'Navigate the catalog using filters (category, name, limit) or type the product’s name in the “search” field;',
-    'Click on a product to read the full description;',
-    'Add products to the cart. In the cart you can delete them, increase or decrease the amount (the final cost will be calculated accordingly);',
-    'Click “Go to checkout”, fill in the delivery information and submit the order;',
-    'The project has responsive layout (available for devices ranging from smartphones to large desktop screens);',
-    'All UI components are custom-made.',
-  ];
-
-  const learned = [
-    'Comprehensive processing of external API data;',
-    'Building a small local Next.js API;',
-    'Using Redux Toolkit for queries and data management;',
-    'Implementing a simple search engine;',
-    'Creating and managing URL hierarchy using React Router;',
-    'Building input forms with thorough validation; ',
-    'Configuring ESlint ruleset; ',
-    'Implementing ‘Husky’ pre-commit check.',
-  ];
   return (
     <div className={css.wrapper}>
-      <div className={css.header}>Pet project: Fake-shop</div>
+      <div className={css.header}>Pet project: Fake Shop</div>
 
       <div className={css.container}>
         <div className={css.title}>Description</div>
@@ -46,22 +27,71 @@ export default function Home() {
       <div className={css.container}>
         <div className={css.title}>Features</div>
         <ul className={css.list}>
-          {features.map((element) => (
-            <li className={css.listItem} key={element}>
-              {element}
-            </li>
-          ))}
+          <li className={css.listItem}>
+            <strong> Navigate the catalog</strong> using{' '}
+            <strong>filters</strong> (category, name, limit) or type the
+            product’s name in the <strong>“search” field</strong>;
+          </li>
+          <li className={css.listItem}>
+            Click on a product to read the <strong>full description</strong>;
+          </li>
+          <li className={css.listItem}>
+            <strong>Add products</strong> to the <strong>cart</strong>. In the
+            cart you can{' '}
+            <strong>delete them, increase or decrease the amount</strong> (the
+            final <strong>cost will be calculated</strong> accordingly);
+          </li>
+          <li className={css.listItem}>
+            Click “Go to checkout”,{' '}
+            <strong>fill in the delivery information</strong> and{' '}
+            <strong>submit the order</strong>;
+          </li>
+          <li className={css.listItem}>
+            The project has <strong>responsive layout</strong> (available for
+            devices ranging from <strong>smartphones to large desktop</strong>{' '}
+            screens);
+          </li>
+          <li className={css.listItem}>
+            All <strong>UI</strong> components are <strong>custom-made</strong>.
+          </li>
         </ul>
       </div>
 
       <div className={css.container}>
         <div className={css.title}>What did I learn?</div>
         <ul className={css.list}>
-          {learned.map((element) => (
-            <li className={css.listItem} key={element}>
-              {element}
-            </li>
-          ))}
+          <li className={css.listItem}>
+            <strong>Comprehensive</strong> processing of{' '}
+            <strong>external API data</strong>;
+          </li>
+          <li className={css.listItem}>
+            Building a small <strong>local Next.js API</strong>;
+          </li>
+          <li className={css.listItem}>
+            Using <strong>Redux Toolkit</strong> for <strong>queries</strong>{' '}
+            and <strong>data management</strong>;
+          </li>
+          <li className={css.listItem}>
+            Implementing a simple <strong>search engine</strong>;
+          </li>
+          <li className={css.listItem}>
+            Creating and managing{' '}
+            <strong>URL hierarchy using Next Router</strong>;
+          </li>
+          <li className={css.listItem}>
+            Implementing <strong>query-based catalog filtering</strong>;
+          </li>
+          <li className={css.listItem}>
+            Building <strong>input forms</strong> with thorough{' '}
+            <strong>validation</strong>;
+          </li>
+          <li className={css.listItem}>
+            {' '}
+            Configuring <strong>ESlint ruleset</strong>;
+          </li>
+          <li className={css.listItem}>
+            Implementing <strong>‘Husky’ pre-commit check</strong>.
+          </li>
         </ul>
       </div>
     </div>
