@@ -1,14 +1,16 @@
 import React from 'react';
+import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { store } from '../store/index';
 import Layout from '../components/layout/layout';
 import '../styles/globals.scss';
-import IndexPage from '../components/layout/head/head';
 
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <IndexPage />
+      <Head>
+        <title>Fake Shop</title>
+      </Head>
       <Layout>
         <Component {...pageProps} />
       </Layout>
