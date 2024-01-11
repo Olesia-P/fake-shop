@@ -1,57 +1,40 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import cx from 'classnames';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { MdDelete } from 'react-icons/md';
 import css from './cart-product.module.scss';
-
 import {
-  usePostCartMutation,
-  useGetCartQuery,
-  useDeleteProductMutation,
+  useAddProductToCartOrCreateCartMutation,
+  useDeleteProductOrAllProductsInCartMutation,
+  useDecreaseProductQuantityMutation,
 } from '../../../store/modules/local-api-slice';
 
 export default function CartProduct({ cartProducts }) {
   const router = useRouter();
-  const [postCart] = usePostCartMutation();
-  const [deleteProduct] = useDeleteProductMutation();
+  const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
 
-  const { data: localApiCartData, isSuccess: localApiCartDataSuccess } =
-    useGetCartQuery();
+  // console.log('cartProducts', cartProducts);
 
-  const addToCart = (cartProduct) => {
-    if (localApiCartDataSuccess) {
-      const identicalObject = localApiCartData.find(
-        (it) => it.product.id === cartProduct.product.id,
-      );
-      const finalQuantity = identicalObject.quantity + 1;
-      const params = { id: cartProduct.product.id, quantity: finalQuantity };
-      postCart(params);
-    }
-  };
+  const [addProductToCartOrCreateCart] =
+    useAddProductToCartOrCreateCartMutation();
 
-  const minusProduct = (cartProduct) => {
-    if (localApiCartDataSuccess) {
-      const identicalObject = localApiCartData.find(
-        (it) => it.product.id === cartProduct.product.id,
-      );
-      const finalQuantity =
-        identicalObject.quantity > 1 ? identicalObject.quantity - 1 : 1;
-      const params = { id: cartProduct.product.id, quantity: finalQuantity };
-      postCart(params);
-    }
-  };
+  const [deleteProductOrAllProductsInCart] =
+    useDeleteProductOrAllProductsInCartMutation();
+
+  const [decreaseProductQuantity] = useDecreaseProductQuantityMutation();
 
   return (
     <div>
       {cartProducts?.map((element) => (
-        <div key={element.product.id} className={css.product}>
+        <div key={element.info.id} className={css.product}>
           <div className={css.productInfo}>
             <div
               className={css.title}
-              onClick={() => router.push(`/products/${element.product.id}`)}
+              onClick={() => router.push(`/products/${element.info.id}`)}
             >
-              {element.product.title}
+              {element.info.title}
             </div>
 
             <div className={css.counterContainer}>
@@ -62,7 +45,10 @@ export default function CartProduct({ cartProducts }) {
                     element.quantity <= 1 && css.stopMinusBtn,
                   )}
                   onClick={() => {
-                    minusProduct(element);
+                    decreaseProductQuantity({
+                      userId,
+                      itemId: element.info.id,
+                    });
                   }}
                 />
               </div>
@@ -71,26 +57,32 @@ export default function CartProduct({ cartProducts }) {
                 <AiOutlinePlus
                   className={css.plusBtn}
                   onClick={() => {
-                    addToCart(element);
+                    addProductToCartOrCreateCart({
+                      userId,
+                      item: element,
+                    });
                   }}
                 />
               </div>
             </div>
             <div className={css.price}>
-              {element.product.price * element.quantity}$
+              {element.info.price * element.quantity}$
             </div>
           </div>
           <div className={css.rightSection}>
             <div
               className={css.img}
-              onClick={() => router.push(`/products/${element.product.id}`)}
+              onClick={() => router.push(`/products/${element.info.id}`)}
             >
-              <img src={element.product.image} alt={element.product.title} />
+              <img src={element.info.image} alt={element.info.title} />
             </div>
             <div
               className={css.deleteIcon}
               onClick={() => {
-                deleteProduct(element.product.id);
+                deleteProductOrAllProductsInCart({
+                  userId,
+                  itemId: element.info.id,
+                });
               }}
             >
               <MdDelete />

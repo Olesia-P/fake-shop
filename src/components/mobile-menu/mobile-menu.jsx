@@ -27,6 +27,11 @@ export default function MobileMenu() {
           <div>Contacts</div>
         </a>
       </Link>
+      <Link href="/orders">
+        <a className={css.headerLink}>
+          <div>Orders</div>
+        </a>
+      </Link>
     </div>
   );
 }

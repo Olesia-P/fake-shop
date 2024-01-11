@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   lastOrderId: '',
   searchResults: [],
+  userId: null,
 };
 
 const mixedPurposeSlice = createSlice({
@@ -21,9 +22,15 @@ const mixedPurposeSlice = createSlice({
         searchResults: action.payload,
       };
     },
+    changeUserId: (state, action) => {
+      return {
+        ...state,
+        userId: action.payload,
+      };
+    },
   },
 });
 
 export default mixedPurposeSlice.reducer;
-export const { changeLastOrderId, changeSearchResults } =
+export const { changeLastOrderId, changeSearchResults, changeUserId } =
   mixedPurposeSlice.actions;

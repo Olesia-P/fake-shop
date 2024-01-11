@@ -5,30 +5,38 @@ import { useSelector } from 'react-redux';
 import css from '../styles/pageStyles/checkout.module.scss';
 import CheckoutInput from '../components/checkout-input/checkout-input';
 import {
-  useGetCartQuery,
-  usePostOrderMutation,
+  useGetSpecificCartQuery,
+  useAddOrderMutation,
+  useDeleteProductOrAllProductsInCartMutation,
 } from '../store/modules/local-api-slice';
 import { countProductsQuantity, countOrderCost } from '../utils/functions';
 import Button from '../components/button/button';
 
 export default function Checkout() {
+  const { catalogFilters } = useSelector(({ catalog }) => catalog);
+  const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
+
+  const { data: cartData } = useGetSpecificCartQuery(userId);
+  const [addOrder, { isSuccess, isLoading }] = useAddOrderMutation();
+  const [deleteProducts] = useDeleteProductOrAllProductsInCartMutation();
+
+  const router = useRouter();
+
+  const productsQuantity = countProductsQuantity(cartData?.products);
+  const total = countOrderCost(cartData?.products);
+
   const [formData, setFormData] = useState({
     firstName: '',
-    lastname: '',
+    lastName: '',
     email: '',
     deliveryAddress: '',
     phoneNumber: '',
     comment: '',
+    totalCost: total,
+    productsQuantity,
   });
-  const { data: localApiCartData } = useGetCartQuery();
-  const { catalogFilters } = useSelector(({ catalog }) => catalog);
-  const router = useRouter();
-  const productsQuantity = countProductsQuantity(localApiCartData);
-  const total = countOrderCost(localApiCartData);
-  const [postOrder, { isSuccess, isLoading }] = usePostOrderMutation();
   const fullOrderInfo = {
-    cart: localApiCartData,
-    id: Date.now(),
+    cart: cartData,
     personalData: formData,
   };
 
@@ -49,8 +57,8 @@ export default function Checkout() {
     {
       label: 'Last name*',
       type: 'text',
-      state: formData.lastname,
-      name: 'lastname',
+      state: formData.lastName,
+      name: 'lastName',
       required: true,
       errorMessage: 'Use letters, hyphens, spaces and dots only.',
       pattern: `${namePattern.source}`,
@@ -97,13 +105,14 @@ export default function Checkout() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    postOrder(fullOrderInfo);
+    addOrder(fullOrderInfo);
+    deleteProducts({ userId });
   };
 
   useEffect(() => {
     if (
-      localApiCartData?.length === 0 ||
-      localApiCartData?.length === undefined
+      cartData?.products.length === 0 ||
+      cartData?.products.length === undefined
     ) {
       router.push(`catalog/?sort=${catalogFilters.alphabet}`);
     }
@@ -129,27 +138,22 @@ export default function Checkout() {
           </div>
           <div className={css.productsList}>
             <div className={css.productListHeader}>In your order:</div>
-            {localApiCartData?.map((element) => (
+            {cartData?.products.map((element) => (
               <div
-                key={element.product.id}
+                key={element.info.id}
                 className={css.product}
-                onClick={() => router.push(`/products/${element.product.id}`)}
+                onClick={() => router.push(`/products/${element.info.id}`)}
               >
                 <div className={css.img}>
-                  <img
-                    src={element.product.image}
-                    alt={element.product.title}
-                  />
+                  <img src={element.info.image} alt={element.info.title} />
                 </div>
-                <div className={css.productName}>{element.product.title}</div>
+                <div className={css.productName}>{element.info.title}</div>
                 <div className={css.productInfo}>
                   <div className={css.counter}>
                     Quantity: {element.quantity}
                   </div>
 
-                  <div className={css.price}>
-                    Price: {element.product.price}$
-                  </div>
+                  <div className={css.price}>Price: {element.info.price}$</div>
                 </div>
               </div>
             ))}

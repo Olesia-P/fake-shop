@@ -3,21 +3,17 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import css from './count-order.module.scss';
 import { countOrderCost } from '../../../utils/functions';
-import { useGetCartQuery } from '../../../store/modules/local-api-slice';
 import { changeIsCartOpen } from '../../../store/modules/openings-slice';
 import Button from '../../button/button';
 
-export default function CountOrder() {
+export default function CountOrder({ cartProducts }) {
   const dispatch = useDispatch();
-
-  const { data: localApiCartData } = useGetCartQuery();
-
   const router = useRouter();
 
-  const sum = countOrderCost(localApiCartData);
+  const sum = countOrderCost(cartProducts);
   return (
     <>
-      {localApiCartData?.length > 0 && (
+      {cartProducts?.length > 0 && (
         <div className={css.containerCount}>
           <div className={css.card}>
             <div className={css.receiptSum}>
@@ -38,7 +34,7 @@ export default function CountOrder() {
           </div>
         </div>
       )}
-      {localApiCartData?.length === 0 && <p>Cart is empty!</p>}
+      {cartProducts?.length === 0 && <p>Cart is empty!</p>}
     </>
   );
 }

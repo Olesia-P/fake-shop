@@ -1,0 +1,100 @@
+@import "../main.scss";
+
+.container {
+    padding-top: 7rem;
+    margin: 0 10%;
+
+    .inputWrap {
+        display: flex;
+        margin: 2rem 0;
+        width: 100%;
+        min-width: 50%;
+
+        input {
+            width: 100%;
+            height: 3.1rem;
+            padding: 1.2rem;
+            font-size: $size-header;
+            background-color: white;
+            box-shadow: inset 1px 0px 6px rgba(0, 0, 0, 0.3);
+            border-radius: $standart-b-radius;
+            margin-top: 0.5rem;
+            border: 2px solid transparent;
+
+            &:focus {
+                border: 2px solid rgb(175, 175, 175);
+            }
+        }
+
+        .btnWrap {
+            margin-left: 2rem;
+        }
+    }
+
+    .orderInfoWrap {
+        margin-top: 2rem;
+        background-color: white;
+        width: 100%;
+        min-width: 50%;
+        box-shadow: $main-shadow;
+        border-radius: $standart-b-radius;
+        padding: 1rem;
+        margin: 0 auto;
+
+        table {
+            font-size: $size-p;
+            width: 100%;
+            min-width: 50%;
+
+            thead {
+                color: white;
+                font-size: $size-header;
+
+                &.greyHeader {
+                    background-color: $asphalt;
+                }
+
+                &.redHeader {
+                    background-color: $red;
+                }
+            }
+
+            tbody {
+                tr {
+
+                    &.title {
+                        background-color: $grey;
+                        font-weight: 600;
+                    }
+
+                    td {
+                        &:first-child {
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include lowTablet {
+    .container {
+        margin: 0 5%;
+
+        .inputWrap {
+            flex-direction: column;
+
+            .btnWrap {
+                margin: 0 auto;
+            }
+        }
+
+        .orderInfoWrap {
+            table {
+                text-wrap: normal;
+                word-break: break-all;
+            }
+        }
+    }
+}

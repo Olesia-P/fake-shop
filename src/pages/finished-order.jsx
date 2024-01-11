@@ -18,9 +18,16 @@ export default function FinishedOrder() {
       <div className={css.messageWrap}>
         <div className={css.message}>
           <div>Thank you for your order!</div>
-          <div>Your order id: {lastOrderId} </div>
           <div>But we will never send it to you.</div>
           <div>It&apos;s a fake shop after all!</div>
+          <br />
+          <div>
+            Your order ID: <strong>{lastOrderId}</strong>.{' '}
+          </div>
+          <div>
+            You can use it to find your order information in the{' '}
+            <strong>&apos;Orders&apos;</strong> tab.
+          </div>
         </div>
         <div className={css.btn}>
           <Button

@@ -4,7 +4,7 @@ export default function Meta() {
   return (
     <>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta charset="UTF-8" />
+      <meta charSet="UTF-8" />
 
       <meta name="title" content="Fake Shop" />
       <meta

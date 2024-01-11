@@ -6,13 +6,13 @@ import { useState, React } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useGetCategoriesQuery } from '../../store/modules/api-slice';
-import { changeCatalogCategory } from '../../store/modules/catalog-slice';
-import useClickOutsideClose from '../../hooks/use-click-outside-close';
+import { useGetCategoriesQuery } from '../../../store/modules/api-slice';
+import { changeCatalogCategory } from '../../../store/modules/catalog-slice';
+import useClickOutsideClose from '../../../hooks/use-click-outside-close';
 import css from './navbar.module.scss';
-import Cart from '../cart/cart';
-import Hamburger from '../hamburger/hamburger';
-import { capitalizeFirstLetter } from '../../utils/functions';
+import Cart from '../../cart/cart';
+import Hamburger from '../../hamburger/hamburger';
+import { capitalizeFirstLetter } from '../../../utils/functions';
 
 export default function Header() {
   const { catalogFilters } = useSelector(({ catalog }) => catalog);
@@ -86,6 +86,11 @@ export default function Header() {
       <Link href="/contacts">
         <a className={css.headerLink}>
           <div>Contacts</div>
+        </a>
+      </Link>
+      <Link href="/orders">
+        <a className={css.headerLink}>
+          <div>Orders</div>
         </a>
       </Link>
 

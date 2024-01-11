@@ -6,47 +6,66 @@ export const localFakeShopApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
   tagTypes: ['Cart'],
   endpoints: (builder) => ({
-    getCart: builder.query({
-      query: () => '/cart',
+    getSpecificCart: builder.query({
+      query: (userId) => `/carts/specificCart?userId=${userId}`,
       providesTags: ['Cart'],
+      method: 'GET',
     }),
 
-    postCart: builder.mutation({
-      query: (cart) => ({
-        url: '/cart',
+    addProductToCartOrCreateCart: builder.mutation({
+      query: (neededData) => ({
+        url: '/carts',
         method: 'POST',
-        body: cart,
+        body: neededData,
       }),
       invalidatesTags: ['Cart'],
     }),
 
-    deleteProduct: builder.mutation({
-      query: (productId) => ({
-        url: `/cart/products/${productId}`,
+    deleteProductOrAllProductsInCart: builder.mutation({
+      query: (neededData) => ({
+        url: '/carts/specificCart',
         method: 'DELETE',
+        body: neededData,
       }),
       invalidatesTags: ['Cart'],
     }),
 
-    postOrder: builder.mutation({
-      query: (order) => ({
+    decreaseProductQuantity: builder.mutation({
+      query: (neededData) => ({
+        url: '/carts/specificCart',
+        method: 'PUT',
+        body: neededData,
+      }),
+      invalidatesTags: ['Cart'],
+    }),
+
+    getOrder: builder.query({
+      query: (orderId) => `/orders/${orderId}`,
+      providesTags: ['Cart'],
+      method: 'GET',
+    }),
+
+    addOrder: builder.mutation({
+      query: (neededData) => ({
         url: '/orders',
         method: 'POST',
-        body: order,
+        body: neededData,
       }),
       invalidatesTags: ['Cart'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const { data: orderData } = await queryFulfilled;
-        dispatch(changeLastOrderId(orderData.id));
+        // eslint-disable-next-line no-underscore-dangle
+        dispatch(changeLastOrderId(orderData.order._id));
       },
     }),
   }),
 });
 
 export const {
-  usePostCartMutation,
-  useLazyGetCartQuery,
-  useGetCartQuery,
-  useDeleteProductMutation,
-  usePostOrderMutation,
+  useAddProductToCartOrCreateCartMutation,
+  useGetSpecificCartQuery,
+  useDeleteProductOrAllProductsInCartMutation,
+  useDecreaseProductQuantityMutation,
+  useAddOrderMutation,
+  useLazyGetOrderQuery,
 } = localFakeShopApi;

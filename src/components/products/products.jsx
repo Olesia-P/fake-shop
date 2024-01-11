@@ -2,10 +2,7 @@ import { useState, React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { BiLoaderAlt } from 'react-icons/bi';
-import {
-  usePostCartMutation,
-  useGetCartQuery,
-} from '../../store/modules/local-api-slice';
+import { useAddProductToCartOrCreateCartMutation } from '../../store/modules/local-api-slice';
 import Button from '../button/button';
 import { changeIsCartOpen } from '../../store/modules/openings-slice';
 import { changeSearchResults } from '../../store/modules/mixed-purpose-slice';
@@ -18,41 +15,34 @@ export default function Products({
   productsError,
 }) {
   const router = useRouter();
-  const [postCart] = usePostCartMutation();
+  const [addProductToCartOrCreateCart] =
+    useAddProductToCartOrCreateCartMutation();
   const [specificProductLoading, setSpecificProductLoading] = useState(null);
   const [buttonDisabled, setButtondisabled] = useState(false);
   const { searchResults } = useSelector(({ mixedPurpose }) => mixedPurpose);
+  const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
   const [productsToRender, setProductsToRender] = useState([]);
-
-  const { data: localApiCartData, isSuccess: localApiCartDataSuccess } =
-    useGetCartQuery();
 
   const dispatch = useDispatch();
 
   const addToCart = async (product) => {
     setSpecificProductLoading(product.id);
     setButtondisabled(true);
-    if (localApiCartDataSuccess) {
-      const identicalObject = localApiCartData.find(
-        (it) => it.product.id === product.id,
-      );
-      const finalQuantity =
-        product.id === identicalObject?.product.id
-          ? identicalObject.quantity + 1
-          : 1;
-      const params = { id: product.id, quantity: finalQuantity };
+    const params = {
+      userId,
+      item: { info: product, quantity: 1 },
+    };
 
-      try {
-        await postCart(params); // Wait for the cart mutation to finish
-        setSpecificProductLoading(null); // Reset loading product after the mutation is complete
-        setButtondisabled(false);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(
-          'An error occurred while adding the product to the cart:',
-          error,
-        );
-      }
+    try {
+      await addProductToCartOrCreateCart(params); // Wait for the cart mutation to finish
+      setSpecificProductLoading(null); // Reset loading product after the mutation is complete
+      setButtondisabled(false);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(
+        'An error occurred while adding the product to the cart:',
+        error,
+      );
     }
   };
 

@@ -17,7 +17,7 @@ export default function Button({
     <button
       type={type === 'button' ? 'button' : 'submit'}
       className={cx(
-        css.addToCartBtn,
+        css.btn,
         isDisabled && css.disabled,
         width === 'widthM' && css.widthM,
         width === 'widthL' && css.widthL,
