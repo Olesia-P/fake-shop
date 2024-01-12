@@ -7,7 +7,6 @@ import CheckoutInput from '../components/checkout-input/checkout-input';
 import {
   useGetSpecificCartQuery,
   useAddOrderMutation,
-  useDeleteProductOrAllProductsInCartMutation,
 } from '../store/modules/local-api-slice';
 import { countProductsQuantity, countOrderCost } from '../utils/functions';
 import Button from '../components/button/button';
@@ -16,9 +15,12 @@ export default function Checkout() {
   const { catalogFilters } = useSelector(({ catalog }) => catalog);
   const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
 
-  const { data: cartData } = useGetSpecificCartQuery(userId);
+  const { data: cartData } = useGetSpecificCartQuery(
+    userId,
+    { skip: userId === null },
+    // not to get 500 error on the load when userId is null
+  );
   const [addOrder, { isSuccess, isLoading }] = useAddOrderMutation();
-  const [deleteProducts] = useDeleteProductOrAllProductsInCartMutation();
 
   const router = useRouter();
 
@@ -106,7 +108,6 @@ export default function Checkout() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     addOrder(fullOrderInfo);
-    deleteProducts({ userId });
   };
 
   useEffect(() => {

@@ -9,6 +9,7 @@
         margin: 2rem 0;
         width: 100%;
         min-width: 50%;
+        position: relative;
 
         input {
             width: 100%;
@@ -20,10 +21,31 @@
             border-radius: $standart-b-radius;
             margin-top: 0.5rem;
             border: 2px solid transparent;
+            position: relative;
 
             &:focus {
                 border: 2px solid rgb(175, 175, 175);
             }
+
+
+
+            &:invalid[focused="true"] {
+                border: 2px solid rgb(208, 24, 37);
+            }
+
+            &:invalid[focused="true"]~div {
+                display: block;
+            }
+        }
+
+        .inputError {
+            color: rgb(208, 24, 37);
+
+            display: none;
+            position: absolute;
+            top: -1.5rem;
+            font-size: $size-p;
+            line-height: 1;
         }
 
         .btnWrap {
@@ -75,6 +97,14 @@
                 }
             }
         }
+    }
+
+    .errorMessage {
+        font-size: $size-header;
+        background-color: $grey;
+        padding: 2rem;
+        font-weight: 600;
+        color: $red;
     }
 }
 

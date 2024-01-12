@@ -22,7 +22,7 @@ const PersonalDataSchema = new mongoose.Schema({
   lastName: String,
   email: String,
   deliveryAddress: String,
-  phoneNumber: Number,
+  phoneNumber: mongoose.Schema.Types.Mixed,
   comment: String,
   totalCost: Number,
   productsQuantity: Number,

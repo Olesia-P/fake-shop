@@ -6,17 +6,17 @@ import css from '../styles/pageStyles/orders.module.scss';
 
 export default function Orders() {
   const [inputId, setInputId] = useState();
-
+  const [focused, setFocused] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [getOrder, { data: orderData }] = useLazyGetOrderQuery();
 
   const handleClick = () => {
-    getOrder(inputId);
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleClick();
-    }
+    getOrder(inputId.trim())
+      .unwrap()
+      .then(() => setIsError(false))
+      .catch(() => {
+        setIsError(true);
+      });
   };
 
   const countProductCost = (quantity, price) => {
@@ -26,71 +26,77 @@ export default function Orders() {
 
   return (
     <div className={css.container}>
-      <div className={css.inputWrap}>
+      <form
+        className={css.inputWrap}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleClick();
+        }}
+      >
         <input
           type="text"
           placeholder="Type order id here..."
+          required
           onChange={(event) => {
             setInputId(event.target.value);
           }}
-          onKeyDown={(event) => {
-            handleKeyDown(event);
-          }}
+          pattern="[A-Za-z0-9]+"
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          // eslint-disable-next-line react/no-unknown-property
+          focused={focused.toString()}
         />
-        <div className={css.btnWrap}>
-          <Button
-            onClick={handleClick}
-            width="widthM"
-            fontSize="fontP"
-            text="Find!"
-            type="button"
-          />
+        <div className={css.inputError}>
+          Use valid order ID (numbers and letters)
         </div>
-      </div>
+        <div className={css.btnWrap}>
+          <Button width="widthM" fontSize="fontP" text="Find!" type="submit" />
+        </div>
+      </form>
 
-      {orderData && (
+      {orderData && !isError && (
         <div className={css.orderInfoWrap}>
           <table>
             <thead className={css.redHeader}>
               <tr>
-                <th colSpan="2">Order ID: {orderData._id}</th>
+                <th colSpan="2">Order ID: {orderData?._id}</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>User ID:</td>
-                <td>{orderData.cart.userId}</td>
+                <td>{orderData?.cart?.userId}</td>
               </tr>
               <tr>
                 <td>Name</td>
                 <td>
-                  {orderData.personalData.firstName}{' '}
-                  {orderData.personalData.lastName}
+                  {orderData?.personalData?.firstName}{' '}
+                  {orderData?.personalData?.lastName}
                 </td>
               </tr>
               <tr>
                 <td>Email: </td>
-                <td>{orderData.personalData.email}</td>
+                <td>{orderData?.personalData?.email}</td>
               </tr>
               <tr>
                 <td>Delivery address:</td>
-                <td>{orderData.personalData.deliveryAddress}</td>
+                <td>{orderData?.personalData?.deliveryAddress}</td>
               </tr>
               <tr>
                 <td>Phone number:</td>
-                <td>{orderData.personalData.phoneNumber}</td>
+                <td>{orderData?.personalData?.phoneNumber}</td>
               </tr>
               <tr>
                 <td>Comment:</td>
-                <td>{orderData.personalData.comment}</td>
+                <td>{orderData?.personalData?.comment}</td>
               </tr>
               <tr>
                 <td>Total const:</td>
-                <td>{orderData.personalData.totalCost}$</td>
+                <td>{orderData?.personalData?.totalCost}$</td>
               </tr>
               <tr>
                 <td>Products quantity:</td>
-                <td>{orderData.personalData.productsQuantity}</td>
+                <td>{orderData?.personalData?.productsQuantity}</td>
               </tr>
             </tbody>
             <thead className={css.greyHeader}>
@@ -99,7 +105,7 @@ export default function Orders() {
               </tr>
             </thead>
 
-            {orderData.cart.products.map((element) => (
+            {orderData?.cart?.products.map((element) => (
               <tbody key={element._id}>
                 <tr className={css.title}>
                   <td>Title:</td>
@@ -118,6 +124,11 @@ export default function Orders() {
               </tbody>
             ))}
           </table>
+        </div>
+      )}
+      {isError && (
+        <div className={css.errorMessage}>
+          Order was not found. Check if you provided the right order ID.{' '}
         </div>
       )}
     </div>
