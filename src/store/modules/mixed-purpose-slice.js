@@ -4,6 +4,7 @@ const initialState = {
   lastOrderId: '',
   searchResults: [],
   userId: null,
+  isCartCreated: false,
 };
 
 const mixedPurposeSlice = createSlice({
@@ -28,9 +29,19 @@ const mixedPurposeSlice = createSlice({
         userId: action.payload,
       };
     },
+    changeIsCartCreated: (state, action) => {
+      return {
+        ...state,
+        isCartCreated: action.payload,
+      };
+    },
   },
 });
 
 export default mixedPurposeSlice.reducer;
-export const { changeLastOrderId, changeSearchResults, changeUserId } =
-  mixedPurposeSlice.actions;
+export const {
+  changeLastOrderId,
+  changeSearchResults,
+  changeUserId,
+  changeIsCartCreated,
+} = mixedPurposeSlice.actions;

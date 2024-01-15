@@ -7,17 +7,21 @@ import css from './cart.module.scss';
 import { changeIsCartOpen } from '../../store/modules/openings-slice';
 import CartProduct from './cart-product/cart-product';
 import CountOrder from './count-order/count-order';
-import { useGetSpecificCartQuery } from '../../store/modules/local-api-slice';
+import { useLazyGetSpecificCartQuery } from '../../store/modules/local-api-slice';
 import useClickOutsideClose from '../../hooks/use-click-outside-close';
 
 export default function Cart() {
   const { isCartOpen } = useSelector(({ openings }) => openings);
   const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
+  const { isCartCreated } = useSelector(({ mixedPurpose }) => mixedPurpose);
 
-  const { data: cartData } = useGetSpecificCartQuery(userId, {
-    skip: userId === null,
-    // not to get 500 error on the load when userId is null
-  });
+  const [getSpecificCart, { data: cartData }] = useLazyGetSpecificCartQuery();
+
+  useEffect(() => {
+    if (isCartCreated && userId !== null) {
+      getSpecificCart(userId);
+    }
+  }, [isCartCreated, userId]);
 
   const dispatch = useDispatch();
   const router = useRouter();

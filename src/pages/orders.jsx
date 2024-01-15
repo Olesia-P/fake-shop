@@ -91,7 +91,7 @@ export default function Orders() {
                 <td>{orderData?.personalData?.comment}</td>
               </tr>
               <tr>
-                <td>Total const:</td>
+                <td>Total cost:</td>
                 <td>{orderData?.personalData?.totalCost}$</td>
               </tr>
               <tr>
@@ -108,7 +108,7 @@ export default function Orders() {
             {orderData?.cart?.products.map((element) => (
               <tbody key={element._id}>
                 <tr className={css.title}>
-                  <td>Title:</td>
+                  <td>Name:</td>
                   <td>{element.info.title}</td>
                 </tr>
                 <tr>
@@ -118,7 +118,7 @@ export default function Orders() {
                 <tr>
                   <td>Cost:</td>
                   <td>
-                    {countProductCost(element.quantity, element.info.price)}
+                    {countProductCost(element.quantity, element.info.price)}$
                   </td>
                 </tr>
               </tbody>

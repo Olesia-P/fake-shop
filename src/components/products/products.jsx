@@ -2,7 +2,7 @@ import { useState, React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { BiLoaderAlt } from 'react-icons/bi';
-import { useAddProductToCartOrCreateCartMutation } from '../../store/modules/local-api-slice';
+import { useAddProductToCartMutation } from '../../store/modules/local-api-slice';
 import Button from '../button/button';
 import { changeIsCartOpen } from '../../store/modules/openings-slice';
 import { changeSearchResults } from '../../store/modules/mixed-purpose-slice';
@@ -15,8 +15,7 @@ export default function Products({
   productsError,
 }) {
   const router = useRouter();
-  const [addProductToCartOrCreateCart] =
-    useAddProductToCartOrCreateCartMutation();
+  const [addProductToCart] = useAddProductToCartMutation();
   const [specificProductLoading, setSpecificProductLoading] = useState(null);
   const [buttonDisabled, setButtondisabled] = useState(false);
   const { searchResults } = useSelector(({ mixedPurpose }) => mixedPurpose);
@@ -34,7 +33,7 @@ export default function Products({
     };
 
     try {
-      await addProductToCartOrCreateCart(params); // Wait for the cart mutation to finish
+      await addProductToCart(params); // Wait for the cart mutation to finish
       setSpecificProductLoading(null); // Reset loading product after the mutation is complete
       setButtondisabled(false);
     } catch (error) {
@@ -54,6 +53,16 @@ export default function Products({
         setProductsToRender(productsData);
       }
     }
+  };
+
+  const shortTitle = (inputString, maxLength) => {
+    if (inputString.length > maxLength) {
+      // eslint-disable-next-line prefer-template
+      const cutString = inputString.slice(0, maxLength) + '...';
+
+      return cutString;
+    }
+    return inputString;
   };
 
   useEffect(() => {
@@ -86,7 +95,8 @@ export default function Products({
                 dispatch(changeIsCartOpen(false));
               }}
             >
-              {element.title}
+              {shortTitle(element.title, 42)}
+              {/* {element.title} */}
             </div>
             <div
               className={css.price}

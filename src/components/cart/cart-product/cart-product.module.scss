@@ -2,8 +2,7 @@
 
 .product {
     padding: 1rem;
-    margin: 0.5rem;
-    width: 19rem;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     background-color: white;
@@ -98,13 +97,13 @@
     }
 }
 
-@include tablet {
+@include lowTablet {
     .product {
-        width: 80%;
+        width: 100%;
 
         .productInfo {
             .title {
-                width: 100%;
+                width: 90%;
             }
         }
     }

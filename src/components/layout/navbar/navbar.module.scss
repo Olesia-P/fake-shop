@@ -11,6 +11,7 @@
     background-color: $white;
     width: 100%;
     z-index: 2;
+    gap: 1.5rem;
 
     .hamburger {
         display: none;
@@ -33,9 +34,8 @@
     }
 
     .headerLink {
-        margin-left: 2rem;
         border-radius: $standart-b-radius;
-        padding: 0.5rem;
+        padding: 0.25rem 0.5rem;
         text-decoration: none;
         color: black;
         position: relative;
@@ -44,7 +44,7 @@
         line-height: 1;
         white-space: nowrap;
         @include dfc;
-        max-height: 2.5rem;
+        height: 2.5rem;
 
         .chevron {
             padding-top: 0.5rem;

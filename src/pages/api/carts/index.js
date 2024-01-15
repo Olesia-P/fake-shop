@@ -15,16 +15,37 @@ export default function handler(req, res) {
       .catch((error) => res.status(500).json({ error: error.message }));
   };
 
-  const addProductToCartOrCreateCart = () => {
-    const { userId, item } = req.body;
+  const createEmptyCart = () => {
+    const { userId } = req.body;
     Cart.findOne({ userId })
       .then((cart) => {
         if (!cart) {
           // If cart doesn't exist, create a new one
-          const newCart = new Cart({ userId, products: [item] });
+          const newCart = new Cart({ userId, products: [] });
           return newCart.save();
         }
 
+        // Return the promise here, allowing the next 'then' block to handle the response
+        return cart;
+      })
+      .then((updatedCart) => {
+        if (!updatedCart) {
+          // Respond with 404 if the cart is not found
+          res.status(404).json({ error: 'Cart not found' });
+        } else {
+          res.status(200).json(updatedCart);
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({ error: error.message });
+      });
+  };
+
+  const addProductToCart = () => {
+    const { userId, item } = req.body;
+
+    Cart.findOne({ userId })
+      .then((cart) => {
         // Check if the item with the same id is already in the cart
         const existingItem = cart.products.find(
           (cartItem) => cartItem.info.id === item.info.id,
@@ -42,7 +63,12 @@ export default function handler(req, res) {
         return cart.save();
       })
       .then((updatedCart) => {
-        res.status(200).json(updatedCart);
+        if (!updatedCart) {
+          // Respond with 404 if the cart is not found
+          res.status(404).json({ error: 'Cart not found' });
+        } else {
+          res.status(200).json(updatedCart);
+        }
       })
       .catch((error) => {
         res.status(500).json({ error: error.message });
@@ -60,7 +86,10 @@ export default function handler(req, res) {
       getAllCarts();
       break;
     case 'POST':
-      addProductToCartOrCreateCart();
+      createEmptyCart();
+      break;
+    case 'PUT':
+      addProductToCart();
       break;
     case 'DELETE':
       deleteAllCarts();

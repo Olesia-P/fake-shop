@@ -15,11 +15,10 @@ export default function Checkout() {
   const { catalogFilters } = useSelector(({ catalog }) => catalog);
   const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
 
-  const { data: cartData } = useGetSpecificCartQuery(
-    userId,
-    { skip: userId === null },
+  const { data: cartData } = useGetSpecificCartQuery(userId, {
+    skip: userId === null,
     // not to get 500 error on the load when userId is null
-  );
+  });
   const [addOrder, { isSuccess, isLoading }] = useAddOrderMutation();
 
   const router = useRouter();

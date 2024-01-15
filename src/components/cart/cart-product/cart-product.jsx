@@ -6,7 +6,7 @@ import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { MdDelete } from 'react-icons/md';
 import css from './cart-product.module.scss';
 import {
-  useAddProductToCartOrCreateCartMutation,
+  useAddProductToCartMutation,
   useDeleteProductOrAllProductsInCartMutation,
   useDecreaseProductQuantityMutation,
 } from '../../../store/modules/local-api-slice';
@@ -17,8 +17,7 @@ export default function CartProduct({ cartProducts }) {
 
   // console.log('cartProducts', cartProducts);
 
-  const [addProductToCartOrCreateCart] =
-    useAddProductToCartOrCreateCartMutation();
+  const [addProductToCart] = useAddProductToCartMutation();
 
   const [deleteProductOrAllProductsInCart] =
     useDeleteProductOrAllProductsInCartMutation();
@@ -57,7 +56,7 @@ export default function CartProduct({ cartProducts }) {
                 <AiOutlinePlus
                   className={css.plusBtn}
                   onClick={() => {
-                    addProductToCartOrCreateCart({
+                    addProductToCart({
                       userId,
                       item: element,
                     });

@@ -33,9 +33,12 @@
 
         .title {
             align-self: flex-start;
-            height: 4rem;
-            overflow: hidden;
+            height: 6rem;
+            // overflow: hidden;
+            // text-overflow: ellipsis;
+            // white-space: nowrap;
             margin: 0.2rem 0;
+            // width: 100%;
         }
 
         .price {

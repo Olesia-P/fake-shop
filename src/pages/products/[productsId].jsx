@@ -1,8 +1,9 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import { PiArrowBendUpLeft } from 'react-icons/pi';
 import { useGetOneProductQuery } from '../../store/modules/api-slice';
-import { useAddProductToCartOrCreateCartMutation } from '../../store/modules/local-api-slice';
+import { useAddProductToCartMutation } from '../../store/modules/local-api-slice';
 import Button from '../../components/button/button';
 import css from './productsId.module.scss';
 
@@ -10,9 +11,9 @@ export default function ProductsId() {
   const router = useRouter();
   const productId = router.query.productsId;
   const { data: productData, isSuccess } = useGetOneProductQuery(productId);
+  const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
 
-  const [addProductToCartOrCreateCart] =
-    useAddProductToCartOrCreateCartMutation();
+  const [addProductToCart] = useAddProductToCartMutation();
 
   return (
     <div className={css.container}>
@@ -38,8 +39,8 @@ export default function ProductsId() {
               <div className={css.btnWrap}>
                 <Button
                   onClick={() =>
-                    addProductToCartOrCreateCart({
-                      userId: 7335412424202,
+                    addProductToCart({
+                      userId,
                       item: { info: productData, quantity: 1 },
                     })
                   }
