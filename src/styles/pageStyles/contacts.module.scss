@@ -1,0 +1,43 @@
+@import "../main.scss";
+
+
+.container {
+    padding-top: 7rem;
+    font-family: $main-font;
+
+
+
+    .wrap {
+        width: 30%;
+        height: fit-content;
+        background-color: $grey;
+        margin: 0 auto;
+        box-shadow: $main-shadow;
+        border-radius: $standart-b-radius;
+        padding: 2rem;
+
+        .header {
+            font-size: $size-huge;
+            text-align: center;
+            font-weight: 600;
+
+        }
+
+        .contact {
+            display: flex;
+            align-items: center;
+            font-size: $size-header;
+            padding: 0.2rem 0.5rem;
+            background-color: white;
+            border: 0.2rem dashed black;
+            margin-top: 0.5rem;
+            border-radius: $standart-b-radius;
+
+
+            .icon {
+                @include dfc;
+                margin-right: 1rem;
+            }
+        }
+    }
+}

@@ -10,6 +10,7 @@ import {
   changeLastOrderId,
   changeUserId,
   changeIsCartCreated,
+  changeOrderId,
 } from '../../store/modules/mixed-purpose-slice';
 import { getCookie, setCookie } from '../../utils/cookie';
 import { useCreateEmptyCartMutation } from '../../store/modules/local-api-slice';
@@ -17,8 +18,6 @@ import useMediaQuery from '../../hooks/use-media-query';
 
 export default function Layout({ children }) {
   const [createEmptyCart] = useCreateEmptyCartMutation();
-  const { isCartCreated } = useSelector(({ mixedPurpose }) => mixedPurpose);
-  const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
   const { isCartOpen } = useSelector(({ openings }) => openings);
   const isLowTablet = useMediaQuery(787);
 
@@ -27,6 +26,9 @@ export default function Layout({ children }) {
   useEffect(() => {
     if (router.path !== '/finished-order') {
       dispatch(changeLastOrderId(''));
+    }
+    if (router.path !== '/orders') {
+      dispatch(changeOrderId(''));
     }
   }, [router.path]);
 
@@ -50,9 +52,6 @@ export default function Layout({ children }) {
       });
     }
   }, []);
-
-  console.log('isCartCreated', isCartCreated);
-  console.log('userId', userId);
 
   return (
     <>

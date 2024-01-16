@@ -25,7 +25,6 @@ export default function handler(req, res) {
           return newCart.save();
         }
 
-        // Return the promise here, allowing the next 'then' block to handle the response
         return cart;
       })
       .then((updatedCart) => {

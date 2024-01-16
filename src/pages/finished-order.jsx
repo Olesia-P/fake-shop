@@ -1,16 +1,19 @@
 import { useEffect, React } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useDeleteProductOrAllProductsInCartMutation } from '../store/modules/local-api-slice';
+import { changeOrderId } from '../store/modules/mixed-purpose-slice';
 import Button from '../components/button/button';
 import css from '../styles/pageStyles/finishedOrder.module.scss';
 
 export default function FinishedOrder() {
   const { lastOrderId } = useSelector(({ mixedPurpose }) => mixedPurpose);
   const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
+  const { orderId } = useSelector(({ mixedPurpose }) => mixedPurpose);
   const [deleteProducts] = useDeleteProductOrAllProductsInCartMutation();
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (lastOrderId === '') {
@@ -21,6 +24,10 @@ export default function FinishedOrder() {
   useEffect(() => {
     deleteProducts({ userId });
   }, []);
+
+  useEffect(() => {
+    dispatch(changeOrderId(lastOrderId));
+  }, [orderId]);
 
   return (
     <div className={css.container}>
@@ -48,6 +55,15 @@ export default function FinishedOrder() {
             text="Back to shopping"
             fontSize="fontP"
           />
+        </div>
+        <div
+          onClick={() => {
+            router.push(`/orders/?orderId=${orderId}`, undefined, {
+              shallow: true,
+            });
+          }}
+        >
+          test
         </div>
       </div>
     </div>

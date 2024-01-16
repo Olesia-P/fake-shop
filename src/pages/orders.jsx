@@ -1,7 +1,10 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import Button from '../components/button/button';
 import { useLazyGetOrderQuery } from '../store/modules/local-api-slice';
+import { changeOrderId } from '../store/modules/mixed-purpose-slice';
 import css from '../styles/pageStyles/orders.module.scss';
 
 export default function Orders() {
@@ -9,9 +12,13 @@ export default function Orders() {
   const [focused, setFocused] = useState(false);
   const [isError, setIsError] = useState(false);
   const [getOrder, { data: orderData }] = useLazyGetOrderQuery();
+  const { orderId } = useSelector(({ mixedPurpose }) => mixedPurpose);
 
-  const handleClick = () => {
-    getOrder(inputId.trim())
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleClick = (input) => {
+    getOrder(input.trim())
       .unwrap()
       .then(() => setIsError(false))
       .catch(() => {
@@ -24,13 +31,33 @@ export default function Orders() {
     return cost;
   };
 
+  useEffect(() => {
+    if (router.query.orderId && router.query.orderId !== '') {
+      dispatch(changeOrderId(router.query.orderId));
+      handleClick(orderId);
+    }
+  }, [router.isReady]);
+
+  useEffect(() => {
+    router.isReady &&
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { ...(orderId !== '' && { orderId }) },
+        },
+        undefined,
+        { shallow: true },
+      );
+  }, [orderId]);
+
   return (
     <div className={css.container}>
       <form
         className={css.inputWrap}
         onSubmit={(e) => {
           e.preventDefault();
-          handleClick();
+          handleClick(inputId.trim());
+          dispatch(changeOrderId(inputId.trim()));
         }}
       >
         <input
@@ -40,7 +67,7 @@ export default function Orders() {
           onChange={(event) => {
             setInputId(event.target.value);
           }}
-          pattern="[A-Za-z0-9]+"
+          pattern="^[a-z0-9\s]*$"
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           // eslint-disable-next-line react/no-unknown-property
