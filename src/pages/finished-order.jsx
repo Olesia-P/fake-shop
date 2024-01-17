@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useDeleteProductOrAllProductsInCartMutation } from '../store/modules/local-api-slice';
 import { changeOrderId } from '../store/modules/mixed-purpose-slice';
 import Button from '../components/button/button';
-import css from '../styles/pageStyles/finishedOrder.module.scss';
+import css from '../styles/pageStyles/finished-order.module.scss';
 
 export default function FinishedOrder() {
   const { lastOrderId } = useSelector(({ mixedPurpose }) => mixedPurpose);
@@ -37,7 +37,14 @@ export default function FinishedOrder() {
           <div>But we will never send it to you.</div>
           <div>It&apos;s a fake shop after all!</div>
           <br />
-          <div>
+          <div
+            onClick={() => {
+              router.push(`/orders/?orderId=${orderId}`, undefined, {
+                shallow: true,
+              });
+            }}
+            className={css.orderId}
+          >
             Your order ID: <strong>{lastOrderId}</strong>{' '}
           </div>
           <div>
@@ -55,15 +62,6 @@ export default function FinishedOrder() {
             text="Back to shopping"
             fontSize="fontP"
           />
-        </div>
-        <div
-          onClick={() => {
-            router.push(`/orders/?orderId=${orderId}`, undefined, {
-              shallow: true,
-            });
-          }}
-        >
-          test
         </div>
       </div>
     </div>

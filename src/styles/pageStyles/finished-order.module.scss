@@ -15,6 +15,15 @@
 
         .message {
             text-align: center;
+
+            .orderId {
+                cursor: pointer;
+                text-decoration: underline;
+
+                &:hover {
+                    color: $red;
+                }
+            }
         }
 
         .btn {

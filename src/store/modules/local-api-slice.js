@@ -7,7 +7,7 @@ export const localFakeShopApi = createApi({
   tagTypes: ['Cart'],
   endpoints: (builder) => ({
     getSpecificCart: builder.query({
-      query: (userId) => `/carts/specificCart?userId=${userId}`,
+      query: (userId) => `/carts/specific-cart?userId=${userId}`,
       providesTags: ['Cart'],
       method: 'GET',
     }),
@@ -31,7 +31,7 @@ export const localFakeShopApi = createApi({
 
     deleteProductOrAllProductsInCart: builder.mutation({
       query: (neededData) => ({
-        url: '/carts/specificCart',
+        url: '/carts/specific-cart',
         method: 'DELETE',
         body: neededData,
       }),
@@ -40,7 +40,7 @@ export const localFakeShopApi = createApi({
 
     decreaseProductQuantity: builder.mutation({
       query: (neededData) => ({
-        url: '/carts/specificCart',
+        url: '/carts/specific-cart',
         method: 'PUT',
         body: neededData,
       }),
