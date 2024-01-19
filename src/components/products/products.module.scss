@@ -5,6 +5,7 @@
     justify-content: center;
     flex-wrap: wrap;
 
+
     .productContainer {
         border: 2px dashed black;
         margin: 1rem 0.5rem;
@@ -51,18 +52,11 @@
         }
     }
 
-    .loadingGlobal {
-        width: 20rem;
-        height: 20rem;
-        margin-left: 100%;
-        margin-top: 40%;
-        color: $asphalt;
-        animation: spin-clockwise 1s infinite ease-in;
-    }
-
-    .loadingCaption {
-        font-size: 30pt;
-        margin-left: 125%;
+    .loadingWrap {
+        width: calc(100vw - 15rem);
+        height: 100%;
+        @include dfc;
+        margin-top: 10%;
     }
 
     .errorWrap {
@@ -83,39 +77,6 @@
             padding: 1rem;
         }
     }
-}
 
 
-@keyframes spin-clockwise {
-    0% {
-        transform: rotate(0deg);
-        color: $grey;
-    }
-
-    50% {
-        color: $red;
-    }
-
-    100% {
-        transform: rotate(360deg);
-        color: $grey;
-    }
-
-    ;
-}
-
-@include tablet {
-    .container {
-        .loadingGlobal {
-            width: 10rem;
-            height: 10rem;
-            margin-left: 0;
-            margin-top: 2rem;
-        }
-
-        .loadingCaption {
-            font-size: $size-header;
-            margin-left: 0;
-        }
-    }
 }

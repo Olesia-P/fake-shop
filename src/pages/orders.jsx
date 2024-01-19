@@ -6,24 +6,21 @@ import Button from '../components/button/button';
 import { useLazyGetOrderQuery } from '../store/modules/local-api-slice';
 import { changeOrderId } from '../store/modules/mixed-purpose-slice';
 import css from '../styles/pageStyles/orders.module.scss';
+import Loading from '../components/loading/loading';
 
 export default function Orders() {
   const [inputId, setInputId] = useState();
   const [focused, setFocused] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [getOrder, { data: orderData }] = useLazyGetOrderQuery();
+  // const [isError, setIsError] = useState(false);
+  const [getOrder, { data: orderData, isError, isFetching, isSuccess }] =
+    useLazyGetOrderQuery();
   const { orderId } = useSelector(({ mixedPurpose }) => mixedPurpose);
 
   const dispatch = useDispatch();
   const router = useRouter();
 
   const handleClick = (input) => {
-    getOrder(input.trim())
-      .unwrap()
-      .then(() => setIsError(false))
-      .catch(() => {
-        setIsError(true);
-      });
+    getOrder(input.trim());
   };
 
   const countProductCost = (quantity, price) => {
@@ -84,7 +81,7 @@ export default function Orders() {
         </div>
       </form>
 
-      {orderData && !isError && (
+      {isSuccess && !isError && !isFetching ? (
         <div className={css.orderInfoWrap}>
           <table>
             <thead className={css.redHeader}>
@@ -154,6 +151,10 @@ export default function Orders() {
               </tbody>
             ))}
           </table>
+        </div>
+      ) : (
+        <div className={css.loadingWrap}>
+          {!isError && isFetching && <Loading />}
         </div>
       )}
       {isError && (

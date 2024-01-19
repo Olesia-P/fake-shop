@@ -1,12 +1,13 @@
 import { useState, React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { BiLoaderAlt } from 'react-icons/bi';
+// import { BiLoaderAlt } from 'react-icons/bi';
 import { useAddProductToCartMutation } from '../../store/modules/local-api-slice';
 import Button from '../button/button';
 import { changeIsCartOpen } from '../../store/modules/openings-slice';
 import { changeSearchResults } from '../../store/modules/mixed-purpose-slice';
 import css from './products.module.scss';
+import Loading from '../loading/loading';
 
 export default function Products({
   productsData,
@@ -54,16 +55,6 @@ export default function Products({
       }
     }
   };
-
-  // const shortTitle = (inputString, maxLength) => {
-  //   if (inputString.length > maxLength) {
-  //     // eslint-disable-next-line prefer-template
-  //     const cutString = inputString.slice(0, maxLength) + '...';
-
-  //     return cutString;
-  //   }
-  //   return inputString;
-  // };
 
   useEffect(() => {
     chooseDataForProducts();
@@ -120,13 +111,8 @@ export default function Products({
           </div>
         ))
       ) : (
-        <div>
-          {isFetching && !productsError && (
-            <>
-              <BiLoaderAlt className={css.loadingGlobal} />
-              <div className={css.loadingCaption}>Loading...</div>
-            </>
-          )}
+        <div className={css.loadingWrap}>
+          {isFetching && !productsError && <Loading />}
         </div>
       )}
       {productsError &&

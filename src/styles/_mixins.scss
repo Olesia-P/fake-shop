@@ -49,3 +49,23 @@
         ;
     }
 }
+
+@mixin loadingAnimation {
+    @keyframes spin-clockwise {
+        0% {
+            transform: rotate(0deg);
+            color: $grey;
+        }
+
+        50% {
+            color: $red;
+        }
+
+        100% {
+            transform: rotate(360deg);
+            color: $grey;
+        }
+
+        ;
+    }
+}

@@ -1,0 +1,35 @@
+@import "../../styles/main.scss";
+
+.container {
+    position: relative;
+
+    .loadingGlobal {
+        width: 20rem;
+        height: 20rem;
+        color: $asphalt;
+        animation: spin-clockwise 1s infinite ease-in;
+    }
+
+    .loadingCaption {
+        font-size: 30pt;
+        position: relative;
+        left: 8%;
+    }
+
+    @include loadingAnimation;
+}
+
+@include tablet {
+    .container {
+        .loadingGlobal {
+            width: 10rem;
+            height: 10rem;
+        }
+
+        .loadingCaption {
+            font-size: $size-header;
+
+        }
+
+    }
+}
