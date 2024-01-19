@@ -34,11 +34,6 @@
         .title {
             align-self: flex-start;
             height: 4rem;
-            // overflow: hidden;
-            // --max-lines: 2;
-            // max-height: calc(1 * 2);
-            // text-overflow: ellipsis;
-            // white-space: nowrap;
             margin: 0.2rem 0;
 
 
@@ -47,13 +42,6 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
 
-            // width: 100%;
-            // &::before {
-            //     position: absolute;
-            //     content: "...";
-            //     bottom: 0;
-            //     right: 0;
-            // }
         }
 
         .price {

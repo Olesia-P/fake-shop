@@ -14,22 +14,21 @@ export default function handler(req, res) {
   const { orderId } = req.query;
 
   const getOrder = () => {
-    Order.findById(orderId)
-      .then((order) => {
-        if (order) {
-          res.status(200).json(order);
-        } else {
-          res.status(404).json({ message: `Order ${orderId} not found` });
-        }
-      })
-      .catch((error) => {
-        if (error.kind === 'ObjectId') {
-          res.status(404).json({
-            error: error.message,
-          });
-        }
-        res.status(500).json({ error: error.message });
-      });
+    if (orderId.match(/^[0-9a-fA-F]{24}$/)) {
+      Order.findById(orderId)
+        .then((order) => {
+          if (order) {
+            res.status(200).json(order);
+          } else {
+            res.status(404).json({ message: `Order ${orderId} not found` });
+          }
+        })
+        .catch((error) => {
+          res.status(500).json({ error: error.message });
+        });
+    } else {
+      res.status(404).json({ message: `Order ${orderId} not found` });
+    }
   };
 
   const updateOrder = () => {
