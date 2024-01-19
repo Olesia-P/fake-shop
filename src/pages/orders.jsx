@@ -36,7 +36,7 @@ export default function Orders() {
       dispatch(changeOrderId(router.query.orderId));
       handleClick(orderId);
     }
-  }, [router.isReady]);
+  }, [router.isReady, router.query]);
 
   useEffect(() => {
     router.isReady &&

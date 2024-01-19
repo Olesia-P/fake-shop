@@ -55,15 +55,15 @@ export default function Products({
     }
   };
 
-  const shortTitle = (inputString, maxLength) => {
-    if (inputString.length > maxLength) {
-      // eslint-disable-next-line prefer-template
-      const cutString = inputString.slice(0, maxLength) + '...';
+  // const shortTitle = (inputString, maxLength) => {
+  //   if (inputString.length > maxLength) {
+  //     // eslint-disable-next-line prefer-template
+  //     const cutString = inputString.slice(0, maxLength) + '...';
 
-      return cutString;
-    }
-    return inputString;
-  };
+  //     return cutString;
+  //   }
+  //   return inputString;
+  // };
 
   useEffect(() => {
     chooseDataForProducts();
@@ -95,7 +95,7 @@ export default function Products({
                 dispatch(changeIsCartOpen(false));
               }}
             >
-              {shortTitle(element.title, 42)}
+              {element.title}
               {/* {element.title} */}
             </div>
             <div

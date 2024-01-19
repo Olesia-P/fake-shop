@@ -22,7 +22,14 @@ export default function handler(req, res) {
           res.status(404).json({ message: `Order ${orderId} not found` });
         }
       })
-      .catch((error) => res.status(500).json({ error: error.message }));
+      .catch((error) => {
+        if (error.kind === 'ObjectId') {
+          res.status(404).json({
+            error: error.message,
+          });
+        }
+        res.status(500).json({ error: error.message });
+      });
   };
 
   const updateOrder = () => {
@@ -39,9 +46,13 @@ export default function handler(req, res) {
 
   const deleteOrder = () => {
     Order.findByIdAndDelete(orderId)
-      .then(() =>
-        res.status(200).json({ message: `Order ${orderId} was deleted` }),
-      )
+      .then((order) => {
+        if (order) {
+          res.status(200).json({ message: `Order ${orderId} was deleted` });
+        } else {
+          res.status(404).json({ message: 'Order not found' });
+        }
+      })
       .catch((error) => res.status(500).json({ error: error.message }));
   };
 

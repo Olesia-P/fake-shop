@@ -5,10 +5,8 @@
     padding-top: 7rem;
     font-family: $main-font;
 
-
-
     .wrap {
-        width: 30%;
+        width: 35%;
         height: fit-content;
         background-color: $grey;
         margin: 0 auto;
@@ -16,11 +14,17 @@
         border-radius: $standart-b-radius;
         padding: 2rem;
 
+
         .header {
             font-size: $size-huge;
             text-align: center;
             font-weight: 600;
-
+            padding: 0.5rem 1rem;
+            width: fit-content;
+            background-color: $asphalt;
+            border-radius: $standart-b-radius;
+            color: white;
+            margin: 0 auto;
         }
 
         .contact {
@@ -29,15 +33,37 @@
             font-size: $size-header;
             padding: 0.2rem 0.5rem;
             background-color: white;
-            border: 0.2rem dashed black;
-            margin-top: 0.5rem;
+            border: 0.1rem dashed black;
+            margin-top: 1rem;
             border-radius: $standart-b-radius;
+            font-weight: 600;
+            word-break: break-all;
 
+
+            &:hover {
+                text-decoration: underline;
+            }
 
             .icon {
                 @include dfc;
                 margin-right: 1rem;
             }
+        }
+    }
+}
+
+@include laptop {
+    .container {
+        .wrap {
+            width: 70%;
+        }
+    }
+}
+
+@include lowTablet {
+    .container {
+        .wrap {
+            width: 90%;
         }
     }
 }
