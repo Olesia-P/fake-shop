@@ -11,7 +11,6 @@ import Loading from '../components/loading/loading';
 export default function Orders() {
   const [inputId, setInputId] = useState();
   const [focused, setFocused] = useState(false);
-  // const [isError, setIsError] = useState(false);
   const [getOrder, { data: orderData, isError, isFetching, isSuccess }] =
     useLazyGetOrderQuery();
   const { orderId } = useSelector(({ mixedPurpose }) => mixedPurpose);
@@ -46,9 +45,6 @@ export default function Orders() {
         { shallow: true },
       );
   }, [orderId]);
-
-  // eslint-disable-next-line no-console
-  console.log('isError', isError);
 
   return (
     <div className={css.container}>
