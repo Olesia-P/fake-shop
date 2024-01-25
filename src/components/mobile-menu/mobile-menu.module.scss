@@ -2,10 +2,10 @@
 
 .container {
     width: 70%;
-    height: 50%;
+    height: fit-content;
     background-image: url(/cloth.jpg);
     background-size: cover;
-    z-index: 2;
+    z-index: 3;
     position: fixed;
     border: 2px dashed black;
     transform: translateX(-110%);
@@ -21,7 +21,7 @@
     }
 
     .headerLink {
-        margin: 1rem 0 0 1rem;
+        margin: 0.5rem 0 0.5rem 1rem;
         border-radius: $standart-b-radius;
         padding: 0.3rem;
         text-decoration: none;

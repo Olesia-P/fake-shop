@@ -14,8 +14,7 @@ import {
 export default function CartProduct({ cartProducts }) {
   const router = useRouter();
   const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
-
-  // console.log('cartProducts', cartProducts);
+  // in Layout on load userId is created/taken from cookie
 
   const [addProductToCart] = useAddProductToCartMutation();
 

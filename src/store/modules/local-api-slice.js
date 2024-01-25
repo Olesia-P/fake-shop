@@ -32,7 +32,7 @@ export const localFakeShopApi = createApi({
     deleteProductOrAllProductsInCart: builder.mutation({
       query: (neededData) => ({
         url: '/carts/specific-cart',
-        method: 'DELETE',
+        method: 'PUT',
         body: neededData,
       }),
       invalidatesTags: ['Cart'],
@@ -41,7 +41,7 @@ export const localFakeShopApi = createApi({
     decreaseProductQuantity: builder.mutation({
       query: (neededData) => ({
         url: '/carts/specific-cart',
-        method: 'PUT',
+        method: 'PATCH',
         body: neededData,
       }),
       invalidatesTags: ['Cart'],
@@ -70,7 +70,6 @@ export const localFakeShopApi = createApi({
 });
 
 export const {
-  // useAddProductToCartOrCreateCartMutation,
   useCreateEmptyCartMutation,
   useAddProductToCartMutation,
   useGetSpecificCartQuery,

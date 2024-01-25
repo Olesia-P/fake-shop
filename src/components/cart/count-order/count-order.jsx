@@ -11,6 +11,7 @@ export default function CountOrder({ cartProducts }) {
   const router = useRouter();
 
   const sum = countOrderCost(cartProducts);
+
   return (
     <>
       {cartProducts?.length > 0 && (

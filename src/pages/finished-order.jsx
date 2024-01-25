@@ -8,6 +8,8 @@ import css from '../styles/pageStyles/finished-order.module.scss';
 
 export default function FinishedOrder() {
   const { lastOrderId } = useSelector(({ mixedPurpose }) => mixedPurpose);
+  // lastOrderId is set in local-api-slice.js (redux)
+  // after the successful submission of the order
   const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
   const { orderId } = useSelector(({ mixedPurpose }) => mixedPurpose);
   const [deleteProducts] = useDeleteProductOrAllProductsInCartMutation();
@@ -20,10 +22,13 @@ export default function FinishedOrder() {
       router.push('/catalog');
     }
   }, []);
+  // lastOrderId is cleaned outside this page
+  // this action is made to prohibit visiting this page voluntarily
 
   useEffect(() => {
     deleteProducts({ userId });
   }, []);
+  // to clean the cart
 
   useEffect(() => {
     dispatch(changeOrderId(lastOrderId));

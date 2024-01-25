@@ -19,6 +19,7 @@ export default function Header() {
   const [isCatalogAccordeonOpen, setIsCatalogAccordeonOpen] = useState(false);
   const { data: categories, isSuccess: categoriesSuccess } =
     useGetCategoriesQuery();
+
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -26,6 +27,7 @@ export default function Header() {
     setIsCatalogAccordeonOpen,
     isCatalogAccordeonOpen,
   );
+  // to close accordeon if user clicked the area outside it
 
   return (
     <div className={css.container}>
@@ -64,6 +66,7 @@ export default function Header() {
                 key={element.name}
                 className={css.listItem}
                 onClick={() => {
+                  // on click category is set as filter and pushed to query
                   dispatch(changeCatalogCategory(element.link));
                   element.link !== ''
                     ? router.push(

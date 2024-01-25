@@ -10,7 +10,9 @@ import Loading from '../components/loading/loading';
 
 export default function Orders() {
   const [inputId, setInputId] = useState();
+  // order id entered to the input
   const [focused, setFocused] = useState(false);
+
   const [getOrder, { data: orderData, isError, isFetching, isSuccess }] =
     useLazyGetOrderQuery();
   const { orderId } = useSelector(({ mixedPurpose }) => mixedPurpose);
@@ -20,6 +22,7 @@ export default function Orders() {
 
   const handleClick = (input) => {
     getOrder(input.trim());
+    // to get rid of possible spaces around the id
   };
 
   const countProductCost = (quantity, price) => {
@@ -33,6 +36,7 @@ export default function Orders() {
       handleClick(orderId);
     }
   }, [router.isReady, router.query]);
+  // check the url for id and set it in state
 
   useEffect(() => {
     router.isReady &&
@@ -45,6 +49,7 @@ export default function Orders() {
         { shallow: true },
       );
   }, [orderId]);
+  // to change the url when orderId is changed
 
   return (
     <div className={css.container}>

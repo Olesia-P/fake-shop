@@ -13,11 +13,9 @@
         border-radius: $standart-b-radius;
         @include hoverAnimation;
 
-
         svg {
             height: 100%;
             width: 100%;
-
         }
     }
 
@@ -39,7 +37,6 @@
         top: 3.3rem;
         height: 0;
         width: 26rem;
-
         background-color: white;
         overflow: hidden;
         border-radius: $standart-b-radius;
@@ -50,7 +47,6 @@
 
         &.open {
             padding: 1rem;
-            // height: max-content;
             height: 70vh;
             transition: height 0.3s ease-in;
             overflow-y: auto;
@@ -81,7 +77,6 @@
         .cart {
             position: fixed;
             width: 100%;
-
             left: 0;
             top: 4rem;
             right: 0;

@@ -6,6 +6,8 @@ export const config = {
     externalResolver: true,
   },
 };
+// to get around the false warning of Next.js 'API resolved without sending a response,
+// this may result in stalled requests'
 
 connectToDatabase();
 

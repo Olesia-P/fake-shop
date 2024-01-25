@@ -4,20 +4,26 @@ import { BiChevronDown } from 'react-icons/bi';
 import css from './dropdown-filter.module.scss';
 
 export default function DropdownFilter({
-  chosenOptionFunction,
+  chosenOption,
   optionsList,
   filterTitle,
   onClick,
   filterName,
 }) {
   const [isFilterOpened, setIsFilterOpened] = useState(false);
+  const decideChosenOption = () => {
+    if (typeof chosenOption === 'function') {
+      return chosenOption();
+    }
+    return chosenOption;
+  };
 
   return (
     <div className={cx(css.filter, isFilterOpened && css.open)}>
       <div className={css.filterHeader}>{filterTitle}:</div>
       <div className={css.options}>
         <div className={css.filterListWrap}>
-          <div className={css.filterChosen}>{chosenOptionFunction()}</div>
+          <div className={css.filterChosen}>{decideChosenOption()}</div>
           <div className={css.filterAccordion}>
             {optionsList.map((element) => (
               <div

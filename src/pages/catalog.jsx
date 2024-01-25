@@ -22,6 +22,9 @@ export default function Catalog() {
   );
   const { searchResults } = useSelector(({ mixedPurpose }) => mixedPurpose);
 
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const params = {
     category: catalogCategory,
     filter: catalogFilters,
@@ -37,9 +40,6 @@ export default function Catalog() {
     error: productsError,
   } = useGetProductsQuery(params);
 
-  const dispatch = useDispatch();
-  const router = useRouter();
-
   const alphabetFilterChosenOption = () => {
     if (catalogFilters.alphabet === 'asc') {
       return 'A-Z';
@@ -47,16 +47,13 @@ export default function Catalog() {
     if (catalogFilters.alphabet === 'desc') {
       return 'Z-A';
     }
-    // return '';
   };
-
-  const limitFilterChosenOption = () => {
-    return catalogFilters.limit;
-  };
+  // what should be shown as chosen option in the dropdown filter
 
   const handleFilterChange = (filterName, value) => {
     dispatch(changeCatalogFilters({ ...catalogFilters, [filterName]: value }));
   };
+  // to change specific filter, not all at once
 
   const alphabetFilterOptionsList = [
     {
@@ -95,6 +92,7 @@ export default function Catalog() {
       handleFilterChange('limit', router.query.limit);
     }
   }, [router.isReady]);
+  // on load checking the url for information and setting states
 
   useEffect(() => {
     router.isReady &&
@@ -111,6 +109,7 @@ export default function Catalog() {
         { shallow: true },
       );
   }, [catalogFilters, catalogCategory]);
+  // changing url each time we change filters
 
   return (
     <div className={css.container}>
@@ -146,14 +145,14 @@ export default function Catalog() {
           {searchResults.length === 0 && (
             <>
               <DropdownFilter
-                chosenOptionFunction={alphabetFilterChosenOption}
+                chosenOption={alphabetFilterChosenOption}
                 optionsList={alphabetFilterOptionsList}
                 filterTitle="In order"
                 onClick={handleFilterChange}
                 filterName="alphabet"
               />
               <DropdownFilter
-                chosenOptionFunction={limitFilterChosenOption}
+                chosenOption={catalogFilters.limit}
                 optionsList={limitFilterOptionsList}
                 filterTitle="Limit"
                 onClick={handleFilterChange}

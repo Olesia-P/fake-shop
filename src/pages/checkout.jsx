@@ -14,10 +14,11 @@ import Button from '../components/button/button';
 export default function Checkout() {
   const { catalogFilters } = useSelector(({ catalog }) => catalog);
   const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
+  // userId is created on load in Layout from cookie or fresh
 
   const { data: cartData } = useGetSpecificCartQuery(userId, {
     skip: userId === null,
-    // not to get 500 error on the load when userId is null
+    // not to get 500 error on the load when userId is null on load
   });
   const [addOrder, { isSuccess, isLoading }] = useAddOrderMutation();
 
@@ -36,6 +37,7 @@ export default function Checkout() {
     totalCost: total,
     productsQuantity,
   });
+
   const fullOrderInfo = {
     cart: cartData,
     personalData: formData,
@@ -117,6 +119,7 @@ export default function Checkout() {
       router.push(`catalog/?sort=${catalogFilters.alphabet}`);
     }
   }, []);
+  // sends back to catalog if there are no products in the cart
 
   useEffect(() => {
     isSuccess && router.push('/finished-order');
@@ -126,7 +129,6 @@ export default function Checkout() {
     <>
       <div className={css.title}>Checkout</div>
       <form className={css.container} onSubmit={(event) => handleSubmit(event)}>
-        {/*  */}
         <div className={css.orderForm}>
           <div className={css.personalInfoHeader}>Delivery information:</div>
           <div className={css.personalInfo}>
@@ -159,7 +161,7 @@ export default function Checkout() {
             ))}
           </div>
         </div>
-        {/*  */}
+
         <div className={css.orderFinalInfo}>
           <div className={css.productsQuantity}>
             Products quantity: <strong>{productsQuantity}</strong>.

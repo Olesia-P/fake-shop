@@ -13,13 +13,16 @@ import useClickOutsideClose from '../../hooks/use-click-outside-close';
 export default function Cart() {
   const { isCartOpen } = useSelector(({ openings }) => openings);
   const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
+  // in Layout on load userId is created/taken from cookie
   const { isCartCreated } = useSelector(({ mixedPurpose }) => mixedPurpose);
+  // in Layout on load cart is loaded/created and isCartCreated is set
 
   const [getSpecificCart, { data: cartData }] = useLazyGetSpecificCartQuery();
 
   useEffect(() => {
     if (isCartCreated && userId !== null) {
       getSpecificCart(userId);
+      //  not to load the cart without needed info for query
     }
   }, [isCartCreated, userId]);
 
@@ -32,10 +35,12 @@ export default function Cart() {
 
   useEffect(() => {
     if (router.pathname === '/checkout') dispatch(changeIsCartOpen(false));
-    // to close cart in checkout, forbid editing cart
+    // to forbid editing cart at checkout stage
   }, [isCartOpen]);
 
   const ref = useClickOutsideClose(changeIsCartOpenWithDispatch, isCartOpen);
+  // to close cart if user clicked the area outside cart
+
   return (
     <div className={css.container} ref={ref}>
       <div

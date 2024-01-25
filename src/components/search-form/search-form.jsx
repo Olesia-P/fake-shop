@@ -11,15 +11,18 @@ export default function SearchForm() {
   const [inputData, setInputData] = useState('');
   const [temporarySearchResults, setTemporarySearchResults] = useState([]);
   const [isSearchListOpen, setIsSearchListOpen] = useState(false);
-  const router = useRouter();
 
   const ref = useClickOutsideClose(setIsSearchListOpen, isSearchListOpen);
+  // to close suggestions if user clicked the area outside
+
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const { data: productsData, isSuccess } = useGetProductsQuery({
     category: '',
     filter: { alphabet: 'asc', limit: '' },
   });
+  // to load all products
 
   const handleSearch = () => {
     if (isSuccess) {
@@ -32,18 +35,22 @@ export default function SearchForm() {
       setTemporarySearchResults(filteredResults);
     }
   };
+  // to search through all products loaded
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       dispatch(changeSearchResults(temporarySearchResults));
     }
   };
+  // to search on enter press
 
   useEffect(() => {
     handleSearch();
     if (inputData === '') {
       dispatch(changeSearchResults([]));
     }
+    // if input gets empty, this action is needed to display products
+    // in the catalog instead of previous (stale) search results
   }, [inputData]);
 
   return (

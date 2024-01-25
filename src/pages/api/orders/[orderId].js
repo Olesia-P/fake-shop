@@ -1,4 +1,3 @@
-// import mongoose from 'mongoose';
 import connectToDatabase from '../../../database/db';
 import { Order } from '../../../database/db-model';
 
@@ -7,6 +6,8 @@ export const config = {
     externalResolver: true,
   },
 };
+// to get around the false warning of Next.js 'API resolved without sending a response,
+// this may result in stalled requests'
 
 connectToDatabase();
 
@@ -15,6 +16,7 @@ export default function handler(req, res) {
 
   const getOrder = () => {
     if (orderId.match(/^[0-9a-fA-F]{24}$/)) {
+      // check if id matches MongoDB ObjectId pattern
       Order.findById(orderId)
         .then((order) => {
           if (order) {

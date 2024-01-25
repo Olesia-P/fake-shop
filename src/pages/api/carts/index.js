@@ -6,6 +6,8 @@ export const config = {
     externalResolver: true,
   },
 };
+// to get around the false warning of Next.js 'API resolved without sending a response,
+// this may result in stalled requests'
 connectToDatabase();
 
 export default function handler(req, res) {
@@ -58,7 +60,6 @@ export default function handler(req, res) {
           cart.products.push(item);
         }
 
-        // Return the promise here, allowing the next 'then' block to handle the response
         return cart.save();
       })
       .then((updatedCart) => {

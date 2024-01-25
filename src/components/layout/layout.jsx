@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { React, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,12 +17,16 @@ import useMediaQuery from '../../hooks/use-media-query';
 
 export default function Layout({ children }) {
   const [createEmptyCart] = useCreateEmptyCartMutation();
+
   const { isCartOpen } = useSelector(({ openings }) => openings);
+
   const isLowTablet = useMediaQuery(787);
 
   const router = useRouter();
   const dispatch = useDispatch();
+
   useEffect(() => {
+    // to clean value after leaving these pages
     if (router.path !== '/finished-order') {
       dispatch(changeLastOrderId(''));
     }
@@ -33,18 +36,18 @@ export default function Layout({ children }) {
   }, [router.path]);
 
   useEffect(() => {
-    const newUserId = (Math.random() * 100000000000).toFixed(0);
+    const newUserId = parseInt((Math.random() * 100000000000).toFixed(0), 10);
     const storedUserId = getCookie('userId');
 
     if (storedUserId) {
-      console.log(`id was stored ${storedUserId}`);
+      // console.log(`id was stored ${storedUserId}`);
       dispatch(changeUserId(storedUserId));
       createEmptyCart({ userId: storedUserId }).then(() => {
         dispatch(changeIsCartCreated(true));
       });
     }
     if (!storedUserId) {
-      console.log('id was not stored');
+      // console.log('id was not stored');
       setCookie('userId', newUserId, 30);
       dispatch(changeUserId(newUserId));
       createEmptyCart({ userId: newUserId }).then(() => {

@@ -1,6 +1,5 @@
 @import "../main.scss";
 
-
 .container {
     padding-top: 7rem;
     font-family: $main-font;
@@ -13,7 +12,6 @@
         box-shadow: $main-shadow;
         border-radius: $standart-b-radius;
         padding: 2rem;
-
 
         .header {
             font-size: $size-huge;
@@ -38,7 +36,6 @@
             border-radius: $standart-b-radius;
             font-weight: 600;
             word-break: break-all;
-
 
             &:hover {
                 text-decoration: underline;

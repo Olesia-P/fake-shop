@@ -1,7 +1,6 @@
 import { useState, React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-// import { BiLoaderAlt } from 'react-icons/bi';
 import { useAddProductToCartMutation } from '../../store/modules/local-api-slice';
 import Button from '../button/button';
 import { changeIsCartOpen } from '../../store/modules/openings-slice';
@@ -15,18 +14,25 @@ export default function Products({
   productsDataSuccess,
   productsError,
 }) {
-  const router = useRouter();
-  const [addProductToCart] = useAddProductToCartMutation();
   const [specificProductLoading, setSpecificProductLoading] = useState(null);
   const [buttonDisabled, setButtondisabled] = useState(false);
-  const { searchResults } = useSelector(({ mixedPurpose }) => mixedPurpose);
-  const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
+  // for making button disabled while loading
   const [productsToRender, setProductsToRender] = useState([]);
+  // products to render differ according to filters
 
+  const { searchResults } = useSelector(({ mixedPurpose }) => mixedPurpose);
+  // search results are present if search input is used
+  const { userId } = useSelector(({ mixedPurpose }) => mixedPurpose);
+  // in Layout on load userId is created/taken from cookie
+
+  const [addProductToCart] = useAddProductToCartMutation();
+
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const addToCart = async (product) => {
     setSpecificProductLoading(product.id);
+    // for loading animation
     setButtondisabled(true);
     const params = {
       userId,
@@ -47,6 +53,8 @@ export default function Products({
   };
 
   const chooseDataForProducts = () => {
+    // to decide what to render: search results or just filtered data
+    // search results come from SearchForm component
     if (productsDataSuccess && !isFetching) {
       if (searchResults.length !== 0) {
         setProductsToRender(searchResults);
@@ -60,10 +68,12 @@ export default function Products({
     chooseDataForProducts();
     dispatch(changeSearchResults([]));
   }, [productsData]);
+  // if products data changes (after using filters), then search results must be cleaned
 
   useEffect(() => {
     chooseDataForProducts();
   }, [searchResults]);
+  // if search was conducted, search results are prioritised, up until any filters are used
 
   return (
     <div className={css.container}>
@@ -87,7 +97,6 @@ export default function Products({
               }}
             >
               {element.title}
-              {/* {element.title} */}
             </div>
             <div
               className={css.price}
@@ -116,7 +125,7 @@ export default function Products({
         </div>
       )}
       {productsError &&
-      productsError.originalStatus.toString().startsWith('5') ? (
+      productsError.originalStatus?.toString().startsWith('5') ? (
         <div className={css.errorWrap}>
           <div className={css.errorMessage}>Error: {productsError.error}</div>
           <div className={css.errorMessageSpecial}>
@@ -136,7 +145,7 @@ export default function Products({
       ) : (
         productsError && (
           <div className={css.errorWrap}>
-            <div className={css.errorMessage}>Error: {productsError.error}</div>
+            <div className={css.errorMessage}>{productsError.error}</div>
           </div>
         )
       )}

@@ -26,8 +26,6 @@
                 border: 2px solid rgb(175, 175, 175);
             }
 
-
-
             &:invalid[focused="true"] {
                 border: 2px solid rgb(208, 24, 37);
             }
@@ -39,7 +37,6 @@
 
         .inputError {
             color: rgb(208, 24, 37);
-
             display: none;
             position: absolute;
             top: -1.5rem;
@@ -82,7 +79,6 @@
 
             tbody {
                 tr {
-
                     &.title {
                         background-color: $grey;
                         font-weight: 600;
@@ -118,11 +114,9 @@
         .inputWrap {
             flex-direction: column;
 
-
             .inputError {
                 top: -2.2rem
             }
-
 
             .btnWrap {
                 margin: 0 auto;

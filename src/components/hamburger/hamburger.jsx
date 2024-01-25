@@ -14,6 +14,7 @@ export default function Hamburger() {
   };
 
   const ref = useClickOutsideClose(changeMobileWithDispatch, isMobileMenuOpen);
+  // to close menu if user clicked the area outside nenu
 
   return (
     <div
