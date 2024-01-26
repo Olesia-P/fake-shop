@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 2rem;
 
     .productContainer {
         border: 2px dashed black;
@@ -49,7 +50,7 @@
     }
 
     .loadingWrap {
-        width: calc(100vw - 15rem);
+        width: calc(100vw - 20rem);
         height: 100%;
         @include dfc;
         margin-top: 10%;

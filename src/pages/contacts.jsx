@@ -17,7 +17,7 @@ export default function Contacts() {
     },
     {
       link: 'https://join.skype.com/invite/kB6BlmG7OSrb',
-      name: 'Skype',
+      name: 'Skype: live:.cid.d0b18002aa3e879a',
       icon: <FaSkype />,
     },
   ];
