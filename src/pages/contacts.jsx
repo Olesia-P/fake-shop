@@ -7,17 +7,20 @@ export default function Contacts() {
   const contacts = [
     {
       link: 'mailto:pryhun.o@gmail.com',
-      name: 'Email: pryhun.o@gmail.com',
+      linkText: 'Email:',
+      text: 'pryhun.o@gmail.com',
       icon: <MdOutlineMailOutline />,
     },
     {
       link: 'https://www.linkedin.com/in/olesia-pryhun-217051247/',
-      name: 'LinkedIn',
+      linkText: 'LinkedIn',
+      text: '',
       icon: <FaLinkedin />,
     },
     {
       link: 'https://join.skype.com/invite/kB6BlmG7OSrb',
-      name: 'Skype: live:.cid.d0b18002aa3e879a',
+      linkText: 'Skype:',
+      text: 'live:.cid.d0b18002aa3e879a',
       icon: <FaSkype />,
     },
   ];
@@ -27,16 +30,20 @@ export default function Contacts() {
       <div className={css.wrap}>
         <div className={css.header}>Contacts</div>
         {contacts.map((element) => (
-          <a
-            key={element.name}
-            className={css.contact}
-            href={element.link}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <p className={css.contact}>
             <span className={css.icon}>{element.icon}</span>
-            {element.name}
-          </a>
+            <a
+              key={element.name}
+              href={element.link}
+              target="_blank"
+              rel="noreferrer"
+              className={css.link}
+            >
+              {element.linkText}
+            </a>
+
+            <span className={css.text}>{element.text}</span>
+          </p>
         ))}
       </div>
     </div>

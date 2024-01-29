@@ -29,22 +29,35 @@
             display: flex;
             align-items: center;
             font-size: $size-header;
-            padding: 0.2rem 0.5rem;
+            padding: 0.5rem;
             background-color: white;
             border: 0.1rem dashed black;
             margin-top: 1rem;
             border-radius: $standart-b-radius;
-            font-weight: 600;
-            word-break: break-all;
-
-            &:hover {
-                text-decoration: underline;
-            }
 
             .icon {
                 @include dfc;
                 margin-right: 1rem;
             }
+
+            .link {
+                text-decoration: underline;
+                margin-right: 0.5rem;
+                font-weight: 600;
+
+                &:hover {
+
+                    color: $red;
+                }
+
+            }
+
+            .text {
+                word-break: break-all;
+
+            }
+
+
         }
     }
 }
@@ -61,6 +74,17 @@
     .container {
         .wrap {
             width: 90%;
+        }
+    }
+}
+
+@include mobile {
+    .container {
+        .wrap {
+            .contact {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     }
 }

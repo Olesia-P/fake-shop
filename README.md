@@ -6,7 +6,7 @@
 
 This fake shop imitates real online shopping experience. You don’t pay, and you will never get your order, but all other things look and function quite the way they are supposed to.
 
-Product objects are received from the external API. Cart and order logic is implemented using custom-built local Next.js API.
+Product objects are received from the external API. Cart and order logic is implemented using custom-built local Next.js API, that is connected to Mongo Database.
 
 <img src="public/screenshot-project-fake-shop-big.png" width="450" height="250">
 
@@ -23,16 +23,18 @@ Product objects are received from the external API. Cart and order logic is impl
 
 - Next.js
 - Next.js API
-- Postman
 - Sass/Scss
 - Redux
+- MongoDB
 - Git + Bash
+- Postman
 - ESLint
 
 ## What did I learn
 
 - **Comprehensive** processing of **external API data**;
-- Building a small **local Next.js API**;
+- Building a **local Next.js API**, that is connected to **MongoDB**;
+- Organizing the **data exchange** between **the app** and **the database**;
 - Using **Redux Toolkit** for **queries and data management**;
 - Implementing a simple **search engine**;
 - Creating and managing **URL hierarchy using Next Router**;

@@ -19,7 +19,7 @@ export default function Home() {
         <div className={css.text}>
           <strong>
             Cart and order logic is implemented using custom-built local Next.js
-            API.
+            API, that is connected to Mongo Database.
           </strong>
         </div>
       </div>
@@ -65,7 +65,12 @@ export default function Home() {
             <strong>external API data</strong>;
           </li>
           <li className={css.listItem}>
-            Building a small <strong>local Next.js API</strong>;
+            Building a <strong>local Next.js API</strong>, that is connected to{' '}
+            <strong>MongoDB</strong>;
+          </li>
+          <li className={css.listItem}>
+            Organizing the <strong>data exchange </strong>
+            between <strong>the app </strong> and <strong>the database</strong>;
           </li>
           <li className={css.listItem}>
             Using <strong>Redux Toolkit</strong> for <strong>queries</strong>{' '}
