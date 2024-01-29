@@ -97,6 +97,9 @@ export default function Home() {
           <li className={css.listItem}>
             Implementing <strong>‘Husky’ pre-commit check</strong>.
           </li>
+          <li className={css.listItem}>
+            Using <strong>cookies</strong>.
+          </li>
         </ul>
       </div>
     </div>

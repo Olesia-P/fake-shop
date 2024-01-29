@@ -42,5 +42,6 @@ Product objects are received from the external API. Cart and order logic is impl
 - Building **input forms** with thorough **validation**;
 - Configuring **ESlint ruleset**;
 - Implementing **‘Husky’ pre-commit check**.
+- Using **cookies**.
 
 Here you can check the <a href="https://main--dazzling-tulumba-1dafaa.netlify.app//" target="_blank">deployed site</a>!
