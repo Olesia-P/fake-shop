@@ -15,7 +15,7 @@ export default function Meta() {
       <meta property="og:type" content="website" />
       <meta
         property="og:url"
-        content="https://main--dazzling-tulumba-1dafaa.netlify.app/"
+        content="https://fake-shop-developer-pryhun.netlify.app/"
       />
       <meta property="og:title" content="Fake Shop" />
       <meta
@@ -30,7 +30,7 @@ export default function Meta() {
       <meta property="twitter:card" content="summary_large_image" />
       <meta
         property="twitter:url"
-        content="https://main--dazzling-tulumba-1dafaa.netlify.app/"
+        content="https://fake-shop-developer-pryhun.netlify.app/"
       />
       <meta property="twitter:title" content="Fake Shop" />
       <meta
