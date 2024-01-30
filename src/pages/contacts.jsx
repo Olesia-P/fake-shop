@@ -30,7 +30,7 @@ export default function Contacts() {
       <div className={css.wrap}>
         <div className={css.header}>Contacts</div>
         {contacts.map((element) => (
-          <p className={css.contact}>
+          <p className={css.contact} key={element.text}>
             <span className={css.icon}>{element.icon}</span>
             <a
               key={element.name}

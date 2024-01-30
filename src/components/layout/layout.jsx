@@ -27,13 +27,13 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     // to clean value after leaving these pages
-    if (router.path !== '/finished-order') {
+    if (router.pathname !== '/finished-order') {
       dispatch(changeLastOrderId(''));
     }
-    if (router.path !== '/orders') {
+    if (router.pathname !== '/orders') {
       dispatch(changeOrderId(''));
     }
-  }, [router.path]);
+  }, [router.pathname]);
 
   useEffect(() => {
     const newUserId = parseInt((Math.random() * 100000000000).toFixed(0), 10);
