@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import React from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -17,6 +18,11 @@ export default function ProductsId() {
 
   return (
     <div className={css.container}>
+      <style jsx global>{`
+        body {
+          background-color: $grey;
+        }
+      `}</style>
       <div className={css.card}>
         <div
           onClick={() => router.push('/catalog')}
@@ -35,7 +41,7 @@ export default function ProductsId() {
             <div className={css.info}>
               <div className={css.title}>{productData.title}</div>
               <div className={css.description}>{productData.description}</div>
-              <div className={css.price}>{productData.price}$</div>
+              <div className={css.price}>{productData.price.toFixed(2)}$</div>
               <div className={css.btnWrap}>
                 <Button
                   onClick={() =>

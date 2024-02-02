@@ -155,7 +155,9 @@ export default function Checkout() {
                     Quantity: {element.quantity}
                   </div>
 
-                  <div className={css.price}>Price: {element.info.price}$</div>
+                  <div className={css.price}>
+                    Price: {(element.info.price * 1).toFixed(2)}$
+                  </div>
                 </div>
               </div>
             ))}

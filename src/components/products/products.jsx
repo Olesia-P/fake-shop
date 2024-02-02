@@ -105,7 +105,7 @@ export default function Products({
                 dispatch(changeIsCartOpen(false));
               }}
             >
-              {element.price}$
+              {element.price.toFixed(2)}$
             </div>
             <Button
               onClick={() => {

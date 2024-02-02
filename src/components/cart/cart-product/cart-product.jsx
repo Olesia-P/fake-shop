@@ -64,7 +64,7 @@ export default function CartProduct({ cartProducts }) {
               </div>
             </div>
             <div className={css.price}>
-              {element.info.price * element.quantity}$
+              {(element.info.price * element.quantity).toFixed(2)}$
             </div>
           </div>
           <div className={css.rightSection}>
