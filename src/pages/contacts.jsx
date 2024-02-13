@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaLinkedin, FaSkype } from 'react-icons/fa';
+import { FaLinkedin, FaTelegramPlane } from 'react-icons/fa';
 import { MdOutlineMailOutline } from 'react-icons/md';
 import css from '../styles/pageStyles/contacts.module.scss';
 
@@ -18,10 +18,10 @@ export default function Contacts() {
       icon: <FaLinkedin />,
     },
     {
-      link: 'https://join.skype.com/invite/kB6BlmG7OSrb',
-      linkText: 'Skype:',
-      text: 'live:.cid.d0b18002aa3e879a',
-      icon: <FaSkype />,
+      link: 'https://t.me/Pryhun_Olesia',
+      linkText: 'Telegram:',
+      text: '@Pryhun_Olesia',
+      icon: <FaTelegramPlane />,
     },
   ];
 
