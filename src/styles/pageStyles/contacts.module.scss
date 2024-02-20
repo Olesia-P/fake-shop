@@ -1,14 +1,14 @@
 @import "../main.scss";
 
 .container {
-    padding-top: 7rem;
+    padding-top: 5rem;
     font-family: $main-font;
 
     .wrap {
         width: 35%;
         height: fit-content;
         background-color: $grey;
-        margin: 0 auto;
+        margin: 2rem auto;
         box-shadow: $main-shadow;
         border-radius: $standart-b-radius;
         padding: 2rem;
