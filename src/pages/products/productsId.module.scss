@@ -2,16 +2,14 @@
 
 .container {
     padding: 4rem 0 0 0;
-    background-color: $grey;
     font-size: $size-p;
     width: 100%;
-    height: calc(100vh - 3.1rem);
     display: flex;
     justify-content: center;
 
     .card {
         margin: 2rem 0;
-        background-color: $white;
+        background-color: white;
         width: fit-content;
         max-width: 70%;
         height: fit-content;
@@ -113,6 +111,19 @@
                         margin-top: 2rem;
                     }
                 }
+            }
+        }
+    }
+}
+
+@include lowTablet {
+    .container {
+        .card {
+
+            max-width: 90%;
+
+            .product {
+                padding: 1.5rem;
             }
         }
     }
