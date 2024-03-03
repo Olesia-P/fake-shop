@@ -54,7 +54,7 @@ export default function Checkout() {
       state: formData.firstName,
       name: 'firstName',
       required: true,
-      errorMessage: 'Use letters, hyphens, spaces and dots only.',
+      errorMessage: 'Use English letters, hyphens, spaces and dots only.',
       pattern: `${namePattern.source}`,
     },
     {
@@ -63,7 +63,7 @@ export default function Checkout() {
       state: formData.lastName,
       name: 'lastName',
       required: true,
-      errorMessage: 'Use letters, hyphens, spaces and dots only.',
+      errorMessage: 'Use English letters, hyphens, spaces and dots only.',
       pattern: `${namePattern.source}`,
     },
     {

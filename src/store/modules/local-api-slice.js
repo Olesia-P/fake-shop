@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { changeLastOrderId } from './mixed-purpose-slice';
+import { changeLastOrderId, changeOrderId } from './mixed-purpose-slice';
 
 export const localFakeShopApi = createApi({
   reducerPath: 'localFakeShopApi',
@@ -64,6 +64,8 @@ export const localFakeShopApi = createApi({
         const { data: orderData } = await queryFulfilled;
         // eslint-disable-next-line no-underscore-dangle
         dispatch(changeLastOrderId(orderData.order._id));
+        // eslint-disable-next-line no-underscore-dangle
+        dispatch(changeOrderId(orderData.order._id));
       },
     }),
   }),

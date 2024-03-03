@@ -30,7 +30,10 @@ export default function Layout({ children }) {
     if (router.pathname !== '/finished-order') {
       dispatch(changeLastOrderId(''));
     }
-    if (router.pathname !== '/orders') {
+    if (
+      router.pathname !== '/orders' &&
+      router.pathname !== '/finished-order'
+    ) {
       dispatch(changeOrderId(''));
     }
   }, [router.pathname]);

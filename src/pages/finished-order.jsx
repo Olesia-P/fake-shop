@@ -1,8 +1,7 @@
 import { useEffect, React } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useDeleteProductOrAllProductsInCartMutation } from '../store/modules/local-api-slice';
-import { changeOrderId } from '../store/modules/mixed-purpose-slice';
 import Button from '../components/button/button';
 import css from '../styles/pageStyles/finished-order.module.scss';
 
@@ -15,24 +14,19 @@ export default function FinishedOrder() {
   const [deleteProducts] = useDeleteProductOrAllProductsInCartMutation();
 
   const router = useRouter();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (lastOrderId === '') {
       router.push('/catalog');
     }
   }, []);
-  // lastOrderId is cleaned outside this page
+  // lastOrderId is cleaned outside this page in Layout
   // this action is made to prohibit visiting this page voluntarily
 
   useEffect(() => {
     deleteProducts({ userId });
   }, []);
   // to clean the cart
-
-  useEffect(() => {
-    dispatch(changeOrderId(lastOrderId));
-  }, [orderId]);
 
   return (
     <div className={css.container}>
@@ -44,9 +38,7 @@ export default function FinishedOrder() {
           <br />
           <div
             onClick={() => {
-              router.push(`/orders/?orderId=${orderId}`, undefined, {
-                shallow: true,
-              });
+              router.push(`/orders/?orderId=${orderId}`);
             }}
             className={css.orderId}
           >
